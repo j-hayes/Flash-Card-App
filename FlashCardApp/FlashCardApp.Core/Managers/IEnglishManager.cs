@@ -19,7 +19,7 @@ namespace FlashCardApp.Core.Managers
             void Update(English english);
             void Delete(English English);
 
-            List<English> getEnglishesByChineseId(int chineseId);
+            List<English> GetEnglishesByChineseIds(List<int> ids);
         }
     }
 }

@@ -57,6 +57,19 @@ namespace FlashCardApp.Core.ViewModels.Study
             }
         }
 
+        public ICommand StudySetCommand
+        {
+            get
+            {
+                return new MvxCommand<FlashCardSet>(
+                    item => 
+                        ShowViewModel<StudyFlashCardSetViewModel>(new StudyFlashCardSetViewModel.Nav()
+                    {
+                        Id = item.ID
+                    }));
+            }
+        }
+
         private Cirrious.MvvmCross.ViewModels.MvxCommand _addCommand;
 
         public ICommand AddCommand

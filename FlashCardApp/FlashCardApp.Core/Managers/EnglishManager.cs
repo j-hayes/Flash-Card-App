@@ -44,12 +44,22 @@ namespace FlashCardApp.Core.Managers
 
 
 
-        public List<English> getEnglishesByChineseId(int chineseId)
+        public List<English> GetEnglishesByChineseIds(List<int> chineseIds)
         {
-            return _connection.Table<English>()
-                .OrderBy(x => x.DefinitionLength)
-                .Where(x => x.ChineseId == (chineseId))
-                .ToList();
+
+            string query = "select * from English where ChineseID in";
+            string chineseIdsForQuery = " (";
+
+            foreach (int id in chineseIds)
+            {
+                chineseIdsForQuery += string.Format("{0},", id);
+            }
+            chineseIdsForQuery = chineseIdsForQuery.Remove(chineseIdsForQuery.Length - 1) + ")";
+
+            query = query + chineseIdsForQuery;
+
+            List<English> results = _connection.Query<English>(query).ToList();
+            return results;
         }
 
 

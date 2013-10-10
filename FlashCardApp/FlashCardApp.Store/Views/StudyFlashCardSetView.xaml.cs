@@ -1,12 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using Windows.Foundation;
+using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media.Animation;
-using Cirrious.MvvmCross.WindowsStore.Views;
-using FlashCardApp.Core.ViewModels.Study;
-
+using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Navigation;
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
+using FlashCardApp.Core.ViewModels.Study;
 using FlashCardApp.Store.Common;
 
 namespace FlashCardApp.Store.Views
@@ -14,9 +20,9 @@ namespace FlashCardApp.Store.Views
     /// <summary>
     /// A basic page that provides characteristics common to most applications.
     /// </summary>
-    public sealed partial class FlashCardSetListView : FlashCardApp.Store.Common.LayoutAwarePage
+    public sealed partial class StudyFlashCardSetView : FlashCardApp.Store.Common.LayoutAwarePage
     {
-        public FlashCardSetListView()
+        public StudyFlashCardSetView()
         {
             this.InitializeComponent();
         }
@@ -44,19 +50,24 @@ namespace FlashCardApp.Store.Views
         {
         }
 
-        private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void NextCard(object sender, TappedRoutedEventArgs e)
         {
-            if (e.AddedItems.Count == 1)
-            {
-                ((FlashCardSetListViewModel) ViewModel).StudySetCommand.Execute(e.AddedItems[0]);
-                ((ListBox) sender).SelectedIndex = -1;
-            }
+            ((StudyFlashCardSetViewModel) ViewModel).NextCardCommand.Execute(new object());
         }
 
-        private void AddButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void FlipCardLeft(object sender, TappedRoutedEventArgs e)
         {
-            AddSetTextBox.Visibility = Visibility.Visible;
-            SubmitNewSetButton.Visibility = Visibility.Visible;
+            ((StudyFlashCardSetViewModel)ViewModel).FlipCardLeftCommand.Execute(new object());
+        }
+
+        private void PreviousCard(object sender, TappedRoutedEventArgs e)
+        {
+            ((StudyFlashCardSetViewModel)ViewModel).PreviousCardCardCommand.Execute(new object());
+        }
+
+        private void FlipCardRight(object sender, TappedRoutedEventArgs e)
+        {
+            ((StudyFlashCardSetViewModel)ViewModel).FlipCardRightCommand.Execute(new object());
         }
     }
 }

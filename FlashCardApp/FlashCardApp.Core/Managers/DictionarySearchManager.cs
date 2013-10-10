@@ -42,7 +42,16 @@ namespace FlashCardApp.Core.Managers
         {
             searchTerm = clearnSearchTerm(searchTerm);
             List<Chinese> chineseResults = _chineseManager.ChinesesMatching(searchTerm);
-            return createSearchResultFromListOfChinese(chineseResults);
+
+            List<English> englishResults = new List<English>();
+
+            if (chineseResults.Count > 0)
+            {
+                englishResults =
+                    _englishManager.GetEnglishesByChineseIds(chineseResults.Select(cr => cr.ID).ToList());
+            }
+            List<SearchResult> results = CreateSearchResultsFromEnglishesandChinese(englishResults, chineseResults);
+            return results;
         }
 
         public List<SearchResult> SearchForMoreChinese(string searchTerm)

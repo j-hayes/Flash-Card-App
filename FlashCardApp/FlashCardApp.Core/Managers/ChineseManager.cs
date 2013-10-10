@@ -21,12 +21,7 @@ namespace FlashCardApp.Core.Managers
         {
             List<Chinese> matchingChinese = _connection.Query<Chinese>(
                 "Select * from Chinese WHERE Simplified match ? limit 100", searchFilter);
-            //List<Chinese> matchingChinese = _connection.Table<Chinese>()
-            //    .OrderBy(x => x.ID)
-            //    .Where(x => x.Simplified.Contains(nameFilter))
-            //    .ToList();
-            //matchingChinese = matchingChinese.OrderBy(x => x.Simplified.Length).ToList();
-            //return matchingChinese;
+           
             return matchingChinese;
         }
 
