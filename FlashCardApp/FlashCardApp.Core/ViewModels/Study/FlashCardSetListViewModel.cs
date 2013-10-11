@@ -15,7 +15,6 @@ namespace FlashCardApp.Core.ViewModels.Study
         public FlashCardSetListViewModel(IFlashCardManager flashCardManager, IMvxMessenger messanger)
         {
             _flashCardManager = flashCardManager;
-
             LoadList();
             _flashCardSetSubscriptionToken = messanger.Subscribe<FlashCardSetListChangedMessage>(OnListChanged);
         }
@@ -30,8 +29,18 @@ namespace FlashCardApp.Core.ViewModels.Study
             LoadList();
         }
 
-        private List<FlashCardSet> _flashCardSets = new List<FlashCardSet>();
+        private FlashCardSet _selectedSet;
+        public FlashCardSet SelectedSet
+        {
+            get { return _selectedSet; }
+            set { _selectedSet = value;
+                RaisePropertyChanged(() => SelectedSet);
+                SelectedSetFlashCards = GetCardsForSet();
+            }
+        }
 
+       
+        private List<FlashCardSet> _flashCardSets = new List<FlashCardSet>();
         public List<FlashCardSet> FlashCardSets
         {
             get { return _flashCardSets; }
@@ -41,6 +50,12 @@ namespace FlashCardApp.Core.ViewModels.Study
                 RaisePropertyChanged(() => FlashCardSets);
             }
 
+        }
+        private List<FlashCard> _selectedSetFlashCards;
+        public List<FlashCard> SelectedSetFlashCards
+        {
+            get { return _selectedSetFlashCards; }
+            set { _selectedSetFlashCards = value;RaisePropertyChanged(()=>SelectedSetFlashCards); }
         }
 
         public ICommand ShowDetailCommand
@@ -96,6 +111,8 @@ namespace FlashCardApp.Core.ViewModels.Study
         }
 
         private string _newSetName;
+   
+
 
         public string NewSetName
         {
@@ -107,10 +124,15 @@ namespace FlashCardApp.Core.ViewModels.Study
             }
 
         }
-
+        #region privates
         private void GetFlashCardSetList()
         {
             FlashCardSets = _flashCardManager.GetSetList();
         }
+        private List<FlashCard> GetCardsForSet()
+        {
+            return _flashCardManager.GetCardsForSet(SelectedSet.ID);
+        }
+        #endregion
     }
 }
