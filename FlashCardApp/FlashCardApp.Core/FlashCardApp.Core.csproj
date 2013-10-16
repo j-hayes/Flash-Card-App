@@ -52,8 +52,11 @@
     <Compile Include="ViewModels\Dictionary\DictionaryViewModel.cs" />
     <Compile Include="ViewModels\Dictionary\SearchResult.cs" />
     <Compile Include="ViewModels\HomePageViewModel.cs" />
+    <Compile Include="ViewModels\Study\CreateCustomCardViewModel.cs" />
+    <Compile Include="ViewModels\Study\FlashCardDetailsViewModel.cs" />
     <Compile Include="ViewModels\Study\FlashCardSetDetailsViewModel.cs" />
     <Compile Include="ViewModels\Study\FlashCardSetListViewModel.cs" />
+    <Compile Include="ViewModels\Study\StudyFlashCardSetSettingsViewModel.cs" />
     <Compile Include="ViewModels\Study\StudyFlashCardSetViewModel.cs" />
     <Compile Include="ViewModels\TestNavigationViewModel.cs" />
   </ItemGroup>

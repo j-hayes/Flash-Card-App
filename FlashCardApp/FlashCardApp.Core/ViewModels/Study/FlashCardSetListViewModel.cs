@@ -67,7 +67,7 @@ namespace FlashCardApp.Core.ViewModels.Study
                         item =>
                             ShowViewModel<FlashCardSetDetailsViewModel>(new FlashCardSetDetailsViewModel.Nav()
                             {
-                                Id = item.ID
+                                Id = SelectedSet.ID
                             }));
             }
         }
@@ -80,35 +80,54 @@ namespace FlashCardApp.Core.ViewModels.Study
                     item => 
                         ShowViewModel<StudyFlashCardSetViewModel>(new StudyFlashCardSetViewModel.Nav()
                     {
-                        Id = item.ID
+                        Id = SelectedSet.ID
                     }));
             }
         }
 
-        private Cirrious.MvvmCross.ViewModels.MvxCommand _addCommand;
+        private Cirrious.MvvmCross.ViewModels.MvxCommand _addSetCommand;
 
-        public ICommand AddCommand
+        public ICommand AddSetCommand
         {
             get
             {
-                _addCommand = _addCommand ?? new MvxCommand(() =>
+                _addSetCommand = _addSetCommand ?? new MvxCommand(() =>
                 {
                     DoAddCommand();
                     NewSetName = "";
                     GetFlashCardSetList();
 
                 });
-                return _addCommand;
+                return _addSetCommand;
             }
         }
 
+        private void DoCreateCustomCardCommand()
 
+        {
+            ShowViewModel<CreateCustomCardViewModel>();
+        }
+
+
+        private MvxCommand _createFlashCardCommand;
+        public ICommand CreateFlashCardCommand
+        {
+            get
+            {
+                _createFlashCardCommand = _createFlashCardCommand ?? new MvxCommand(DoCreateCustomCardCommand);
+                return _createFlashCardCommand;
+            }
+        }
 
         private void DoAddCommand()
         {
-            FlashCardSet set = new FlashCardSet {Name = NewSetName};
-            _flashCardManager.CreateSet(set);
-        }
+            if
+            (NewSetName.Length > 0)
+                {
+                    FlashCardSet set = new FlashCardSet {Name = NewSetName};
+                    _flashCardManager.CreateSet(set);
+                }
+            }
 
         private string _newSetName;
    

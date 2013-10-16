@@ -29,6 +29,7 @@ namespace FlashCardApp.Core.Managers
         public void EditCard(FlashCard flashCard)
         {
             _connection.Update(flashCard);
+           
         }
 
         public void DeleteCard(FlashCard flashCard)
@@ -39,7 +40,7 @@ namespace FlashCardApp.Core.Managers
 
         public FlashCard GetCard(int Id)
         {
-            return _connection.Table<FlashCard>().Where(x => x.ID == Id).FirstOrDefault();
+            return _connection.Table<FlashCard>().FirstOrDefault(x => x.ID == Id);
         }
 
         public void AddCardtoSet(int CardID, int SetID)
@@ -49,11 +50,10 @@ namespace FlashCardApp.Core.Managers
             //todo error messaging: don't allow multiple I think.
         }
 
-    
-
         public void CreateSet(FlashCardSet set)
         {
             _connection.Insert(set);
+            _messenger.Publish(new FlashCardSetListChangedMessage(this));
         }
 
         public void CreateSet(string name)
@@ -63,7 +63,9 @@ namespace FlashCardApp.Core.Managers
 
         public void DeleteSet(FlashCardSet flashCardSet)
         {
-            _connection.Delete<FlashCardSet>(flashCardSet);
+
+            _connection.Delete<FlashCardSet>(flashCardSet.ID);
+            _messenger.Publish(new FlashCardSetListChangedMessage(this));
             //todo:add messaging to alert that a set no longer exists
         }
 

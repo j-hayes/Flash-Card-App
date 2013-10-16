@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Windows.Input;
 using Cirrious.MvvmCross.ViewModels;
 using FlashCardApp.Core.Entities;
 using FlashCardApp.Core.Managers;
@@ -25,7 +26,7 @@ namespace FlashCardApp.Core.ViewModels
         }
 
         private Cirrious.MvvmCross.ViewModels.MvxCommand _dictionaryCommand;
-        public System.Windows.Input.ICommand DictionaryCommand
+        public ICommand DictionaryCommand
         {
             get
             {
@@ -37,8 +38,9 @@ namespace FlashCardApp.Core.ViewModels
         {
             ShowViewModel<DictionaryViewModel>();
         }
-        private Cirrious.MvvmCross.ViewModels.MvxCommand _flashCardCommand;
-        public System.Windows.Input.ICommand FlashCardCommand
+        
+        private MvxCommand _flashCardCommand;
+        public ICommand FlashCardCommand
         {
             get
             {
