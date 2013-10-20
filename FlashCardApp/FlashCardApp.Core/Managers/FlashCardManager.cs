@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using Cirrious.MvvmCross.Plugins.Messenger;
 using Cirrious.MvvmCross.Plugins.Sqlite;
 using FlashCardApp.Core.Entities;
+using FlashCardApp.Core.GetRandomService;
+using System.Threading.Tasks;
 
 namespace FlashCardApp.Core.Managers
 {
@@ -18,6 +21,25 @@ namespace FlashCardApp.Core.Managers
             _connection = factory.Create("Dictionary.sqlite");
             _connection.CreateTable<FlashCardSet>();
             _connection.CreateTable<FlashCard>();
+           
+
+        
+        }
+
+        public void stuff()
+        {
+            GetRandomService.Service1Client client = new Service1Client();
+            string s = "";
+            client.GetRandomAsync(s);
+            client.GetRandomCompleted+=client_GetRandomCompleted;
+            
+            
+
+        }
+
+        private void client_GetRandomCompleted(object sender, GetRandomCompletedEventArgs e)
+        {
+            string s = e.Result;
         }
 
         public int CreateCard(FlashCard flashCard)

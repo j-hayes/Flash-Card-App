@@ -29,10 +29,6 @@
             <RowDefinition Height="140"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition x:Name="primaryColumn" Width="610"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
 
         <!-- Back button and page title -->
         <Grid x:Name="titlePanel">
@@ -47,25 +43,32 @@
                 Style="{StaticResource BackButtonStyle}"/>
             <TextBlock x:Name="pageTitle" Grid.Column="1" Text="{Binding Group.Title}" Style="{StaticResource PageHeaderTextStyle}"/>
         </Grid>
-
-        <Grid Grid.Row="1" Grid.Column="0">
+        <!--Todo: make these page wide rows and then just the middle row has columns  -->
+        <!--Main Content-->
+        <Grid Grid.Row="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="72"></RowDefinition>
+                <RowDefinition Height="500" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="540" />
+                <ColumnDefinition Width="432"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
             <!-- Vertical scrolling item list -->
             <ListView
                 x:Name="itemListView"
                 AutomationProperties.AutomationId="ItemsListView"
                 AutomationProperties.Name="Items"
-                TabIndex="1"
                 Grid.Row="0"
+                Grid.Column="0"
                 Margin="10,0,5,10"
                 Padding="120,0,0,60"
                 ItemsSource="{Binding Source={StaticResource itemsViewSource}}"
                 IsSwipeEnabled="False"
                 SelectionChanged="ItemListView_SelectionChanged"
-               >
+            >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
@@ -74,29 +77,10 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Grid Grid.Row="1">
-                <StackPanel Orientation="Horizontal">
-                    <Button Command="{Binding AddSetCommand}"  Content="Add Set" Height="60" Width="180" FontSize="24"></Button>
-                    <TextBox Text="{Binding NewSetName, Mode=TwoWay}" Width="360" Height="60"></TextBox>
-                </StackPanel>
-            </Grid>
-        </Grid>
 
-        <Grid Grid.Row="1"
-              Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="72"></RowDefinition>
-            </Grid.RowDefinitions>
-            <!-- Details for selected item -->
-            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" Width="756">
-                <Button Command="{Binding StudySetCommand}"  Content="Study Set" Height="60" Width="180" FontSize="24" Margin="0,6"></Button>
-                <Button Command="{Binding ShowDetailCommand}"  Content="Edit Set" Height="60" Width="180" FontSize="24" ></Button>
-                <Button Command="{Binding CreateFlashCardCommand}"  Content="Create Custom Card" Height="60" Width="276" FontSize="24" Margin="0,6" ></Button>
-            </StackPanel>
             <GridView
                 Grid.Row="0"
-               
+               Grid.Column="1"
                 ItemsSource="{Binding SelectedSetFlashCards}">
                 <GridView.Header>
                     <TextBlock Text="{Binding SelectedSet.Name}"></TextBlock>
@@ -122,6 +106,38 @@
                     </DataTemplate>
                 </GridView.ItemTemplate>
             </GridView>
+
+            <Grid Row="0" Grid.Column="2">
+                <StackPanel>
+                    <TextBlock Text="Show:" FontSize="36" ></TextBlock>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                        <ToggleButton Content="Pinyin"  IsChecked="{Binding StudySettings.ShowPinyin }"/>
+                        <ToggleButton Content="Traditional"  IsChecked="{Binding StudySettings.ShowTraditional }"/>
+                        <ToggleButton Content="Simplified"  IsChecked="{Binding StudySettings.ShowSimplified }"/>
+                        <ToggleButton Content="Definition"  IsChecked="{Binding StudySettings.ShowDefinition }"/>
+                </StackPanel>
+                    <TextBlock Text="Max Number of Cards:" FontSize="36" ></TextBlock>
+                    <Slider Maximum="{Binding SelectedSetFlashCards.Count}" Value="{Binding StudySettings.MaxCardsInStudySet, Mode=TwoWay}" ></Slider> <!-- todo: make this actually bind-->
+                    <TextBlock Text="{Binding StudySettings.MaxCardsInStudySet}" FontSize="24"></TextBlock>   
+                </StackPanel>
+            </Grid>
+
+        <Grid Row="1" Column="0">
+                <StackPanel Orientation="Horizontal">
+                    <Button Command="{Binding AddSetCommand}"  Content="Add Set" Height="60" Width="180" FontSize="24"></Button>
+                    <TextBox Text="{Binding NewSetName, Mode=TwoWay}" Width="474" Height="60" Margin="0,34"></TextBox>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="12,0,0,0">
+                <!-- Details for selected item -->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="756">
+                    <Button Command="{Binding StudySetCommand}"  Content="Study Set" Height="60" Width="180" FontSize="24" Margin="0,6"></Button>
+                    <Button Command="{Binding ShowDetailCommand}"  Content="Edit Set" Height="60" Width="180" FontSize="24" ></Button>
+                    <Button Command="{Binding CreateFlashCardCommand}"  Content="Create Custom Card" Height="60" Width="276" FontSize="24" Margin="0,6" ></Button>
+                </StackPanel>
+
+            </Grid>
         </Grid>
         <VisualStateManager.VisualStateGroups>
 

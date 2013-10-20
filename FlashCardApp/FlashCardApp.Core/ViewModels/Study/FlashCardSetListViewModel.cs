@@ -17,6 +17,7 @@ namespace FlashCardApp.Core.ViewModels.Study
             _flashCardManager = flashCardManager;
             LoadList();
             _flashCardSetSubscriptionToken = messanger.Subscribe<FlashCardSetListChangedMessage>(OnListChanged);
+            StudySettings = new StudyFlashCardSetSettingsViewModel(); //todo:start with users last settings saving states
         }
 
         private void LoadList()
@@ -29,6 +30,13 @@ namespace FlashCardApp.Core.ViewModels.Study
             LoadList();
         }
 
+        private StudyFlashCardSetSettingsViewModel _studySettings;
+        public StudyFlashCardSetSettingsViewModel StudySettings
+        {
+            get { return _studySettings; }
+            set { _studySettings = value; RaisePropertyChanged(()=>StudySettings);}
+        }
+
         private FlashCardSet _selectedSet;
         public FlashCardSet SelectedSet
         {
@@ -38,7 +46,7 @@ namespace FlashCardApp.Core.ViewModels.Study
                 SelectedSetFlashCards = GetCardsForSet();
             }
         }
-
+        
        
         private List<FlashCardSet> _flashCardSets = new List<FlashCardSet>();
         public List<FlashCardSet> FlashCardSets
@@ -48,6 +56,7 @@ namespace FlashCardApp.Core.ViewModels.Study
             {
                 _flashCardSets = value;
                 RaisePropertyChanged(() => FlashCardSets);
+              
             }
 
         }
@@ -129,11 +138,8 @@ namespace FlashCardApp.Core.ViewModels.Study
                 }
             }
 
-        private string _newSetName;
-   
-
-
-        public string NewSetName
+       private string _newSetName;
+       public string NewSetName
         {
             get { return _newSetName; }
             set
