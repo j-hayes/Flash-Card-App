@@ -2,11 +2,13 @@
 using System.Linq;
 using System.Text;
 using FlashCardApp.Core.Entities;
+using FlashCardApp.Core.FlashCardService;
 
 namespace FlashCardApp.Core.Managers
 {
     public interface IFlashCardManager
     {
+
         int CreateCard(FlashCard flashCared);
         void EditCard(FlashCard flashCard);
         void DeleteCard(FlashCard flashCard);
@@ -24,5 +26,16 @@ namespace FlashCardApp.Core.Managers
         List<FlashCard> GetCardsForSet(int p);
 
         List<FlashCard> GetAllCards(int p);
+
+        void DeleteAllCardsAndSets();
+
+        void ReplaceCardsWithCloudCards(List<FlashCardSet> sets);
+        
+
+
+        ServiceFlashCardSet[] GetCloudSetsForUpload();
+
+
+        
     }
 }

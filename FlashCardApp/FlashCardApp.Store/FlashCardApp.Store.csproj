@@ -118,20 +118,13 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service References\LocalService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Service References\ServiceReference1\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="Setup.cs" />
     <Compile Include="ValueConverters\SearchEnumConverter.cs" />
     <Compile Include="Views\Dictionary\DictionaryView.xaml.cs">
       <DependentUpon>DictionaryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Study\CloudCardSaveView.xaml.cs">
+      <DependentUpon>CloudCardSaveView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Study\CreateCustomCardView.xaml.cs">
       <DependentUpon>CreateCustomCardView.xaml</DependentUpon>
@@ -163,26 +156,6 @@
     <None Include="packages.config" />
     <None Include="Properties\DataSources\FlashCardApp.Core.Entities.FlashCardSet.datasource" />
     <None Include="Properties\ServiceReferences.Designer.ClientConfig" />
-    <None Include="Service References\LocalService\Service1.wsdl" />
-    <None Include="Service References\LocalService\Service1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\LocalService\Service11.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\LocalService\Service12.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceReference1\Service1.wsdl" />
-    <None Include="Service References\ServiceReference1\Service1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceReference1\Service11.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceReference1\Service12.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <PRIResource Include="Strings\Gloabal.resw" />
   </ItemGroup>
   <ItemGroup>
@@ -191,20 +164,6 @@
     <Content Include="Assets\SplashScreen.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Common\ReadMe.txt" />
-    <None Include="Service References\ServiceReference1\Service1.disco" />
-    <None Include="Service References\ServiceReference1\configuration91.svcinfo" />
-    <None Include="Service References\ServiceReference1\configuration.svcinfo" />
-    <None Include="Service References\ServiceReference1\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Service References\LocalService\Service1.disco" />
-    <None Include="Service References\LocalService\configuration91.svcinfo" />
-    <None Include="Service References\LocalService\configuration.svcinfo" />
-    <None Include="Service References\LocalService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
     <Content Include="ToDo-MvvmCross\_ Windows Store UI.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -223,6 +182,10 @@
     <Page Include="Views\Dictionary\DictionaryView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Study\CloudCardSaveView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Study\CreateCustomCardView.xaml">
       <SubType>Designer</SubType>
@@ -290,10 +253,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Service References\LocalService\" />
-    <WCFMetadataStorage Include="Service References\ServiceReference1\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>

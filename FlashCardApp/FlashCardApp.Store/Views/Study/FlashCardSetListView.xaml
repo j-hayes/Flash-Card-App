@@ -72,7 +72,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
-                            <TextBlock Text="{Binding Name}"></TextBlock>
+                            <TextBlock Text="{Binding SetName}"></TextBlock>
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
@@ -111,10 +111,10 @@
                 <StackPanel>
                     <TextBlock Text="Show:" FontSize="36" ></TextBlock>
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
-                        <ToggleButton Content="Pinyin"  IsChecked="{Binding StudySettings.ShowPinyin }"/>
-                        <ToggleButton Content="Traditional"  IsChecked="{Binding StudySettings.ShowTraditional }"/>
-                        <ToggleButton Content="Simplified"  IsChecked="{Binding StudySettings.ShowSimplified }"/>
-                        <ToggleButton Content="Definition"  IsChecked="{Binding StudySettings.ShowDefinition }"/>
+                        <ToggleButton Content="Pinyin"  IsChecked="{Binding StudySettings.ShowPinyin, Mode=TwoWay }"/>
+                        <ToggleButton Content="Traditional"  IsChecked="{Binding StudySettings.ShowTraditional, Mode=TwoWay }"/>
+                        <ToggleButton Content="Simplified"  IsChecked="{Binding StudySettings.ShowSimplified, Mode=TwoWay }"/>
+                        <ToggleButton Content="Definition"  IsChecked="{Binding StudySettings.ShowDefinition, Mode=TwoWay }"/>
                 </StackPanel>
                     <TextBlock Text="Max Number of Cards:" FontSize="36" ></TextBlock>
                     <Slider Maximum="{Binding SelectedSetFlashCards.Count}" Value="{Binding StudySettings.MaxCardsInStudySet, Mode=TwoWay}" ></Slider> <!-- todo: make this actually bind-->

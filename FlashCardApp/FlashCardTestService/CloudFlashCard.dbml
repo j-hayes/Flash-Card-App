@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="FlashCardDb" Class="CloudFlashCardDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Table Name="dbo.CloudUser" Member="CloudUsers">
+    <Type Name="CloudUser">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserEmail" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="CloudUser_CloudFlashCardSet" Member="CloudFlashCardSets" ThisKey="Id" OtherKey="UserID" Type="CloudFlashCardSet" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CloudFlashCardSet" Member="CloudFlashCardSets">
+    <Type Name="CloudFlashCardSet">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SetName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="CloudFlashCardSet_CloudFlashCard" Member="CloudFlashCards" ThisKey="ID,UserID" OtherKey="SetID,OwnerID" Type="CloudFlashCard" />
+      <Association Name="CloudUser_CloudFlashCardSet" Member="CloudUser" ThisKey="UserID" OtherKey="Id" Type="CloudUser" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CloudFlashCard" Member="CloudFlashCards">
+    <Type Name="CloudFlashCard">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Definition" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Pinyin" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Simplified" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Traditional" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="OwnerID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="SetID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="CloudFlashCardSet_CloudFlashCard" Member="CloudFlashCardSet" ThisKey="SetID,OwnerID" OtherKey="ID,UserID" Type="CloudFlashCardSet" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

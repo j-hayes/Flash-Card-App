@@ -16,9 +16,7 @@ namespace FlashCardApp.Core.ViewModels.Study
 
     public class StudyFlashCardSetViewModel :  MvxViewModel
     {
-        private IFlashCardManager _flashCardManager;
-
-
+        private readonly IFlashCardManager _flashCardManager;
         public StudyFlashCardSetViewModel(IFlashCardManager flashCardManager)
         {
             _flashCardManager = flashCardManager;
@@ -29,7 +27,10 @@ namespace FlashCardApp.Core.ViewModels.Study
         public class Nav
         {
             public int Id { get; set; }
+            public string Settings { get; set; }
         }
+
+        private StudyFlashCardSetSettingsViewModel Settings { get; set; }
 
         public void Init(FlashCardSetDetailsViewModel.Nav navigation)
         {
@@ -39,7 +40,10 @@ namespace FlashCardApp.Core.ViewModels.Study
             state = FlashCardStateEnum.Chinese;
             CurrentCardIndex = 0;
             CurrentCard = SetCards[CurrentCardIndex];
-           
+            
+            
+
+
         }
 
         public int CurrentCardIndex
@@ -117,6 +121,7 @@ namespace FlashCardApp.Core.ViewModels.Study
             else
             {
                 CurrentShowingSideIndex++;
+                SetState();
              
             }
         }
@@ -176,7 +181,7 @@ namespace FlashCardApp.Core.ViewModels.Study
             }
             else
             {
-                //todo: do done with set behavior
+                Close(this);//Todo:show set statistics
             }
         }
 
@@ -194,6 +199,7 @@ namespace FlashCardApp.Core.ViewModels.Study
             {
                 CurrentCardIndex--;
                 CurrentCard = SetCards[CurrentCardIndex];
+                SetState();
             }
         }
         #endregion

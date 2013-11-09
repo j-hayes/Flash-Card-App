@@ -13,7 +13,7 @@ using FlashCardApp.Core.ViewModels.Study;
 
 namespace FlashCardApp.Core.ViewModels
 {
-    class HomePageViewModel : MvxViewModel
+   public class HomePageViewModel : MvxViewModel
     {
         private string _searchTerm = "";
         public string SearchTerm
@@ -55,19 +55,19 @@ namespace FlashCardApp.Core.ViewModels
             ShowViewModel<FlashCardSetListViewModel>();
         }
 
-        private Cirrious.MvvmCross.ViewModels.MvxCommand _testNavigationCommnad;
-        public System.Windows.Input.ICommand TestNavigationCommnad
+        private Cirrious.MvvmCross.ViewModels.MvxCommand _saveCardCloudCommand;
+        public ICommand SaveCardCloudCommand
         {
             get
             {
-                _testNavigationCommnad = _testNavigationCommnad ?? new Cirrious.MvvmCross.ViewModels.MvxCommand(NavigateToTest);
-                return _testNavigationCommnad;
+                _saveCardCloudCommand = _saveCardCloudCommand ?? new Cirrious.MvvmCross.ViewModels.MvxCommand(NavigateToCloudCardSave);
+                return _saveCardCloudCommand;
             }
         }
 
-        private void NavigateToTest()
+        private void NavigateToCloudCardSave()
         {
-            ShowViewModel<TestNavigationViewModel>();
+            ShowViewModel<CloudCardSaveViewModel>();
         }
     }
 }

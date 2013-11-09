@@ -82,19 +82,26 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Service1.svc" />
+    <Content Include="FlashCardService.svc" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AzureLocalStorageTraceListener.cs" />
+    <Compile Include="CloudFlashCard.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CloudFlashCard.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\FlashCard.cs" />
+    <Compile Include="Entities\FlashCardSet.cs" />
     <Compile Include="FakeBlog.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FakeBlog.dbml</DependentUpon>
     </Compile>
-    <Compile Include="Service1.svc.cs">
-      <DependentUpon>Service1.svc</DependentUpon>
+    <Compile Include="FlashCardService.svc.cs">
+      <DependentUpon>FlashCardService.svc</DependentUpon>
     </Compile>
-    <Compile Include="IService1.cs" />
+    <Compile Include="IFlashCardService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebRole.cs" />
   </ItemGroup>
@@ -111,6 +118,11 @@
       <LastGenOutput>FakeBlog.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="CloudFlashCard.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>CloudFlashCard.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -119,17 +131,16 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FlashCardApp.Core\FlashCardApp.Core.csproj">
-      <Project>{063bec66-7fd5-4367-8608-6a075e562767}</Project>
-      <Name>FlashCardApp.Core</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
     <None Include="FakeBlog.dbml.layout">
       <DependentUpon>FakeBlog.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CloudFlashCard.dbml.layout">
+      <DependentUpon>CloudFlashCard.dbml</DependentUpon>
     </None>
   </ItemGroup>
   <PropertyGroup>

@@ -1,15 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ServiceDefinition name="AppTestService" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" schemaVersion="2013-03.2.0">
-  <WebRole name="FlashCardTestService" vmsize="Small">
+  <WebRole name="FlashCardTestService" vmsize="ExtraSmall">
     <Sites>
-      <Site name="Web">
+      <Site name="Service" physicalDirectory="TODO">
         <Bindings>
-          <Binding name="Endpoint1" endpointName="Endpoint1" />
+          <Binding name="Endpoint1" endpointName="Endpoint1" hostHeader="www.service.FlashCardApp.azurewebsites.net" />
+        </Bindings>
+      </Site>
+      <Site name="PublicSite" physicalDirectory="TODO:">
+        <Bindings>
+          <Binding name="PublicSite" endpointName="PublicSite" hostHeader="www.FlashCardApp.azurewebsites.net/"/>
         </Bindings>
       </Site>
     </Sites>
     <Endpoints>
-      <InputEndpoint name="Endpoint1" protocol="http" port="80" />
+      <InputEndpoint name="ServiceEndpoint" protocol="http" port="80" />
+      <InputEndpoint name="WebEndpoint" protocol="http" port="8080" />
     </Endpoints>
     <Imports>
       <Import moduleName="Diagnostics" />

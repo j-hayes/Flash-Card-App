@@ -90,7 +90,9 @@ namespace FlashCardApp.Core.ViewModels.Study
                         ShowViewModel<StudyFlashCardSetViewModel>(new StudyFlashCardSetViewModel.Nav()
                     {
                         Id = SelectedSet.ID
-                    }));
+                        
+                    }
+                    ));
             }
         }
 
@@ -133,7 +135,7 @@ namespace FlashCardApp.Core.ViewModels.Study
             if
             (NewSetName.Length > 0)
                 {
-                    FlashCardSet set = new FlashCardSet {Name = NewSetName};
+                    FlashCardSet set = new FlashCardSet {SetName = NewSetName};
                     _flashCardManager.CreateSet(set);
                 }
             }

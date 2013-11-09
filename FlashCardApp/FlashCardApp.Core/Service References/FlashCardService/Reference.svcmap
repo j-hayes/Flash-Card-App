@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="dafa0518-e7e2-4f4c-a32d-3ea769592fb5" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>true</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>true</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>false</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:60710/FlashCardService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="FlashCardService.xsd" MetadataType="Schema" ID="bfe4dcf7-1222-4d05-8e54-62bdc0939846" SourceId="1" SourceUrl="http://localhost:60710/FlashCardService.svc?xsd=xsd2" />
+    <MetadataFile FileName="FlashCardService1.xsd" MetadataType="Schema" ID="c6ff43a9-5e6f-4309-af0d-99daeb5e3d82" SourceId="1" SourceUrl="http://localhost:60710/FlashCardService.svc?xsd=xsd1" />
+    <MetadataFile FileName="FlashCardService.wsdl" MetadataType="Wsdl" ID="19d5a412-ec42-41f1-ad63-955c44d42453" SourceId="1" SourceUrl="http://localhost:60710/FlashCardService.svc?wsdl" />
+    <MetadataFile FileName="FlashCardService2.xsd" MetadataType="Schema" ID="74052c72-5a68-4c45-b2b3-d02ad8995f3d" SourceId="1" SourceUrl="http://localhost:60710/FlashCardService.svc?xsd=xsd0" />
+    <MetadataFile FileName="FlashCardService.disco" MetadataType="Disco" ID="f8fe6bff-462e-47a6-959a-f669a186757c" SourceId="1" SourceUrl="http://localhost:60710/FlashCardService.svc?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

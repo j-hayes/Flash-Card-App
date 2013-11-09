@@ -1,23 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
+using System.Linq.Expressions;
+using System.ServiceModel;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
+
 using Windows.UI.Xaml.Navigation;
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
-using FlashCardApp.Core.Entities;
+using FlashCardApp.Core.FlashCardService;
 using FlashCardApp.Store.Common;
-using FlashCardApp.Store.LocalService;
-using FlashCardApp.Store.ServiceReference1;
 
 namespace FlashCardApp.Store.Views
 {
@@ -29,7 +19,7 @@ namespace FlashCardApp.Store.Views
         public HomePageView()
         {
             this.InitializeComponent();
-          
+
         }
 
 
@@ -60,24 +50,14 @@ namespace FlashCardApp.Store.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-           
 
 
-           setString();
+     
             
-            
-        }
-
-        public async void setString()
-        {
-            ServiceReference1.Service1Client service1 = new ServiceReference1.Service1Client();
-
-            ObservableCollection<FlashCard> flashCards = new ObservableCollection<FlashCard>();
-            int i = await service1.UploadSetsAsync(new FlashCardSet(), flashCards);
-            RandomNumberBox.Text = i.ToString();
-
 
 
         }
+
+       
     }
 }

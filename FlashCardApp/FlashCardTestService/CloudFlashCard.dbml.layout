@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="CloudFlashCard">
+  <DataContextMoniker Name="/CloudFlashCardDataContext" />
+  <nestedChildShapes>
+    <classShape Id="8a890c55-6747-4a67-94c7-23d43a1fba77" absoluteBounds="1.25, 0.625, 2, 1.3862939453125003">
+      <DataClassMoniker Name="/CloudFlashCardDataContext/CloudUser" />
+      <nestedChildShapes>
+        <elementListCompartment Id="34869487-18df-481e-9dc2-f523788be541" absoluteBounds="1.2650000000000001, 1.085, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="85c5650f-0585-4ddc-b21c-d3ac6ef68fee" absoluteBounds="2.875, 3.25, 2, 1.3862939453125003">
+      <DataClassMoniker Name="/CloudFlashCardDataContext/CloudFlashCardSet" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5bb8a923-191e-4c8c-8510-f281c4763ab7" absoluteBounds="2.8900000000000006, 3.71, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="ae765fe6-147f-4cb1-9d95-3f5bb8aeda5e" absoluteBounds="5.125, 0.5, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/CloudFlashCardDataContext/CloudFlashCard" />
+      <nestedChildShapes>
+        <elementListCompartment Id="59120ca6-da27-407c-a8dd-014e5e13e8fc" absoluteBounds="5.14, 0.96, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(3.0625 : 2.0112939453125); (3.0625 : 3.25)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CloudFlashCardDataContext/CloudUser/CloudUser_CloudFlashCardSet" />
+      <nodes>
+        <classShapeMoniker Id="8a890c55-6747-4a67-94c7-23d43a1fba77" />
+        <classShapeMoniker Id="85c5650f-0585-4ddc-b21c-d3ac6ef68fee" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(4.875 : 3.25); (5.125 : 2.65549967447917)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CloudFlashCardDataContext/CloudFlashCardSet/CloudFlashCardSet_CloudFlashCard" />
+      <nodes>
+        <classShapeMoniker Id="85c5650f-0585-4ddc-b21c-d3ac6ef68fee" />
+        <classShapeMoniker Id="ae765fe6-147f-4cb1-9d95-3f5bb8aeda5e" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

@@ -23,7 +23,7 @@ namespace FlashCardApp.Store.Common
         /// <typeparam name="T">Type of the property.</typeparam>
         /// <param name="storage">Reference to a property with both getter and setter.</param>
         /// <param name="value">Desired value for the property.</param>
-        /// <param name="propertyName">Name of the property used to notify listeners.  This
+        /// <param name="propertyName">SetName of the property used to notify listeners.  This
         /// value is optional and can be provided automatically when invoked from compilers that
         /// support CallerMemberName.</param>
         /// <returns>True if the value was changed, false if the existing value matched the
@@ -40,7 +40,7 @@ namespace FlashCardApp.Store.Common
         /// <summary>
         /// Notifies listeners that a property value has changed.
         /// </summary>
-        /// <param name="propertyName">Name of the property used to notify listeners.  This
+        /// <param name="propertyName">SetName of the property used to notify listeners.  This
         /// value is optional and can be provided automatically when invoked from compilers
         /// that support <see cref="CallerMemberNameAttribute"/>.</param>
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)

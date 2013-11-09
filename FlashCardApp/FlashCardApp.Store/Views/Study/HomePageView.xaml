@@ -43,14 +43,10 @@
         <StackPanel Grid.Row="1" Orientation="Horizontal">
             <Button Command="{Binding DictionaryCommand}" Content="Dictionary" HorizontalAlignment="Left" Height="120" MinWidth="120" VerticalAlignment="Top" Foreground="White"/>
             <Button Command="{Binding FlashCardCommand}" Content="Flash Cards" HorizontalAlignment="Left" Height="120" MinWidth="120" VerticalAlignment="Top" Width="100"/>
-            <TextBlock Name="RandomNumberBox" Width="400" Height="50" VerticalAlignment="Top"></TextBlock>
-            <ListView Name="ListViewForNames" Width="100">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Name}"></TextBlock>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+            <Button Command="{Binding SaveCardCloudCommand}" Content="Save Cards" HorizontalAlignment="Left" Height="120" MinWidth="120" VerticalAlignment="Top" Width="100"/>
+            
+            <TextBlock Name="TestTextBlock"></TextBlock>
+            
         </StackPanel>
         <VisualStateManager.VisualStateGroups>
 
