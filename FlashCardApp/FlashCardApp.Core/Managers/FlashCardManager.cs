@@ -153,7 +153,37 @@ namespace FlashCardApp.Core.Managers
             return cloudset.ToArray();
         }
 
+        public void MarkIncorrect(FlashCard setCard)
+        {
+            setCard.TotalTries++;
 
- 
+            if (setCard.Score > 10)
+            {
+                setCard.Score -= 10;
+            }
+            else
+            {
+                setCard.Score = 0;
+            }
+
+            _connection.Update(setCard);
+        }
+
+        public void MarkCorrect(FlashCard setCard)
+        {
+            setCard.TotalTries++;
+            setCard.CorrectAnswers++;
+            if (setCard.Score < 100)
+            {
+                setCard.Score += 10;
+
+            }
+            else
+            {
+                setCard.Score = 100;
+            }
+            _connection.Update(setCard);
+            
+        }
     }
 }

@@ -37,26 +37,25 @@
     <ServiceConfiguration Include="ServiceConfiguration.Cloud.cscfg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FlashCardTestService\FlashCardTestService.csproj">
-      <Name>FlashCardTestService</Name>
-      <Project>{faa2e653-90c3-4ea4-8f95-2aa8c752771b}</Project>
-      <Private>True</Private>
-      <RoleType>Web</RoleType>
-      <RoleName>FlashCardTestService</RoleName>
-      <UpdateDiagnosticsConnectionStringOnPublish>True</UpdateDiagnosticsConnectionStringOnPublish>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="FlashCardTestServiceContent\" />
+    <Folder Include="FlashCardServiceContent" />
     <Folder Include="Profiles" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="FlashCardTestServiceContent\diagnostics.wadcfg">
+    <Content Include="FlashCardServiceContent\diagnostics.wadcfg">
       <SubType>Content</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <PublishProfile Include="Profiles\TestRandomNumberJacksonProduction.azurePubxml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FlashCardTestService\FlashCardService.csproj">
+      <Name>FlashCardService</Name>
+      <Project>{faa2e653-90c3-4ea4-8f95-2aa8c752771b}</Project>
+      <Private>True</Private>
+      <RoleType>Web</RoleType>
+      <RoleName>FlashCardService</RoleName>
+    </ProjectReference>
   </ItemGroup>
   <!-- Import the target files for this project template -->
   <PropertyGroup>

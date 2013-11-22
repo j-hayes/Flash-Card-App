@@ -34,10 +34,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="Entities\Chinese.cs" />
     <Compile Include="Entities\English.cs" />
     <Compile Include="Entities\FlashCard.cs" />
     <Compile Include="Entities\FlashCardSet.cs" />
+    <Compile Include="Helpers\PinyinFormatHelper.cs" />
     <Compile Include="Managers\ChineseManager.cs" />
     <Compile Include="Managers\CloudConverter.cs" />
     <Compile Include="Managers\DictionarySearchManager.cs" />
@@ -59,6 +61,7 @@
     <Compile Include="ViewModels\Dictionary\DictionaryViewModel.cs" />
     <Compile Include="ViewModels\Dictionary\SearchResult.cs" />
     <Compile Include="ViewModels\HomePageViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\Study\CloudCardSaveViewModel.cs" />
     <Compile Include="ViewModels\Study\CreateCustomCardViewModel.cs" />
     <Compile Include="ViewModels\Study\FlashCardDetailsViewModel.cs" />

@@ -36,6 +36,7 @@ namespace FlashCardApp.Core.Managers
         ServiceFlashCardSet[] GetCloudSetsForUpload();
 
 
-        
+        void MarkIncorrect(FlashCard setCard);
+        void MarkCorrect(FlashCard setCard);
     }
 }

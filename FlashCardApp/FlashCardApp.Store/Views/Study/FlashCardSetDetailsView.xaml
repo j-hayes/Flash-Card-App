@@ -60,7 +60,7 @@
                             <StackPanel>
                                 <TextBlock FontSize="36" Text="{Binding Simplified}" TextWrapping="Wrap"></TextBlock>
                                 <TextBlock FontSize="36" Text="{Binding Traditional}" TextWrapping="Wrap"></TextBlock>
-                                <TextBlock FontSize="36" Text="{Binding Pinyin}" TextWrapping="Wrap"></TextBlock>
+                                <TextBlock FontSize="36" Text="{Binding AccentedPinyin}" TextWrapping="Wrap"></TextBlock>
                                 <TextBlock FontSize="36" Text="{Binding Definition}" TextWrapping="Wrap"></TextBlock>
                             </StackPanel>
                         </Grid>

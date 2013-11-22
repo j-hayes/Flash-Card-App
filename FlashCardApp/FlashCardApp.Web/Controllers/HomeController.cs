@@ -1,52 +1,67 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Linq;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Providers.Entities;
+
+using FlashCardApp.Web.Helpers;
+using FlashCardApp.Web.Models;
 
 namespace FlashCardApp.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private CloudFlashCardDataContext flashCardDataContex;
+        private CloudCardConverter cloudConverter;
+
+        private CloudUser user;
+
+        public HomeController()
+        {
+            flashCardDataContex = new CloudFlashCardDataContext();
+            cloudConverter = new CloudCardConverter();
+        } //
+        // GET: /Home/
+        [HttpGet]
         public ActionResult Index()
         {
-            string s = "";
-            string ss = "";
-
-
-            return ShowJacksonSets(s, ss);
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your app description page.";
-
+            ViewBag.UserIsLoggedIn = false;
             return View();
         }
 
-        public ActionResult Contact()
+        [HttpPost]
+        public ActionResult Index(string userName, string password)
         {
-            ViewBag.Message = "Your contact page.";
+            user = flashCardDataContex.CloudUsers.First(x => x.UserEmail == userName
+                                                             & x.Password == password);
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = "No User Found Please Check Password";
+            }
+            Session.Add("UserID", user.Id);
+            List<CloudFlashCardSet> cloudSets =
+                flashCardDataContex.CloudFlashCardSets.Where(x => x.UserID == user.Id).ToList();
 
-            return View();
-        }
 
-        public ActionResult ShowJacksonSets(string username, string password)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ActionResult ShowJacksonSets()
-        {
-
-            CloudSetDataContext dataContext = new CloudSetDataContext();
-
-            var user = dataContext.CloudUsers.First(x => x.UserEmail == "jacksonjhayes@gmail.com" && x.Password == "jh01123581321");
-
-            List<CloudFlashCardSet> sets = dataContext.CloudFlashCardSets.Where(x => x.CloudUser == user).ToList();
-
+            List<FlashCardSet> sets = cloudConverter.ConvertCloudSetToSet(cloudSets);
+                ViewBag.UserIsLoggedIn = true;
             return View(sets);
         }
 
+
+        public ActionResult DisplaySet(int setID)
+        {
+            int userID = (int) Session["UserId"];
+            var cloudset = flashCardDataContex.CloudFlashCardSets.Where(x => x.ID == setID
+                                                                        & x.UserID == userID).ToList();
+                //todo:make this more safe 
+            var sets = cloudConverter.ConvertCloudSetToSet(cloudset);
+         
+
+          
+            return View(sets[0]);
+        }
     }
 }

@@ -47,7 +47,7 @@
                 <StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Button Command="{Binding UploadCardsToCloud}" FontSize="18"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="142" Width="142">
-                            <TextBlock TextWrapping="Wrap" TextAlignment=" Center">Upload Cards</TextBlock>
+                            <TextBlock TextWrapping="Wrap" TextAlignment="Center">Upload Cards</TextBlock>
                         </Button>
                         <Button Command="{Binding ReplaceCardsWithCloudCards}" FontSize="18" Visibility="{Binding ShowSaveReplaceCardsButton}"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="142" Width="142">
                             <TextBlock TextWrapping="Wrap" TextAlignment="Center">Import Saved Cards </TextBlock>
@@ -72,7 +72,7 @@
                             <StackPanel>
                                 <TextBlock  Margin="0,-10,0,0" Text="{Binding Simplified}" Style="{StaticResource SubheaderTextStyle}"/>
                                 <TextBlock  Margin="0,-10,0,0" Text="{Binding Traditional}" Style="{StaticResource SubheaderTextStyle}"/>
-                                <TextBlock  Margin="0,-10,0,0" Text="{Binding Pinyin}" Style="{StaticResource SubheaderTextStyle}"/>
+                                <TextBlock  Margin="0,-10,0,0" Text="{Binding AccentedPinyin}" Style="{StaticResource SubheaderTextStyle}"/>
                                 <TextBlock  Margin="0,-10,0,0" Text="{Binding Definition}" Style="{StaticResource SubheaderTextStyle}"/>
                             </StackPanel>
                         </DataTemplate>

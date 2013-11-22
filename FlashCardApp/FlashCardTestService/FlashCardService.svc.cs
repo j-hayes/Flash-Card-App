@@ -5,9 +5,10 @@ using System.Configuration;
 using System.Linq;
 using System.ServiceModel;
 using System.Web.Security;
-using FlashCardTestService.Entities;
+using FlashCardCloudService.Entities;
+using FlashCardTestService;
 
-namespace FlashCardTestService
+namespace FlashCardCloudService
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in code, svc and config file together.
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
@@ -37,6 +38,25 @@ namespace FlashCardTestService
 
         }
 
+        public bool DeleteUser(string emailAddress, string password)
+        {
+            if (_dbContext.CloudUsers.FirstOrDefault(x => x.UserEmail == emailAddress & x.Password == password) == null)
+            {
+                _dbContext.CloudUsers.DeleteOnSubmit(new CloudUser()
+                {
+                    Password = password,
+                    UserEmail = emailAddress
+                });
+
+                _dbContext.SubmitChanges();
+                return true;
+            }
+            else
+            {
+                throw new FaultException("The Email Address and Password Combination Not found");
+            }
+        }
+
         public List<ServiceFlashCardSet> GetSets(string userEmailAdress, string password)
         {
 
@@ -60,7 +80,7 @@ namespace FlashCardTestService
                 };
                 foreach (var flashCard in cloudFlashCardSet.CloudFlashCards)
                 {
-                    var flashcard = new ServiceFlashCard()
+                    var serviceFlashcard = new ServiceFlashCard()
                     {
                         Traditional = flashCard.Traditional,
                         Simplified = flashCard.Simplified,
@@ -68,7 +88,7 @@ namespace FlashCardTestService
                         Pinyin = flashCard.Pinyin,
                         ID = flashCard.ID
                     };
-                    set.FlashCards.Add(flashcard);
+                    set.FlashCards.Add(serviceFlashcard);
                 }
                 sets.Add(set);
             }

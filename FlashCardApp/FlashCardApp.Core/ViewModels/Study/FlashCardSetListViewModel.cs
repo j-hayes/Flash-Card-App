@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows.Input;
 using Cirrious.MvvmCross.Plugins.Messenger;
 using Cirrious.MvvmCross.ViewModels;
@@ -17,7 +18,12 @@ namespace FlashCardApp.Core.ViewModels.Study
             _flashCardManager = flashCardManager;
             LoadList();
             _flashCardSetSubscriptionToken = messanger.Subscribe<FlashCardSetListChangedMessage>(OnListChanged);
-            StudySettings = new StudyFlashCardSetSettingsViewModel(); //todo:start with users last settings saving states
+            StudySettings = new StudyFlashCardSetSettingsViewModel() {MaxCardsInStudySet = 0};
+                //todo:start with users last settings saving states
+            if (FlashCardSets.Count > 0)
+            {
+                SelectedSet = FlashCardSets[0];
+            }
         }
 
         private void LoadList()
@@ -41,9 +47,14 @@ namespace FlashCardApp.Core.ViewModels.Study
         public FlashCardSet SelectedSet
         {
             get { return _selectedSet; }
-            set { _selectedSet = value;
+            set
+            {
+                _selectedSet = value;
                 RaisePropertyChanged(() => SelectedSet);
                 SelectedSetFlashCards = GetCardsForSet();
+
+                StudySettings.MaxCardsInStudySet = SelectedSetFlashCards.Count;
+
             }
         }
         
@@ -67,6 +78,22 @@ namespace FlashCardApp.Core.ViewModels.Study
             set { _selectedSetFlashCards = value;RaisePropertyChanged(()=>SelectedSetFlashCards); }
         }
 
+        public ICommand ShowPinyinFirstCommand
+        {
+            get { return new MvxCommand(() => StudySettings.UpdateShowFirstSetting("Pinyin")); }
+        }
+
+        public ICommand ShowCharactersFirstCommand
+        {
+            get { return new MvxCommand(() => StudySettings.UpdateShowFirstSetting("Characters")); }
+        }
+
+        public ICommand ShowDefinitionFirstCommand
+        {
+            get { return new MvxCommand(() => StudySettings.UpdateShowFirstSetting("Definition")); }
+        }
+
+
         public ICommand ShowDetailCommand
         {
             get
@@ -81,16 +108,23 @@ namespace FlashCardApp.Core.ViewModels.Study
             }
         }
 
+       
+
         public ICommand StudySetCommand
         {
             get
             {
                 return new MvxCommand<FlashCardSet>(
                     item => 
-                        ShowViewModel<StudyFlashCardSetViewModel>(new StudyFlashCardSetViewModel.Nav()
+                        ShowViewModel<StudyFlashCardSetViewModel>(new Nav()
                     {
-                        Id = SelectedSet.ID
-                        
+                        Id = SelectedSet.ID,
+                        firstSideState = StudySettings.FirstSide.ToString() ,        //todo:change this?
+                        MaxCardsInStudySet = StudySettings.MaxCardsInStudySet,
+                        ShowDefinition = StudySettings.ShowDefinition,
+                        ShowPinyin = StudySettings.ShowPinyin,
+                        ShowSimplified = StudySettings.ShowSimplified,
+                        ShowTraditional = StudySettings.ShowTraditional
                     }
                     ));
             }

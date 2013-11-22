@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Input;
+using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.ViewModels;
 using FlashCardApp.Core.Entities;
 using FlashCardApp.Core.Managers;
@@ -13,6 +14,25 @@ namespace FlashCardApp.Core.ViewModels.Study
         English = 1,
         Pinyin = 0
     }
+    public class Nav
+    {
+        public int Id { get; set; }
+
+        public int MaxCardsInStudySet { get; set; }
+
+        public string firstSideState { get; set; }
+
+        public bool ShowPinyin { get; set; }
+
+        public bool ShowTraditional { get; set; }
+
+        public bool ShowSimplified { get; set; }
+
+        public bool ShowDefinition { get; set; }
+
+    }
+
+  
 
     public class StudyFlashCardSetViewModel :  MvxViewModel
     {
@@ -24,32 +44,55 @@ namespace FlashCardApp.Core.ViewModels.Study
 
         }
 
-        public class Nav
-        {
-            public int Id { get; set; }
-            public string Settings { get; set; }
-        }
+       
 
         private StudyFlashCardSetSettingsViewModel Settings { get; set; }
 
-        public void Init(FlashCardSetDetailsViewModel.Nav navigation)
+        public void Init(Nav navigation)
         {
+            Settings = new StudyFlashCardSetSettingsViewModel()
+            {
+              ShowDefinition = navigation.ShowDefinition,
+              ShowSimplified = navigation.ShowSimplified,
+              ShowTraditional = navigation.ShowTraditional,
+              ShowPinyin = navigation.ShowPinyin,
+              MaxCardsInStudySet = navigation.MaxCardsInStudySet
+
+            };
+            if (navigation.firstSideState == "English")
+            {
+                Settings.FirstSide = ShowSideFirstSetting.English;
+                state = FlashCardStateEnum.English;
+                DefaultSideIndex = 2;
+            }
+            else if (navigation.firstSideState == "Characters")
+            {
+                Settings.FirstSide = ShowSideFirstSetting.Characters;
+                state = FlashCardStateEnum.Chinese;
+                DefaultSideIndex = 1;
+            }
+            else
+            {
+                Settings.FirstSide = ShowSideFirstSetting.Pinyin;
+                state = FlashCardStateEnum.Pinyin;
+                DefaultSideIndex = 0;
+            }
+
             Set = _flashCardManager.GetSet(navigation.Id);
             SetCards = _flashCardManager.GetCardsForSet(Set.ID);
-            CurrentShowingSideIndex = 2;
-            state = FlashCardStateEnum.Chinese;
+            CurrentShowingSideIndex = DefaultSideIndex;
             CurrentCardIndex = 0;
             CurrentCard = SetCards[CurrentCardIndex];
+            SetState();
             
-            
-
-
         }
 
+
+        private int _currentCardIndex;
         public int CurrentCardIndex
         {
             get { return _currentCardIndex; }
-            set { _currentCardIndex = value; }
+            set { _currentCardIndex = value; RaisePropertyChanged(()=>CurrentCardIndex); }
         } //todo reset card to chinese / the actual one they want to see first
 
         private int _currentShowingSideIndex;
@@ -69,6 +112,9 @@ namespace FlashCardApp.Core.ViewModels.Study
 
         private const int MaxShowingIndex = 2; //this the maximum number of sides a card can have -1 to make it the max index for the variable holding sides of a card
         #endregion
+
+        private int DefaultSideIndex { get; set; }
+
         #region properties
         private List<FlashCard> _setCards;
         public List<FlashCard> SetCards
@@ -92,9 +138,6 @@ namespace FlashCardApp.Core.ViewModels.Study
                 VisibleSideText = CurrentCard.Simplified;
             }
         }
-
-
-        private int _currentCardIndex;
 
         private string _visibleSideText;
         public string VisibleSideText
@@ -149,40 +192,87 @@ namespace FlashCardApp.Core.ViewModels.Study
         {
             if (CurrentShowingSideIndex == 0)
             {
-                state = FlashCardStateEnum.Pinyin;
-                VisibleSideText = SetCards[CurrentCardIndex].Pinyin;
+                if (Settings.ShowPinyin)
+                {
+                    state = FlashCardStateEnum.Pinyin;
+                    VisibleSideText = SetCards[CurrentCardIndex].AccentedPinyin;
+                }
+                else
+                {
+                    CurrentShowingSideIndex++;
+                }
             }
             else if (CurrentShowingSideIndex == 1)
             {
-                state = FlashCardStateEnum.English;
-                VisibleSideText = SetCards[CurrentCardIndex].Definition;
+                if (Settings.ShowDefinition)
+                {
+                    state = FlashCardStateEnum.English;
+                    VisibleSideText = SetCards[CurrentCardIndex].Definition;
+                }
+                else
+                {
+                    CurrentShowingSideIndex++;
+                }
             }
             else
             {
-                state = FlashCardStateEnum.Chinese;
-                VisibleSideText = SetCards[CurrentCardIndex].Simplified;
+                if (Settings.CanShowCharacters)
+                {
+                    state = FlashCardStateEnum.Chinese;
+                    if (Settings.ShowSimplified)
+                    {
+                        VisibleSideText = SetCards[CurrentCardIndex].Simplified;
+                    }
+                    if (Settings.ShowTraditional) //todo:better formatting of this string
+                    {
+                        if (Settings.ShowSimplified)
+                        {
+                            VisibleSideText = VisibleSideText + " " + SetCards[CurrentCardIndex].Traditional;
+                        }
+                        else
+                        {
+                            VisibleSideText = SetCards[CurrentCardIndex].Traditional;
+                        }
+                    }
+                }
             }
         }
 
-        public ICommand NextCardCommand 
+        public ICommand CorrectNextCardCommand 
         {
             get
             {
-                return new MvxCommand(MoveToNextCard);
+                return new MvxCommand(() => MoveToNextCard(true));
             }
         }
 
-        private void MoveToNextCard()
+        private void MoveToNextCard(bool correct)
         {
-            if (CurrentCardIndex < SetCards.Count - 1)
+
+            if (correct)
+            {
+                _flashCardManager.MarkCorrect(SetCards[CurrentCardIndex]);
+            }
+            else
+            {
+                _flashCardManager.MarkIncorrect(SetCards[CurrentCardIndex]);
+            }
+
+            if (CurrentCardIndex < Settings.MaxCardsInStudySet - 1)
             {
                 CurrentCardIndex++;
                 CurrentCard = SetCards[CurrentCardIndex];
+                CurrentShowingSideIndex = DefaultSideIndex;
             }
             else
             {
                 Close(this);//Todo:show set statistics
             }
+        }
+
+        public ICommand IncorrectNextCardCommand
+        {
+            get{return new MvxCommand(()=>MoveToNextCard(false));}
         }
 
         public ICommand PreviousCardCardCommand

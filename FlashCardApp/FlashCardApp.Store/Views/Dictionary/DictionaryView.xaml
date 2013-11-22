@@ -74,7 +74,7 @@
                             <StackPanel>
                                 <TextBlock Text="{Binding Traditional }"  MaxHeight="40" Foreground="White" LineHeight="10" Grid.Row="2"/>
                                 <TextBlock Text="{Binding Simplified}" MaxHeight="40" Grid.Row="2"/>
-                                <TextBlock Text="{Binding Pinyin}"  MaxHeight="40" Grid.Row="3" />
+                                <TextBlock Text="{Binding AccentedPinyin}"  MaxHeight="40" Grid.Row="3" />
                                 <TextBlock Text="{Binding DefintionsString}" MaxHeight="40" Grid.Row="4"/>
                             </StackPanel>
                         </StackPanel>

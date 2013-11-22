@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ServiceModel;
-using FlashCardTestService.Entities;
+using FlashCardCloudService.Entities;
 
-namespace FlashCardTestService
+namespace FlashCardCloudService
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IService1" in both code and config file together.
     [ServiceContract]
@@ -18,6 +18,9 @@ namespace FlashCardTestService
 
         [OperationContract]
         bool UploadSets(List<ServiceFlashCardSet> serviceSets, string userEmailAddress, string password);
+
+        [OperationContract]
+        bool DeleteUser(string emailAddress, string password);
 
 
     }

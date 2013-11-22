@@ -4,7 +4,7 @@ using System.IO;
 using Microsoft.WindowsAzure.Diagnostics;
 using Microsoft.WindowsAzure.ServiceRuntime;
 
-namespace FlashCardTestService
+namespace FlashCardCloudService
 {
     public class AzureLocalStorageTraceListener : XmlWriterTraceListener
     {
