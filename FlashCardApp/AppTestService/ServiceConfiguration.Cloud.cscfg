@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="AppTestService" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="3" osVersion="*" schemaVersion="2013-03.2.0">
+  <Role name="FlashCardService">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=flashcardappstorage;AccountKey=zEcTN7je9QrRQ7j6Ao3zXxi6Jk5f/XfMU6qIHwBc+CClCSHIMTFTqf0tkV2Su7qUYY9v3XV1Wvxz/orZGR6z5w==" />
+    </ConfigurationSettings>
+  </Role>
+</ServiceConfiguration>

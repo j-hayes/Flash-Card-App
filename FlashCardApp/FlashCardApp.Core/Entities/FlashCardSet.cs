@@ -8,7 +8,10 @@ namespace FlashCardApp.Core.Entities
     {
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
-        public string Name { get; set; }
+        public string SetName { get; set; }
+
+        [Ignore]
+        public List<FlashCard> FlashCards { get; set; } 
 
         /// <summary>
         /// Constructs a new Empty FlashCardSet Object
@@ -16,9 +19,10 @@ namespace FlashCardApp.Core.Entities
         public FlashCardSet()
         {
         }
-        public FlashCardSet(string Name)
+        public FlashCardSet(string setName)
         {
-            this.Name = Name;
+            this.SetName = setName;
         }
+
     }
 }

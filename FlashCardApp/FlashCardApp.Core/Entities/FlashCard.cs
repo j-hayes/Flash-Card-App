@@ -1,6 +1,7 @@
 ﻿
 using System;
 using Cirrious.MvvmCross.Plugins.Sqlite;
+using FlashCardApp.Core.Helpers;
 
 namespace FlashCardApp.Core.Entities
 {
@@ -16,6 +17,23 @@ namespace FlashCardApp.Core.Entities
         public string Traditional { get; set; }
         public string Simplified { get; set; }
 
+
+        [Ignore]
+        public string AccentedPinyin
+        {
+            get
+            {
+
+                return PinyinFormatHelper.ConvertNumericalPinYinToAccented(Pinyin);
+            }
+        }
+
+        ///statistics 
+        public int TotalTries { get; set; }
+        public int CorrectAnswers { get; set; }
+        public int Score { get; set; }
+
+        
         /// <summary>
         /// Creates and empty FlashCard object
         /// </summary>

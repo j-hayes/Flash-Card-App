@@ -40,10 +40,14 @@
             <Button x:Name="backButton" Click="GoBack" IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}" Style="{StaticResource BackButtonStyle}"/>
             <TextBlock x:Name="pageTitle" Grid.Column="1" Text="{StaticResource AppName}" Style="{StaticResource PageHeaderTextStyle}"/>
         </Grid>
-
-        <Button Command="{Binding DictionaryCommand}" Content="Dictionary" HorizontalAlignment="Left" Height="120" MinWidth="120" Margin="60,51,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" Foreground="White"/>
-        <Button Command="{Binding FlashCardCommand}" Content="Flash Cards" HorizontalAlignment="Left" Height="120" MinWidth="120" Margin="240,51,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100"/>
-     
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <Button Command="{Binding DictionaryCommand}" Content="Dictionary" HorizontalAlignment="Left" Height="120" MinWidth="120" VerticalAlignment="Top" Foreground="White"/>
+            <Button Command="{Binding FlashCardCommand}" Content="Flash Cards" HorizontalAlignment="Left" Height="120" MinWidth="120" VerticalAlignment="Top" Width="100"/>
+            <Button Command="{Binding SaveCardCloudCommand}" Content="Save Cards" HorizontalAlignment="Left" Height="120" MinWidth="120" VerticalAlignment="Top" Width="100"/>
+            
+            <TextBlock Name="TestTextBlock"></TextBlock>
+            
+        </StackPanel>
         <VisualStateManager.VisualStateGroups>
 
             <!-- Visual states reflect the application's view state -->

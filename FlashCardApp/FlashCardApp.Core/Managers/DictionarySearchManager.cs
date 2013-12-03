@@ -58,6 +58,7 @@ namespace FlashCardApp.Core.Managers
         {
             searchTerm = clearnSearchTerm(searchTerm);
             List<Chinese> chineseResults = _chineseManager.ChinesesRelated(searchTerm);
+            throw new NotImplementedException();
             return createSearchResultFromListOfChinese(chineseResults);
         }
 
@@ -65,7 +66,16 @@ namespace FlashCardApp.Core.Managers
         public List<SearchResult> SearchByPinYin(string searchTerm)
         {
             searchTerm = clearnSearchTerm(searchTerm);
-            throw new NotImplementedException();
+            List<Chinese> chineseResults = _chineseManager.PinyinMatching(searchTerm);
+            List<English> englishResults = new List<English>();
+
+            if (chineseResults.Count > 0)
+            {
+                englishResults =
+                    _englishManager.GetEnglishesByChineseIds(chineseResults.Select(cr => cr.ID).ToList());
+            }
+            List<SearchResult> results = CreateSearchResultsFromEnglishesandChinese(englishResults, chineseResults);
+            return results;
         }
 
         #region privates
@@ -112,7 +122,7 @@ namespace FlashCardApp.Core.Managers
                
             }
             results.RemoveAt(0);
-            results = results.OrderBy(x => x.DefintionsString.Length).ToList();
+            results = results.OrderBy(x => x.Pinyin.Length).ToList();
             return results;
         }
 

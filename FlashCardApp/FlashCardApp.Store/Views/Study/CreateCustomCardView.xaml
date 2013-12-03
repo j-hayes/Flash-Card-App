@@ -57,7 +57,7 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Button Content="Submit Updates" Command="{Binding AddCardToSetCommand}" Click="Button_Click"></Button>
-                    <ComboBox Width="300" ItemsSource="{Binding FlashCardSets}" DisplayMemberPath="Name" SelectedIndex="{Binding SelectedSetIndex, Mode=TwoWay}" SelectedItem="{Binding SelectedSet, Mode=TwoWay}"/>
+                    <ComboBox Width="300" ItemsSource="{Binding FlashCardSets}" DisplayMemberPath="SetName" SelectedIndex="{Binding SelectedSetIndex, Mode=TwoWay}" SelectedItem="{Binding SelectedSet, Mode=TwoWay}"/>
 
                 </StackPanel>
             </StackPanel>

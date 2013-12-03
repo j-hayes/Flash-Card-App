@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows.Input;
 using Cirrious.MvvmCross.Plugins.Messenger;
 using Cirrious.MvvmCross.ViewModels;
@@ -17,6 +18,12 @@ namespace FlashCardApp.Core.ViewModels.Study
             _flashCardManager = flashCardManager;
             LoadList();
             _flashCardSetSubscriptionToken = messanger.Subscribe<FlashCardSetListChangedMessage>(OnListChanged);
+            StudySettings = new StudyFlashCardSetSettingsViewModel() {MaxCardsInStudySet = 0};
+                //todo:start with users last settings saving states
+            if (FlashCardSets.Count > 0)
+            {
+                SelectedSet = FlashCardSets[0];
+            }
         }
 
         private void LoadList()
@@ -29,16 +36,28 @@ namespace FlashCardApp.Core.ViewModels.Study
             LoadList();
         }
 
+        private StudyFlashCardSetSettingsViewModel _studySettings;
+        public StudyFlashCardSetSettingsViewModel StudySettings
+        {
+            get { return _studySettings; }
+            set { _studySettings = value; RaisePropertyChanged(()=>StudySettings);}
+        }
+
         private FlashCardSet _selectedSet;
         public FlashCardSet SelectedSet
         {
             get { return _selectedSet; }
-            set { _selectedSet = value;
+            set
+            {
+                _selectedSet = value;
                 RaisePropertyChanged(() => SelectedSet);
                 SelectedSetFlashCards = GetCardsForSet();
+
+                StudySettings.MaxCardsInStudySet = SelectedSetFlashCards.Count;
+
             }
         }
-
+        
        
         private List<FlashCardSet> _flashCardSets = new List<FlashCardSet>();
         public List<FlashCardSet> FlashCardSets
@@ -48,6 +67,7 @@ namespace FlashCardApp.Core.ViewModels.Study
             {
                 _flashCardSets = value;
                 RaisePropertyChanged(() => FlashCardSets);
+              
             }
 
         }
@@ -57,6 +77,22 @@ namespace FlashCardApp.Core.ViewModels.Study
             get { return _selectedSetFlashCards; }
             set { _selectedSetFlashCards = value;RaisePropertyChanged(()=>SelectedSetFlashCards); }
         }
+
+        public ICommand ShowPinyinFirstCommand
+        {
+            get { return new MvxCommand(() => StudySettings.UpdateShowFirstSetting("Pinyin")); }
+        }
+
+        public ICommand ShowCharactersFirstCommand
+        {
+            get { return new MvxCommand(() => StudySettings.UpdateShowFirstSetting("Characters")); }
+        }
+
+        public ICommand ShowDefinitionFirstCommand
+        {
+            get { return new MvxCommand(() => StudySettings.UpdateShowFirstSetting("Definition")); }
+        }
+
 
         public ICommand ShowDetailCommand
         {
@@ -72,16 +108,25 @@ namespace FlashCardApp.Core.ViewModels.Study
             }
         }
 
+       
+
         public ICommand StudySetCommand
         {
             get
             {
                 return new MvxCommand<FlashCardSet>(
                     item => 
-                        ShowViewModel<StudyFlashCardSetViewModel>(new StudyFlashCardSetViewModel.Nav()
+                        ShowViewModel<StudyFlashCardSetViewModel>(new Nav()
                     {
-                        Id = SelectedSet.ID
-                    }));
+                        Id = SelectedSet.ID,
+                        firstSideState = StudySettings.FirstSide.ToString() ,        //todo:change this?
+                        MaxCardsInStudySet = StudySettings.MaxCardsInStudySet,
+                        ShowDefinition = StudySettings.ShowDefinition,
+                        ShowPinyin = StudySettings.ShowPinyin,
+                        ShowSimplified = StudySettings.ShowSimplified,
+                        ShowTraditional = StudySettings.ShowTraditional
+                    }
+                    ));
             }
         }
 
@@ -124,16 +169,13 @@ namespace FlashCardApp.Core.ViewModels.Study
             if
             (NewSetName.Length > 0)
                 {
-                    FlashCardSet set = new FlashCardSet {Name = NewSetName};
+                    FlashCardSet set = new FlashCardSet {SetName = NewSetName};
                     _flashCardManager.CreateSet(set);
                 }
             }
 
-        private string _newSetName;
-   
-
-
-        public string NewSetName
+       private string _newSetName;
+       public string NewSetName
         {
             get { return _newSetName; }
             set

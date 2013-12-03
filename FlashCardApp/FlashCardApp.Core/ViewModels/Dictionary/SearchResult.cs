@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using FlashCardApp.Core.Entities;
+using FlashCardApp.Core.Helpers;
 
 namespace FlashCardApp.Core.ViewModels.Dictionary
 {
@@ -12,6 +13,16 @@ namespace FlashCardApp.Core.ViewModels.Dictionary
         public string Simplified { get; set; }
         public string Pinyin { get; set; }
         public int ChineseId;
+
+
+        public string AccentedPinyin
+        {
+            get
+            {
+                return PinyinFormatHelper.ConvertNumericalPinYinToAccented(Pinyin);
+            }
+        }
+
 
 
         public string DefintionsString

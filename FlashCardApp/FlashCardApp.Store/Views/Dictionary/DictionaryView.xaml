@@ -74,7 +74,7 @@
                             <StackPanel>
                                 <TextBlock Text="{Binding Traditional }"  MaxHeight="40" Foreground="White" LineHeight="10" Grid.Row="2"/>
                                 <TextBlock Text="{Binding Simplified}" MaxHeight="40" Grid.Row="2"/>
-                                <TextBlock Text="{Binding Pinyin}"  MaxHeight="40" Grid.Row="3" />
+                                <TextBlock Text="{Binding AccentedPinyin}"  MaxHeight="40" Grid.Row="3" />
                                 <TextBlock Text="{Binding DefintionsString}" MaxHeight="40" Grid.Row="4"/>
                             </StackPanel>
                         </StackPanel>
@@ -121,7 +121,7 @@
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
                             <StackPanel>
-                                <TextBlock TextAlignment="Center" TextWrapping="Wrap" Text="{Binding Name}" Width="120" MaxWidth="98" MinWidth="98" MinHeight="98" MaxHeight="98" Foreground="White" LineHeight="10"/>
+                                <TextBlock TextAlignment="Center" TextWrapping="Wrap" Text="{Binding SetName}" Width="120" MaxWidth="98" MinWidth="98" MinHeight="98" MaxHeight="98" Foreground="White" LineHeight="10"/>
                             </StackPanel>
                         </StackPanel>
                     </DataTemplate>

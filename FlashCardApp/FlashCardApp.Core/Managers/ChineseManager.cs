@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using Cirrious.MvvmCross.Plugins.Sqlite;
 using System.Linq;
@@ -14,14 +15,14 @@ namespace FlashCardApp.Core.Managers
         public ChineseManager(ISQLiteConnectionFactory factory)
         {
             _connection = factory.Create("Dictionary.sqlite");
-            _connection.CreateTable<Chinese>();
+            // _connection.CreateTable<Chinese>();
         }
 
         public List<Chinese> ChinesesMatching(string searchFilter)
         {
             List<Chinese> matchingChinese = _connection.Query<Chinese>(
                 "Select * from Chinese WHERE Simplified match ? limit 100", searchFilter);
-           
+
             return matchingChinese;
         }
 
@@ -29,6 +30,15 @@ namespace FlashCardApp.Core.Managers
         {
             throw new NotImplementedException("");
             //todo: This should get more results than the match query
+        }
+
+        public List<Chinese> PinyinMatching(string searchTerm)
+        {
+            List<Chinese> matchingChinese =
+                _connection.Query<Chinese>("Select * from Chinese WHERE SearchablePinyin match ? Limit 100", searchTerm);
+
+
+            return matchingChinese;
         }
 
         public void Insert(Chinese chinese)
@@ -78,5 +88,6 @@ namespace FlashCardApp.Core.Managers
             List<Chinese> results = _connection.Query<Chinese>(query).ToList();
             return results;
         }
+
     }
 }

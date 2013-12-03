@@ -123,6 +123,9 @@
     <Compile Include="Views\Dictionary\DictionaryView.xaml.cs">
       <DependentUpon>DictionaryView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Study\CloudCardSaveView.xaml.cs">
+      <DependentUpon>CloudCardSaveView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Study\CreateCustomCardView.xaml.cs">
       <DependentUpon>CreateCustomCardView.xaml</DependentUpon>
     </Compile>
@@ -146,11 +149,10 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <Content Include="Assets\Dictionary.sqlite">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <None Include="FlashCardApp.Store_TemporaryKey.pfx" />
+    <Content Include="Assets\Dictionary.sqlite" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\FlashCardApp.Core.Entities.FlashCardSet.datasource" />
+    <None Include="Properties\ServiceReferences.Designer.ClientConfig" />
     <PRIResource Include="Strings\Gloabal.resw" />
   </ItemGroup>
   <ItemGroup>
@@ -177,6 +179,10 @@
     <Page Include="Views\Dictionary\DictionaryView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Study\CloudCardSaveView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Study\CreateCustomCardView.xaml">
       <SubType>Designer</SubType>
@@ -241,6 +247,9 @@
       <Project>{063bec66-7fd5-4367-8608-6a075e562767}</Project>
       <Name>FlashCardApp.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>

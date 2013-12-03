@@ -1,17 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
+using System.Linq.Expressions;
+using System.ServiceModel;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
+
 using Windows.UI.Xaml.Navigation;
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
+using FlashCardApp.Core.FlashCardService;
 using FlashCardApp.Store.Common;
 
 namespace FlashCardApp.Store.Views
@@ -24,7 +19,9 @@ namespace FlashCardApp.Store.Views
         public HomePageView()
         {
             this.InitializeComponent();
+
         }
+
 
         /// <summary>
         /// Populates the page with content passed during navigation.  Any saved state is also
@@ -49,7 +46,18 @@ namespace FlashCardApp.Store.Views
         {
         }
 
-  
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+
+     
+            
+
+
+        }
+
+       
     }
 }

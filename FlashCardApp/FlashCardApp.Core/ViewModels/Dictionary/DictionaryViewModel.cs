@@ -30,7 +30,7 @@ namespace FlashCardApp.Core.ViewModels.Dictionary
             {
                 DictionarySearchInputType.English,
                 DictionarySearchInputType.Chinese,
-                //DictionarySearchInputType.Pinyin
+                DictionarySearchInputType.Pinyin
             };
         }
 

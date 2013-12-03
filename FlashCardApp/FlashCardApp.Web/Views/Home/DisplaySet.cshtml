@@ -1,0 +1,35 @@
+﻿@using FlashCardApp.Web
+@using FlashCard = FlashCardApp.Web.Models.FlashCard
+@model FlashCardApp.Web.Models.FlashCardSet
+
+
+@{
+    Layout = "../Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>title</title>
+</head>
+<body>
+    <div>
+        @if (Model.FlashCards.Count >= 0)
+        {
+            foreach (var card in Model.FlashCards)
+            {
+                <div class="FlashCard">
+                    <br/>
+
+                    <div>Traditional: @card.Traditional</div>
+                    <div>Simplified: @card.Simplified</div>
+                    <div>Pinyin: @card.AccentedPinyin</div>
+                    <div>Definition: @card.Definition</div>
+                    
+                </div> 
+            }
+        }
+    </div>
+</body>
+</html>

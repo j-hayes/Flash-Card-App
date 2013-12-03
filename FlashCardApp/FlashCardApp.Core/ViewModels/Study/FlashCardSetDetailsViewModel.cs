@@ -19,12 +19,15 @@ namespace FlashCardApp.Core.ViewModels.Study
         public class Nav
         {
             public int Id { get; set; }
+            
         }
+
+        private StudyFlashCardSetSettingsViewModel Settings { get; set; }
 
         public void Init(Nav navigation)
         {
-            Set = _flashCardManager.GetSet(navigation.Id);
-            GetSetCards();
+            GetSetCards(navigation.Id);
+         
         }
 
        
@@ -42,7 +45,7 @@ namespace FlashCardApp.Core.ViewModels.Study
         public List<FlashCard> SetCards
         {
             get { return _setCards; }
-            set { _setCards = value; RaisePropertyChanged(() => SetCards); }
+            set { _setCards = value; RaisePropertyChanged(() => SetCards); }//todo:use FlashCardSet.Cards instead of this
         }
 
         public FlashCard SelectedCard
@@ -59,7 +62,7 @@ namespace FlashCardApp.Core.ViewModels.Study
                     new MvxCommand(() =>
                     {
                         _flashCardManager.DeleteCard(SelectedCard);
-                        GetSetCards();
+                        GetSetCards(Set.ID);
                     });
 
                 //todo: messanger that this set has been updated
@@ -88,12 +91,17 @@ namespace FlashCardApp.Core.ViewModels.Study
                               ShowViewModel<FlashCardDetailsViewModel>(new FlashCardDetailsViewModel.Nav()
                               {
                                   Id = SelectedCard.ID
+                                  
+
                               }));
             }    
         }
 
-        private void GetSetCards()
+        
+
+        private void GetSetCards(int id)
         {
+            Set = _flashCardManager.GetSet(id);
             SetCards = _flashCardManager.GetCardsForSet(Set.ID);
         }
     }

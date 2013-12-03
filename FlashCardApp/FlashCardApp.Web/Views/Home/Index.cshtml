@@ -1,0 +1,37 @@
+﻿@using System.ServiceModel.Security
+@using FlashCardApp.Core.Entities
+@using FlashCardApp.Web
+@model System.Collections.Generic.List<FlashCardApp.Web.Models.FlashCardSet>
+
+@{
+    ViewBag.Title = "title";
+    //Layout = "_Layout";
+}
+<body>
+    <h2>title</h2>
+    
+    @if (!ViewBag.UserIsLoggedIn)
+    {
+        using (Html.BeginForm("Index", "Home"))
+        {
+            <div>
+                User Name:@Html.TextBox("userName");
+
+                Password:@Html.TextBox("password");
+                <input type="submit" value="submit" />
+            </div>
+        }
+
+    }
+    )
+    @if (Model != null)
+    {
+        foreach (var set in Model)
+        {
+            <div class="SetName">
+                @Html.ActionLink(set.SetName, "DisplaySet", new{setID = set.ID});
+            </div>
+        }
+    }
+}
+</body>
