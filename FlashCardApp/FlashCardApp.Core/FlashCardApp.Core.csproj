@@ -80,6 +80,9 @@
     <None Include="Service References\FlashCardService\FlashCardApp.Core.FlashCardService.CreateUserResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\FlashCardService\FlashCardApp.Core.FlashCardService.DeleteUserResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\FlashCardService\FlashCardApp.Core.FlashCardService.GetSetsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

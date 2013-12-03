@@ -14,7 +14,7 @@ namespace FlashCardApp.Core.FlashCardService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ServiceFlashCardSet", Namespace="http://schemas.datacontract.org/2004/07/FlashCardTestService.Entities")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ServiceFlashCardSet", Namespace="http://schemas.datacontract.org/2004/07/FlashCardCloudService.Entities")]
     public partial class ServiceFlashCardSet : object, System.ComponentModel.INotifyPropertyChanged {
         
         private FlashCardApp.Core.FlashCardService.ServiceFlashCard[] FlashCardsField;
@@ -74,7 +74,7 @@ namespace FlashCardApp.Core.FlashCardService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ServiceFlashCard", Namespace="http://schemas.datacontract.org/2004/07/FlashCardTestService.Entities")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ServiceFlashCard", Namespace="http://schemas.datacontract.org/2004/07/FlashCardCloudService.Entities")]
     public partial class ServiceFlashCard : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string DefinitionField;
@@ -195,6 +195,11 @@ namespace FlashCardApp.Core.FlashCardService {
         System.IAsyncResult BeginUploadSets(FlashCardApp.Core.FlashCardService.UploadSetsRequest request, System.AsyncCallback callback, object asyncState);
         
         FlashCardApp.Core.FlashCardService.UploadSetsResponse EndUploadSets(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IFlashCardService/DeleteUser", ReplyAction="http://tempuri.org/IFlashCardService/DeleteUserResponse")]
+        System.IAsyncResult BeginDeleteUser(FlashCardApp.Core.FlashCardService.DeleteUserRequest request, System.AsyncCallback callback, object asyncState);
+        
+        FlashCardApp.Core.FlashCardService.DeleteUserResponse EndDeleteUser(System.IAsyncResult result);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -309,6 +314,42 @@ namespace FlashCardApp.Core.FlashCardService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="DeleteUser", WrapperNamespace="http://tempuri.org/")]
+    public partial class DeleteUserRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public string emailAddress;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
+        public string password;
+        
+        public DeleteUserRequest() {
+        }
+        
+        public DeleteUserRequest(string emailAddress, string password) {
+            this.emailAddress = emailAddress;
+            this.password = password;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="DeleteUserResponse", WrapperNamespace="http://tempuri.org/")]
+    public partial class DeleteUserResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public bool DeleteUserResult;
+        
+        public DeleteUserResponse() {
+        }
+        
+        public DeleteUserResponse(bool DeleteUserResult) {
+            this.DeleteUserResult = DeleteUserResult;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IFlashCardServiceChannel : FlashCardApp.Core.FlashCardService.IFlashCardService, System.ServiceModel.IClientChannel {
     }
@@ -372,6 +413,25 @@ namespace FlashCardApp.Core.FlashCardService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class DeleteUserCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public DeleteUserCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public FlashCardApp.Core.FlashCardService.DeleteUserResponse Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((FlashCardApp.Core.FlashCardService.DeleteUserResponse)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class FlashCardServiceClient : System.ServiceModel.ClientBase<FlashCardApp.Core.FlashCardService.IFlashCardService>, FlashCardApp.Core.FlashCardService.IFlashCardService {
         
         private BeginOperationDelegate onBeginCreateUserDelegate;
@@ -391,6 +451,12 @@ namespace FlashCardApp.Core.FlashCardService {
         private EndOperationDelegate onEndUploadSetsDelegate;
         
         private System.Threading.SendOrPostCallback onUploadSetsCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginDeleteUserDelegate;
+        
+        private EndOperationDelegate onEndDeleteUserDelegate;
+        
+        private System.Threading.SendOrPostCallback onDeleteUserCompletedDelegate;
         
         private BeginOperationDelegate onBeginOpenDelegate;
         
@@ -451,6 +517,8 @@ namespace FlashCardApp.Core.FlashCardService {
         public event System.EventHandler<GetSetsCompletedEventArgs> GetSetsCompleted;
         
         public event System.EventHandler<UploadSetsCompletedEventArgs> UploadSetsCompleted;
+        
+        public event System.EventHandler<DeleteUserCompletedEventArgs> DeleteUserCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;
         
@@ -594,6 +662,52 @@ namespace FlashCardApp.Core.FlashCardService {
                         request}, this.onEndUploadSetsDelegate, this.onUploadSetsCompletedDelegate, userState);
         }
         
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult FlashCardApp.Core.FlashCardService.IFlashCardService.BeginDeleteUser(FlashCardApp.Core.FlashCardService.DeleteUserRequest request, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginDeleteUser(request, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        FlashCardApp.Core.FlashCardService.DeleteUserResponse FlashCardApp.Core.FlashCardService.IFlashCardService.EndDeleteUser(System.IAsyncResult result) {
+            return base.Channel.EndDeleteUser(result);
+        }
+        
+        private System.IAsyncResult OnBeginDeleteUser(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            FlashCardApp.Core.FlashCardService.DeleteUserRequest request = ((FlashCardApp.Core.FlashCardService.DeleteUserRequest)(inValues[0]));
+            return ((FlashCardApp.Core.FlashCardService.IFlashCardService)(this)).BeginDeleteUser(request, callback, asyncState);
+        }
+        
+        private object[] OnEndDeleteUser(System.IAsyncResult result) {
+            FlashCardApp.Core.FlashCardService.DeleteUserResponse retVal = ((FlashCardApp.Core.FlashCardService.IFlashCardService)(this)).EndDeleteUser(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnDeleteUserCompleted(object state) {
+            if ((this.DeleteUserCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.DeleteUserCompleted(this, new DeleteUserCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void DeleteUserAsync(FlashCardApp.Core.FlashCardService.DeleteUserRequest request) {
+            this.DeleteUserAsync(request, null);
+        }
+        
+        public void DeleteUserAsync(FlashCardApp.Core.FlashCardService.DeleteUserRequest request, object userState) {
+            if ((this.onBeginDeleteUserDelegate == null)) {
+                this.onBeginDeleteUserDelegate = new BeginOperationDelegate(this.OnBeginDeleteUser);
+            }
+            if ((this.onEndDeleteUserDelegate == null)) {
+                this.onEndDeleteUserDelegate = new EndOperationDelegate(this.OnEndDeleteUser);
+            }
+            if ((this.onDeleteUserCompletedDelegate == null)) {
+                this.onDeleteUserCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnDeleteUserCompleted);
+            }
+            base.InvokeAsync(this.onBeginDeleteUserDelegate, new object[] {
+                        request}, this.onEndDeleteUserDelegate, this.onDeleteUserCompletedDelegate, userState);
+        }
+        
         private System.IAsyncResult OnBeginOpen(object[] inValues, System.AsyncCallback callback, object asyncState) {
             return ((System.ServiceModel.ICommunicationObject)(this)).BeginOpen(callback, asyncState);
         }
@@ -731,6 +845,19 @@ namespace FlashCardApp.Core.FlashCardService {
             public FlashCardApp.Core.FlashCardService.UploadSetsResponse EndUploadSets(System.IAsyncResult result) {
                 object[] _args = new object[0];
                 FlashCardApp.Core.FlashCardService.UploadSetsResponse _result = ((FlashCardApp.Core.FlashCardService.UploadSetsResponse)(base.EndInvoke("UploadSets", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginDeleteUser(FlashCardApp.Core.FlashCardService.DeleteUserRequest request, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = request;
+                System.IAsyncResult _result = base.BeginInvoke("DeleteUser", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public FlashCardApp.Core.FlashCardService.DeleteUserResponse EndDeleteUser(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                FlashCardApp.Core.FlashCardService.DeleteUserResponse _result = ((FlashCardApp.Core.FlashCardService.DeleteUserResponse)(base.EndInvoke("DeleteUser", _args, result)));
                 return _result;
             }
         }

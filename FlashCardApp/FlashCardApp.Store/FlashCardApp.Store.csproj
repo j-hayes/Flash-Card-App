@@ -150,7 +150,6 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <Content Include="Assets\Dictionary.sqlite" />
-    <None Include="FlashCardApp.Store_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\FlashCardApp.Core.Entities.FlashCardSet.datasource" />
     <None Include="Properties\ServiceReferences.Designer.ClientConfig" />

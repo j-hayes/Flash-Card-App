@@ -15,7 +15,7 @@ namespace FlashCardCloudService
     public class FlashCardService : IFlashCardService
     {
         private readonly CloudFlashCardDataContext _dbContext = new CloudFlashCardDataContext(ConfigurationManager
-            .ConnectionStrings["FlashCardDbConnectionString"].ConnectionString);
+            .ConnectionStrings["LUC_DB"].ConnectionString);
 
 
         public bool CreateUser(string emailAddress, string password)
@@ -99,9 +99,9 @@ namespace FlashCardCloudService
         {
            
             CloudUser user = VerifyUserAndGetUser(userEmailAddress, password);
-            List<CloudFlashCardSet> sets = ConverToCloudSet(serviceSets, user);
-
             DeleteUserCards(user.Id);
+
+            List<CloudFlashCardSet> sets = ConverToCloudSet(serviceSets, user);
 
             _dbContext.CloudFlashCardSets.InsertAllOnSubmit(sets);
             _dbContext.SubmitChanges();
@@ -116,8 +116,11 @@ namespace FlashCardCloudService
             {
                 CloudFlashCardSet set = new CloudFlashCardSet()
                 {
-                    SetName =  serviceFlashCardSet.SetName, 
-                    CloudUser = user
+                    SetName = serviceFlashCardSet.SetName,
+                    ID = serviceFlashCardSet.ID,
+                    //CloudUser = user,
+                    UserID = user.Id
+
                 };
                 foreach (var serviceCard in serviceFlashCardSet.FlashCards)
                 {
@@ -128,7 +131,9 @@ namespace FlashCardCloudService
                         Pinyin = serviceCard.Pinyin,
                         CloudFlashCardSet = set,
                         Definition = serviceCard.Definition,
-                        ID = serviceCard.ID
+                        ID = serviceCard.ID,
+                        OwnerID = user.Id
+
 
                     };
                     set.CloudFlashCards.Add(card);
@@ -154,13 +159,10 @@ namespace FlashCardCloudService
         {
             _dbContext.CloudFlashCards.DeleteAllOnSubmit(
             _dbContext.CloudFlashCards.Where(x => x.OwnerID == userId).ToList());
-            
-            
             _dbContext.SubmitChanges();
+          
             _dbContext.CloudFlashCardSets.DeleteAllOnSubmit(
             _dbContext.CloudFlashCardSets.Where(x => x.UserID == userId).ToList());
-
-
             _dbContext.SubmitChanges();
         }
     }

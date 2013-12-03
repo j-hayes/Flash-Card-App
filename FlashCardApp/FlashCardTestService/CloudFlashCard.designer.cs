@@ -42,7 +42,7 @@ namespace FlashCardTestService
     #endregion
 		
 		public CloudFlashCardDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["Flash_Card_DbConnectionString"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["LUC_DB"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -144,7 +144,7 @@ namespace FlashCardTestService
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
 		public int ID
 		{
 			get
@@ -522,7 +522,7 @@ namespace FlashCardTestService
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
 		public int ID
 		{
 			get
