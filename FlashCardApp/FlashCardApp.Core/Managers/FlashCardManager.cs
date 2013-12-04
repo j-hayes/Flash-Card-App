@@ -19,9 +19,9 @@ namespace FlashCardApp.Core.Managers
         public FlashCardServiceClient CloudClient;
     
 
-        public FlashCardManager(ISQLiteConnectionFactory factory, IMvxMessenger messenger)
+        public FlashCardManager(ISQLiteConnectionFactory factory)//, IMvxMessenger messenger)
         {
-            _messenger = messenger;
+           // _messenger = messenger;
             CloudClient = new FlashCardServiceClient();
             _connection = factory.Create("Dictionary.sqlite");
             _connection.CreateTable<FlashCardSet>();

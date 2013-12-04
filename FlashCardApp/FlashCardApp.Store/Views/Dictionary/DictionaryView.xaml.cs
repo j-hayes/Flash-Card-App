@@ -57,7 +57,7 @@ namespace FlashCardApp.Store.Views
         private void AddToSetButtonClick(object sender, RoutedEventArgs e)
         {
             
-
+            //todo:change this to a pop up instead of a top app bar
            ((DictionaryViewModel)ViewModel).GetFlashCardSetList.Execute(sender);
             topAppBar.IsOpen = true;
         }
