@@ -16,6 +16,7 @@ namespace FlashCardApp.Web.Controllers
         private CloudFlashCardDataContext flashCardDataContex;
         private CloudCardConverter cloudConverter;
 
+
         private CloudUser user;
 
         public HomeController()
@@ -63,5 +64,45 @@ namespace FlashCardApp.Web.Controllers
           
             return View(sets[0]);
         }
+
+        public ActionResult Logout()
+        {
+            Session.RemoveAll();
+            return Redirect("Index");
+        }
+
+        public ActionResult StudySet(int setID)
+        {
+            int userID = (int)Session["UserId"];
+            var cloudset = flashCardDataContex.CloudFlashCardSets.First(x => x.ID == setID
+                                                                             & x.UserID == userID);
+            Session["StudySetViewModel"] = new StudySetViewModel(cloudset);
+            return View((StudySetViewModel)Session["StudySetViewModel"]);
+
+        }
+
+        public ActionResult FlipCard()
+        {
+            StudySetViewModel viewModel = (StudySetViewModel) Session["StudySetViewModel"];
+            viewModel.FlipCard();
+           return View("StudySet", viewModel);
+        }
+
+        public ActionResult NextCard()
+        {
+               StudySetViewModel viewModel = (StudySetViewModel) Session["StudySetViewModel"];
+            viewModel.NextCard(1);
+            return View("StudySet", viewModel);
+        }
+
+        public ActionResult PreviousCard()
+        {
+
+            StudySetViewModel viewModel = (StudySetViewModel)Session["StudySetViewModel"];
+            viewModel.NextCard(-1);
+            return View("StudySet", viewModel);
+        }
+
+
     }
 }

@@ -17,14 +17,8 @@ namespace FlashCardApp.Core.Managers
         public EnglishManager(ISQLiteConnectionFactory factory)
         {
             _connection = factory.Create("Dictionary.sqlite");
-            _connection.CreateTable<English>();
-            _connection.Insert(new English()
-            {
-                ID = 120120120,
-                ChineseId = 1,
-                Definition = "hello world",
-                DefinitionLength = 5
-            });
+            
+           
         }
 
         public List<English> EnglishesMatching(string filter)

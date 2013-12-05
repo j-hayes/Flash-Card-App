@@ -1,0 +1,63 @@
+﻿@model FlashCardApp.Web.Models.StudySetViewModel
+
+@{
+    ViewBag.Title = "StudySet";
+    Layout = "~/Views/Shared/_BootstrapLayout.basic.cshtml";
+}
+
+
+
+<fieldset>
+    
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.CurrentCard.Definition)
+    </div>
+    @if (Model.ShowEnglish)
+    {
+        <div class="display-field">
+            @Html.DisplayFor(model => model.CurrentCard.Definition)
+        </div>
+    }
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.CurrentCard.Traditional)
+    </div>
+    
+    <div class="display-field">
+        @Html.DisplayFor(model =>  model.CurrentCard.Traditional)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.CurrentCard.Simplified)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CurrentCard.Simplified)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.CurrentCard.Pinyin)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CurrentCard.Pinyin)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.CurrentCard.Pinyin)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CurrentCard.Pinyin)
+    </div>
+</fieldset>
+
+<div>
+    @Html.ActionLink("Flip Card","FlipCard","Home", Model)
+</div>
+<div>
+    @Html.ActionLink("Next Card","NextCard","Home", Model)
+</div>
+ <div>
+@Html.ActionLink("Previous Card","PreviousCard","Home", Model)
+     </div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

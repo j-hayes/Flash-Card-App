@@ -4,34 +4,36 @@
 @model System.Collections.Generic.List<FlashCardApp.Web.Models.FlashCardSet>
 
 @{
-    ViewBag.Title = "title";
-    //Layout = "_Layout";
+    
+    ViewBag.Title = "User Sets";
+    Layout = "../Shared/_BootstrapLayout.basic.cshtml";
 }
-<body>
-    <h2>title</h2>
+
+
+
     
     @if (!ViewBag.UserIsLoggedIn)
     {
         using (Html.BeginForm("Index", "Home"))
         {
             <div>
-                User Name:@Html.TextBox("userName");
+                User Name:@Html.TextBox("userName")
 
-                Password:@Html.TextBox("password");
+                Password:@Html.TextBox("password")
                 <input type="submit" value="submit" />
             </div>
         }
 
     }
-    )
+    
     @if (Model != null)
     {
         foreach (var set in Model)
         {
-            <div class="SetName">
-                @Html.ActionLink(set.SetName, "DisplaySet", new{setID = set.ID});
+            <div class="focused">
+                @Html.ActionLink(set.SetName, "DisplaySet", new{setID = set.ID})
+                 @Html.ActionLink(set.SetName, "StudySet", new{setID = set.ID})
             </div>
         }
     }
-}
-</body>
+

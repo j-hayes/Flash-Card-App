@@ -89,6 +89,7 @@ namespace FlashCardApp.Store
         private async void InitializeAppEnvironment()
         {
             string dbName = "Dictionary.sqlite";//todo: add this to some resource file
+ 
             try
             {
                 if (!(await AppHelper.ExistsInStorageFolder(AppHelper.localFolder, dbName )))

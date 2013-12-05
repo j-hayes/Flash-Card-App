@@ -33,9 +33,7 @@ namespace FlashCardApp.WindowsPhone
             // Phone-specific initialization
             InitializePhoneApplication();
 
-            //Check for or add database
-            InitializeDatabase();
-
+           
             // Language display initialization
             InitializeLanguage();
 
@@ -61,6 +59,9 @@ namespace FlashCardApp.WindowsPhone
 
             var setup = new Setup(RootFrame);
             setup.Initialize();
+
+            //Check for or add database
+            InitializeDatabase();
 
         }
 
