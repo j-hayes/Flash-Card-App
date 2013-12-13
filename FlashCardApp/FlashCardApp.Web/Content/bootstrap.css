@@ -6165,3 +6165,8 @@ a.badge:focus {
 .affix {
   position: fixed;
 }
+.flashCard-section {
+    font-size: 48px;
+
+
+}

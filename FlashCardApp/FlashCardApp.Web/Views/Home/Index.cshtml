@@ -10,7 +10,7 @@
 }
 
 
-
+<!--todo: session variable to keep loging current -->
     
     @if (!ViewBag.UserIsLoggedIn)
     {
@@ -19,7 +19,7 @@
             <div>
                 User Name:@Html.TextBox("userName")
 
-                Password:@Html.TextBox("password")
+                Password:@Html.Password("password")
                 <input type="submit" value="submit" />
             </div>
         }
@@ -28,11 +28,18 @@
     
     @if (Model != null)
     {
+        <div class="page-header">
+            Flash Card Sets
+        </div>
         foreach (var set in Model)
         {
             <div class="focused">
-                @Html.ActionLink(set.SetName, "DisplaySet", new{setID = set.ID})
-                 @Html.ActionLink(set.SetName, "StudySet", new{setID = set.ID})
+                @Html.DisplayName(set.SetName)<br/>
+                @Html.ActionLink("Display Set", "DisplaySet" , new{setID = set.ID})
+                <br/>
+                @Html.ActionLink("Study Set" , "StudySet",  new{setID = set.ID})
+                
+                <br/>
             </div>
         }
     }

@@ -67,7 +67,7 @@ namespace FlashCardApp.Core.ViewModels
 
         private void NavigateToCloudCardSave()
         {
-            ShowViewModel<CloudCardSaveViewModel>();
+            ShowViewModel<LoginViewModel>();
         }
     }
 }

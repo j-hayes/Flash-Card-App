@@ -19,9 +19,9 @@ namespace FlashCardApp.Core.Managers
         public FlashCardServiceClient CloudClient;
     
 
-        public FlashCardManager(ISQLiteConnectionFactory factory)//, IMvxMessenger messenger)
+        public FlashCardManager(ISQLiteConnectionFactory factory, IMvxMessenger messenger)
         {
-           // _messenger = messenger;
+            _messenger = messenger;
             CloudClient = new FlashCardServiceClient();
             _connection = factory.Create("Dictionary.sqlite");
             _connection.CreateTable<FlashCardSet>();
@@ -75,6 +75,8 @@ namespace FlashCardApp.Core.Managers
         {
 
             _connection.Delete<FlashCardSet>(flashCardSet.ID);
+            string query = "Delete from CardInSet where SetID == ?"; //todo:create query that adds //and make these tables cascade foreign keys
+            _connection.Execute(query, flashCardSet.ID);
             _messenger.Publish(new FlashCardSetListChangedMessage(this));
             //todo:add messaging to alert that a set no longer exists
         }

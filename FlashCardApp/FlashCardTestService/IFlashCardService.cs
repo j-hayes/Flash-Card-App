@@ -14,6 +14,9 @@ namespace FlashCardCloudService
         bool CreateUser(string emailAddress, string password);
 
         [OperationContract]
+        bool VerifyUser(string emailAddress, string password);
+
+        [OperationContract]
         List<ServiceFlashCardSet> GetSets(string userEmailAdress, string password);
 
         [OperationContract]

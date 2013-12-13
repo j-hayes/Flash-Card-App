@@ -12,8 +12,7 @@
 
     <Page.Resources>
 
-        <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
-        <x:String x:Key="AppName">My Application</x:String>
+      
     </Page.Resources>
 
     <!--
@@ -26,7 +25,7 @@
             <RowDefinition Height="140"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
+       
         <!-- Back button and page title -->
         <Grid>
             <Grid.ColumnDefinitions>
@@ -36,6 +35,7 @@
             <Button x:Name="backButton" Click="GoBack" IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}" Style="{StaticResource BackButtonStyle}"/>
             <TextBlock x:Name="pageTitle" Grid.Column="1" Text="{StaticResource AppName}" Style="{StaticResource PageHeaderTextStyle}"/>
         </Grid>
+
         <Grid Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="600"/>
@@ -43,7 +43,7 @@
             </Grid.ColumnDefinitions>
          
             <!-- Vertical scrolling item list -->
-            <Grid Column="0">
+            <Grid Column="0" IsTapEnabled="{Binding LoginViewModel.ShowMainContent}" >
                 <StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Button Command="{Binding UploadCardsToCloud}" FontSize="18"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="142" Width="142">

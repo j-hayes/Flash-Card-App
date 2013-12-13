@@ -41,7 +41,9 @@
         </Grid.ColumnDefinitions>
         
         <Grid Grid.Row="0" Grid.Column="0"></Grid>
-        <Grid Name="TopButton" Background="AliceBlue" Grid.Row="0" Grid.Column="1" IsTapEnabled="True"  Tapped="TopButton_OnTapped"></Grid>
+        <Grid Name="TopButton"   Background="AliceBlue" Grid.Row="0" Grid.Column="1" IsTapEnabled="True"  Tapped="TopButton_OnTapped">
+            <TextBlock Text="Previous" FontSize="36" Foreground="Black" FontFamily="Global User Interface" TextAlignment="Center" VerticalAlignment="Center"></TextBlock>
+        </Grid>
         <Grid Grid.Row="0" Grid.Column="2"></Grid>
         <Grid Name="LeftButton" Background="AliceBlue" Grid.Row="1" Grid.Column="0"   IsTapEnabled="True" Tapped="LeftButton_OnTapped"></Grid>
         <Grid Grid.Row="1" Grid.Column="1" Background="Black"  ManipulationMode="All" ManipulationStarted="CenterGrid_ManipulateStarted" ManipulationCompleted="CenterGrid_ManipulateCompleted">
@@ -56,10 +58,15 @@
             </Grid.ColumnDefinitions>
             
                 <Border Grid.Column="0" BorderBrush="Black" BorderThickness="0,0,3,0">
-                    <GridView  Name="BottomLeft" Background="AliceBlue" IsTapEnabled="True" Tapped="BottomLeft_OnTapped"></GridView>
+                    <Grid  Name="BottomLeft" Background="AliceBlue" IsTapEnabled="True" Tapped="BottomLeft_OnTapped">
+                        <TextBlock Text="Incorrect" FontSize="36" Foreground="Black" FontFamily="Global User Interface" TextAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                </Grid>
                 </Border>
                 <Border Grid.Column="1" BorderBrush="black" BorderThickness="3,0,0,0" >
-                    <Grid  Name="BottomRight" Background="AliceBlue" IsTapEnabled="True" Tapped="BottomRight_OnTapped"></Grid>
+                    <Grid  Name="BottomRight" Background="AliceBlue" IsTapEnabled="True" Tapped="BottomRight_OnTapped">
+                        <TextBlock Text="Correct" FontSize="36" Foreground="Black" FontFamily="Global User Interface" TextAlignment="Center" VerticalAlignment="Center"></TextBlock>
+
+                </Grid>
                 </Border>
         </Grid>
         <Grid Grid.Row="2" Grid.Column="2"></Grid>

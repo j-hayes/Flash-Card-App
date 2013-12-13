@@ -2,13 +2,17 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.ServiceModel.Security;
 using System.Text;
 using System.Windows.Input;
 using System.Xml.Linq;
+using Cirrious.MvvmCross.Plugins.Messenger;
 using Cirrious.MvvmCross.ViewModels;
 using FlashCardApp.Core.Entities;
 using FlashCardApp.Core.FlashCardService;
 using FlashCardApp.Core.Managers;
+using FlashCardApp.Core.Messages;
+using FlashCardApp.Core.ViewModels.Dictionary;
 
 namespace FlashCardApp.Core.ViewModels.Study
 {
@@ -17,14 +21,41 @@ namespace FlashCardApp.Core.ViewModels.Study
         private IFlashCardManager _flashCardManager;
 
         private FlashCardServiceClient serviceClient;
+        private readonly MvxSubscriptionToken _flashCardSetSubscriptionToken;
 
         public CloudCardSaveViewModel(IFlashCardManager flashCardManager)
         {
             _flashCardManager = flashCardManager;
+           
+
+        }
+
+        public class Nav
+        {
+            public string UserEmail { get; set; }
+            public string Password { get; set; }
+
+        }
+        public void Init(Nav navigation)
+        {
+            UserName = navigation.UserEmail;
+            Password = navigation.Password;
             ShowSaveReplaceCardsButton = false;
             DoGetCloudCards();//Todo: Refactor out these into new manager or the FCM
-            
 
+        }
+
+        
+
+        private bool LoggedIn { get; set; }
+
+        private string UserName { get; set; }
+        private string Password { get; set; }
+
+        public LoginViewModel LoginViewModel
+        {
+            get { return _loginViewModel; }
+            set { _loginViewModel = value; }
         }
 
         public FlashCardSet SelectedFlastCardSet
@@ -47,6 +78,7 @@ namespace FlashCardApp.Core.ViewModels.Study
         private string _response;
         private FlashCardSet _selectedFlastCardSet;
         private bool _showSaveReplaceCardsButton;
+        private LoginViewModel _loginViewModel;
 
         public string ResponseText
         {
@@ -81,7 +113,7 @@ namespace FlashCardApp.Core.ViewModels.Study
         private void ServiceClientOnOpenCompletedForDownload(object sender, AsyncCompletedEventArgs asyncCompletedEventArgs)
         {
             serviceClient.GetSetsCompleted += ClientOnGetSetsCompleted;
-            serviceClient.GetSetsAsync(new GetSetsRequest("jacksonjhayes@gmail.com", "jh01123581321"));
+            serviceClient.GetSetsAsync(new GetSetsRequest(UserName, Password));
         }
 
         private void ClientOnGetSetsCompleted(object sender, GetSetsCompletedEventArgs getSetsCompletedEventArgs)
@@ -135,7 +167,7 @@ namespace FlashCardApp.Core.ViewModels.Study
             serviceClient.UploadSetsCompleted += ClientOnUploadSetsCompleted;
 
             serviceClient.UploadSetsAsync(new UploadSetsRequest(_flashCardManager.GetCloudSetsForUpload(),
-                "jacksonjhayes@gmail.com", "jh01123581321"));
+                UserName, Password));
             serviceClient.CloseAsync();
         }
 
@@ -153,7 +185,7 @@ namespace FlashCardApp.Core.ViewModels.Study
             {
                 if (uploadSetsCompletedEventArgs.Result.UploadSetsResult)
                 {
-                    ResponseText = "Your Cards Have been uploaded successfully?";
+                    ResponseText = "Your Cards Have been uploaded successfully";
                 }
                 else
                 {

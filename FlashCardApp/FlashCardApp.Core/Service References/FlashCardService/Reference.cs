@@ -186,6 +186,11 @@ namespace FlashCardApp.Core.FlashCardService {
         
         FlashCardApp.Core.FlashCardService.CreateUserResponse EndCreateUser(System.IAsyncResult result);
         
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IFlashCardService/VerifyUser", ReplyAction="http://tempuri.org/IFlashCardService/VerifyUserResponse")]
+        System.IAsyncResult BeginVerifyUser(FlashCardApp.Core.FlashCardService.VerifyUserRequest request, System.AsyncCallback callback, object asyncState);
+        
+        FlashCardApp.Core.FlashCardService.VerifyUserResponse EndVerifyUser(System.IAsyncResult result);
+        
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IFlashCardService/GetSets", ReplyAction="http://tempuri.org/IFlashCardService/GetSetsResponse")]
         System.IAsyncResult BeginGetSets(FlashCardApp.Core.FlashCardService.GetSetsRequest request, System.AsyncCallback callback, object asyncState);
         
@@ -235,6 +240,42 @@ namespace FlashCardApp.Core.FlashCardService {
         
         public CreateUserResponse(bool CreateUserResult) {
             this.CreateUserResult = CreateUserResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="VerifyUser", WrapperNamespace="http://tempuri.org/")]
+    public partial class VerifyUserRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public string emailAddress;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
+        public string password;
+        
+        public VerifyUserRequest() {
+        }
+        
+        public VerifyUserRequest(string emailAddress, string password) {
+            this.emailAddress = emailAddress;
+            this.password = password;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="VerifyUserResponse", WrapperNamespace="http://tempuri.org/")]
+    public partial class VerifyUserResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public bool VerifyUserResult;
+        
+        public VerifyUserResponse() {
+        }
+        
+        public VerifyUserResponse(bool VerifyUserResult) {
+            this.VerifyUserResult = VerifyUserResult;
         }
     }
     
@@ -375,6 +416,25 @@ namespace FlashCardApp.Core.FlashCardService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class VerifyUserCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public VerifyUserCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public FlashCardApp.Core.FlashCardService.VerifyUserResponse Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((FlashCardApp.Core.FlashCardService.VerifyUserResponse)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class GetSetsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
@@ -439,6 +499,12 @@ namespace FlashCardApp.Core.FlashCardService {
         private EndOperationDelegate onEndCreateUserDelegate;
         
         private System.Threading.SendOrPostCallback onCreateUserCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginVerifyUserDelegate;
+        
+        private EndOperationDelegate onEndVerifyUserDelegate;
+        
+        private System.Threading.SendOrPostCallback onVerifyUserCompletedDelegate;
         
         private BeginOperationDelegate onBeginGetSetsDelegate;
         
@@ -514,6 +580,8 @@ namespace FlashCardApp.Core.FlashCardService {
         
         public event System.EventHandler<CreateUserCompletedEventArgs> CreateUserCompleted;
         
+        public event System.EventHandler<VerifyUserCompletedEventArgs> VerifyUserCompleted;
+        
         public event System.EventHandler<GetSetsCompletedEventArgs> GetSetsCompleted;
         
         public event System.EventHandler<UploadSetsCompletedEventArgs> UploadSetsCompleted;
@@ -568,6 +636,52 @@ namespace FlashCardApp.Core.FlashCardService {
             }
             base.InvokeAsync(this.onBeginCreateUserDelegate, new object[] {
                         request}, this.onEndCreateUserDelegate, this.onCreateUserCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult FlashCardApp.Core.FlashCardService.IFlashCardService.BeginVerifyUser(FlashCardApp.Core.FlashCardService.VerifyUserRequest request, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginVerifyUser(request, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        FlashCardApp.Core.FlashCardService.VerifyUserResponse FlashCardApp.Core.FlashCardService.IFlashCardService.EndVerifyUser(System.IAsyncResult result) {
+            return base.Channel.EndVerifyUser(result);
+        }
+        
+        private System.IAsyncResult OnBeginVerifyUser(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            FlashCardApp.Core.FlashCardService.VerifyUserRequest request = ((FlashCardApp.Core.FlashCardService.VerifyUserRequest)(inValues[0]));
+            return ((FlashCardApp.Core.FlashCardService.IFlashCardService)(this)).BeginVerifyUser(request, callback, asyncState);
+        }
+        
+        private object[] OnEndVerifyUser(System.IAsyncResult result) {
+            FlashCardApp.Core.FlashCardService.VerifyUserResponse retVal = ((FlashCardApp.Core.FlashCardService.IFlashCardService)(this)).EndVerifyUser(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnVerifyUserCompleted(object state) {
+            if ((this.VerifyUserCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.VerifyUserCompleted(this, new VerifyUserCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void VerifyUserAsync(FlashCardApp.Core.FlashCardService.VerifyUserRequest request) {
+            this.VerifyUserAsync(request, null);
+        }
+        
+        public void VerifyUserAsync(FlashCardApp.Core.FlashCardService.VerifyUserRequest request, object userState) {
+            if ((this.onBeginVerifyUserDelegate == null)) {
+                this.onBeginVerifyUserDelegate = new BeginOperationDelegate(this.OnBeginVerifyUser);
+            }
+            if ((this.onEndVerifyUserDelegate == null)) {
+                this.onEndVerifyUserDelegate = new EndOperationDelegate(this.OnEndVerifyUser);
+            }
+            if ((this.onVerifyUserCompletedDelegate == null)) {
+                this.onVerifyUserCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnVerifyUserCompleted);
+            }
+            base.InvokeAsync(this.onBeginVerifyUserDelegate, new object[] {
+                        request}, this.onEndVerifyUserDelegate, this.onVerifyUserCompletedDelegate, userState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -819,6 +933,19 @@ namespace FlashCardApp.Core.FlashCardService {
             public FlashCardApp.Core.FlashCardService.CreateUserResponse EndCreateUser(System.IAsyncResult result) {
                 object[] _args = new object[0];
                 FlashCardApp.Core.FlashCardService.CreateUserResponse _result = ((FlashCardApp.Core.FlashCardService.CreateUserResponse)(base.EndInvoke("CreateUser", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginVerifyUser(FlashCardApp.Core.FlashCardService.VerifyUserRequest request, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = request;
+                System.IAsyncResult _result = base.BeginInvoke("VerifyUser", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public FlashCardApp.Core.FlashCardService.VerifyUserResponse EndVerifyUser(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                FlashCardApp.Core.FlashCardService.VerifyUserResponse _result = ((FlashCardApp.Core.FlashCardService.VerifyUserResponse)(base.EndInvoke("VerifyUser", _args, result)));
                 return _result;
             }
             

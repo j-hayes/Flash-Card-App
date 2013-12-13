@@ -107,6 +107,7 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SqlScripts\CloudDatabaseCreationScript.sql" />
     <Content Include="Web.config" />
     <Content Include="CloudFlashCard.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
