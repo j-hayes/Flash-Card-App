@@ -14,8 +14,9 @@ namespace FlashCardApp.Core.Managers
 
         public ChineseManager(ISQLiteConnectionFactory factory)
         {
-            _connection = factory.Create("Dictionary.sqlite");
-            // _connection.CreateTable<Chinese>();
+            _connection = factory.Create("Dictionary1.sqlite");
+            _connection.CreateTable<Chinese>();
+            var i = _connection.Table<Chinese>().ToList();
         }
 
         public List<Chinese> ChinesesMatching(string searchFilter)

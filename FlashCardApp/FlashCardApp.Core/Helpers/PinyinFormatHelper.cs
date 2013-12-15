@@ -35,7 +35,7 @@ namespace FlashCardApp.Core.Helpers
                     {
                         if (t[t.Length - 1] == 'u')
                         {
-                            t = t.Substring(0, t.Length - 2) + "\u00fc";
+                            t = t.Substring(0, t.Length - 1) + "\u00fc";
                         }
                     }
                     else

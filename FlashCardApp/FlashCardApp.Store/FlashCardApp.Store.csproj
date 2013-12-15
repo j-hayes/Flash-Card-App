@@ -152,7 +152,10 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <Content Include="Assets\Dictionary.sqlite" />
+    <Content Include="Assets\d.sqlite" />
+    <Content Include="Assets\Dictionary.sqlite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\FlashCardApp.Core.Entities.FlashCardSet.datasource" />
     <None Include="Properties\ServiceReferences.Designer.ClientConfig" />

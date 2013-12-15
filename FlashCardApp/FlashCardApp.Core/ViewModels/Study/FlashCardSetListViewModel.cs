@@ -167,7 +167,7 @@ namespace FlashCardApp.Core.ViewModels.Study
         private void DoAddCommand()
         {
             if
-            (NewSetName.Length > 0)
+            (!string.IsNullOrEmpty(NewSetName))
                 {
                     FlashCardSet set = new FlashCardSet {SetName = NewSetName};
                     _flashCardManager.CreateSet(set);
