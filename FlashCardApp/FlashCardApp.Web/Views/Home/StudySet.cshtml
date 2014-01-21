@@ -1,0 +1,56 @@
+﻿@using System.Web.UI.WebControls
+@model FlashCardApp.Web.Models.StudySetViewModel
+@{
+    ViewBag.Title = "StudySet";
+    Layout = "~/Views/Shared/_BootstrapLayout.basic.cshtml";
+}
+
+
+
+
+<div class="container">
+    <div class="row span12" style="height: 100px">
+        <div class="span5 pull-left flashCard-section">
+
+            @Html.DisplayNameFor(model => model.CurrentCard.Definition): 
+            @if (Model.ShowEnglish)
+            {
+               
+                @Html.DisplayFor(model => model.CurrentCard.Definition)
+                
+            }
+        </div>
+        <div class="span5 pull-right flashCard-section">
+
+            @Html.DisplayNameFor(model => model.CurrentCard.Traditional): 
+                @Html.DisplayFor(model => model.CurrentCard.Traditional)
+
+        </div>
+    </div>
+    <div class="row span12" style="height: 100px">
+        <div class="span5 pull-left flashCard-section">
+            @Html.DisplayNameFor(model => model.CurrentCard.Simplified): 
+                @Html.DisplayFor(model => model.CurrentCard.Simplified)
+
+        </div>
+        <div class="span5 pull-right flashCard-section">
+
+            @Html.DisplayNameFor(model => model.CurrentCard.Pinyin):
+                @Html.DisplayFor(model => model.CurrentCard.Pinyin)
+
+        </div>
+    </div>
+    </div>
+    <div>
+        @Html.ActionLink("Flip Card", "FlipCard", "Home", Model)
+    </div>
+    <div>
+        @Html.ActionLink("Next Card", "NextCard", "Home", Model)
+    </div>
+    <div>
+        @Html.ActionLink("Previous Card", "PreviousCard", "Home", Model)
+    </div>
+<p>
+    @Html.ActionLink("Return to Login", "Index")
+</p>
+
