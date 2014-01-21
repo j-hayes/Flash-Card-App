@@ -104,8 +104,8 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="AppHelper.cs" />
+    <Compile Include="Bootstrap\CommunitySqlitePluginBootstrap.cs" />
     <Compile Include="Bootstrap\MessengerPluginBootstrap.cs" />
-    <Compile Include="Bootstrap\SqlitePluginBootstrap.cs" />
     <Compile Include="Bootstrap\ThreadUtilsPluginBootstrap.cs" />
     <Compile Include="Common\BindableBase.cs" />
     <Compile Include="Common\BooleanNegationConverter.cs" />
@@ -122,6 +122,9 @@
     <Compile Include="ValueConverters\SearchEnumConverter.cs" />
     <Compile Include="Views\Dictionary\DictionaryView.xaml.cs">
       <DependentUpon>DictionaryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FirstView.xaml.cs">
+      <DependentUpon>FirstView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
@@ -153,9 +156,12 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <Content Include="Assets\d.sqlite" />
-    <Content Include="Assets\Dictionary.sqlite">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="bin\Debug\sqlite3.def" />
+    <Content Include="bin\Debug\sqlite3.dll" />
+    <Content Include="bin\x64\Debug\sqlite3.def" />
+    <Content Include="bin\x64\Debug\sqlite3.dll" />
+    <Content Include="ToDo-MvvmCross\_ Windows Store UI.txt" />
+    <Content Include="Assets\Dictionary.sqlite" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\FlashCardApp.Core.Entities.FlashCardSet.datasource" />
     <None Include="Properties\ServiceReferences.Designer.ClientConfig" />
@@ -182,6 +188,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Dictionary\DictionaryView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\FirstView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -219,36 +229,44 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Cirrious.CrossCore">
-      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.0.12\lib\netcore45\Cirrious.CrossCore.dll</HintPath>
-    </Reference>
-    <Reference Include="Cirrious.CrossCore.WindowsStore">
-      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.0.12\lib\netcore45\Cirrious.CrossCore.WindowsStore.dll</HintPath>
-    </Reference>
-    <Reference Include="Cirrious.MvvmCross">
-      <HintPath>..\packages\MvvmCross.HotTuna.MvvmCrossLibraries.3.0.12\lib\netcore45\Cirrious.MvvmCross.dll</HintPath>
-    </Reference>
-    <Reference Include="Cirrious.MvvmCross.Localization">
-      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.0.12\lib\netcore45\Cirrious.MvvmCross.Localization.dll</HintPath>
-    </Reference>
-    <Reference Include="Cirrious.MvvmCross.Plugins.Messenger">
-      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.Messenger.3.0.12\lib\netcore45\Cirrious.MvvmCross.Plugins.Messenger.dll</HintPath>
-    </Reference>
-    <Reference Include="Cirrious.MvvmCross.Plugins.Sqlite, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Cirrious.CrossCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e16445fd9b451819, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.Sqlite.3.0.12\lib\netcore45\Cirrious.MvvmCross.Plugins.Sqlite.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.0.14\lib\netcore45\Cirrious.CrossCore.dll</HintPath>
     </Reference>
-    <Reference Include="Cirrious.MvvmCross.Plugins.Sqlite.WindowsStore">
-      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.Sqlite.3.0.12\lib\netcore45\x86\Cirrious.MvvmCross.Plugins.Sqlite.WindowsStore.dll</HintPath>
+    <Reference Include="Cirrious.CrossCore.WindowsStore, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.0.14\lib\netcore45\Cirrious.CrossCore.WindowsStore.dll</HintPath>
     </Reference>
-    <Reference Include="Cirrious.MvvmCross.Plugins.ThreadUtils">
-      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.ThreadUtils.3.0.12\lib\netcore45\Cirrious.MvvmCross.Plugins.ThreadUtils.dll</HintPath>
+    <Reference Include="Cirrious.MvvmCross, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e16445fd9b451819, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MvvmCross.HotTuna.MvvmCrossLibraries.3.0.14\lib\netcore45\Cirrious.MvvmCross.dll</HintPath>
     </Reference>
-    <Reference Include="Cirrious.MvvmCross.Plugins.ThreadUtils.WindowsStore">
-      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.ThreadUtils.3.0.12\lib\netcore45\Cirrious.MvvmCross.Plugins.ThreadUtils.WindowsStore.dll</HintPath>
+    <Reference Include="Cirrious.MvvmCross.Community.Plugins.Sqlite, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MvvmCross.Community.Plugin.Sqlite.3.0.13\lib\netcore45\Cirrious.MvvmCross.Community.Plugins.Sqlite.dll</HintPath>
     </Reference>
-    <Reference Include="Cirrious.MvvmCross.WindowsStore">
-      <HintPath>..\packages\MvvmCross.HotTuna.MvvmCrossLibraries.3.0.12\lib\netcore45\Cirrious.MvvmCross.WindowsStore.dll</HintPath>
+    <Reference Include="Cirrious.MvvmCross.Community.Plugins.Sqlite.WindowsStore">
+      <HintPath>..\packages\MvvmCross.Community.Plugin.Sqlite.3.0.13\lib\netcore45\x86\Cirrious.MvvmCross.Community.Plugins.Sqlite.WindowsStore.dll</HintPath>
+    </Reference>
+    <Reference Include="Cirrious.MvvmCross.Localization, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.0.14\lib\netcore45\Cirrious.MvvmCross.Localization.dll</HintPath>
+    </Reference>
+    <Reference Include="Cirrious.MvvmCross.Plugins.Messenger, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.Messenger.3.0.14\lib\netcore45\Cirrious.MvvmCross.Plugins.Messenger.dll</HintPath>
+    </Reference>
+    <Reference Include="Cirrious.MvvmCross.Plugins.ThreadUtils, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.ThreadUtils.3.0.14\lib\netcore45\Cirrious.MvvmCross.Plugins.ThreadUtils.dll</HintPath>
+    </Reference>
+    <Reference Include="Cirrious.MvvmCross.Plugins.ThreadUtils.WindowsStore, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.ThreadUtils.3.0.14\lib\netcore45\Cirrious.MvvmCross.Plugins.ThreadUtils.WindowsStore.dll</HintPath>
+    </Reference>
+    <Reference Include="Cirrious.MvvmCross.WindowsStore, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MvvmCross.HotTuna.MvvmCrossLibraries.3.0.14\lib\netcore45\Cirrious.MvvmCross.WindowsStore.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -259,6 +277,17 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\x86\Debug\" />
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="Microsoft.VCLibs, Version=11.0">
+      <Name>Microsoft Visual C++ Runtime Package</Name>
+    </SDKReference>
+    <SDKReference Include="SQLite.WinRT, Version=3.8.2">
+      <Name>SQLite for Windows Runtime</Name>
+    </SDKReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>

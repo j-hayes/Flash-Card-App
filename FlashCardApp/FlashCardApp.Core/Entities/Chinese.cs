@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using FlashCardApp.Core.Helpers;
-using Cirrious.MvvmCross.Plugins.Sqlite;
+using Cirrious.MvvmCross.Community.Plugins.Sqlite;
 
 namespace FlashCardApp.Core.Entities
 {

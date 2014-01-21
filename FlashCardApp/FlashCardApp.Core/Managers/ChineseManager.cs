@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
-using Cirrious.MvvmCross.Plugins.Sqlite;
+using Cirrious.MvvmCross.Community.Plugins.Sqlite;
 using System.Linq;
 using FlashCardApp.Core.Entities;
 
@@ -14,7 +14,7 @@ namespace FlashCardApp.Core.Managers
 
         public ChineseManager(ISQLiteConnectionFactory factory)
         {
-            _connection = factory.Create("Dictionary1.sqlite");
+            _connection = factory.Create("Dictionary.sqlite");
             _connection.CreateTable<Chinese>();
             var i = _connection.Table<Chinese>().ToList();
         }

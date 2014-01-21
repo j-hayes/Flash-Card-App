@@ -4,7 +4,7 @@ using System.Linq;
 using System.ServiceModel;
 using Cirrious.CrossCore.Parse;
 using Cirrious.MvvmCross.Plugins.Messenger;
-using Cirrious.MvvmCross.Plugins.Sqlite;
+using Cirrious.MvvmCross.Community.Plugins.Sqlite;
 using FlashCardApp.Core.Entities;
 
 using System.Threading.Tasks;

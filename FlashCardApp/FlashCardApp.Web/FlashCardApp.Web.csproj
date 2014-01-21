@@ -139,7 +139,6 @@
       <DependentUpon>CloudFlashCard.dbml</DependentUpon>
     </Compile>
     <Compile Include="Controllers\BootstrapBaseController.cs" />
-    <Compile Include="Controllers\FlipCardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LogoutController.cs" />
     <Compile Include="Global.asax.cs">

@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-using Cirrious.MvvmCross.Plugins.Sqlite;
 using FlashCardApp.Core.Entities;
 using FlashCardApp.Core.Managers.FlashCardApp.Core.Services;
 using FlashCardApp.Core.ViewModels.Dictionary;
+using Cirrious.MvvmCross.Community.Plugins.Sqlite;
+
 
 
 namespace FlashCardApp.Core.Managers
@@ -17,7 +18,6 @@ namespace FlashCardApp.Core.Managers
         public EnglishManager(ISQLiteConnectionFactory factory)
         {
             _connection = factory.Create("Dictionary.sqlite");
-            
            
         }
 
