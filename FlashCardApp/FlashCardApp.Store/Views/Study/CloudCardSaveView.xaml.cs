@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
+using FlashCardApp.Core.ViewModels;
 using FlashCardApp.Store.Common;
 
 namespace FlashCardApp.Store.Views.Study
@@ -24,8 +25,10 @@ namespace FlashCardApp.Store.Views.Study
         public CloudCardSaveView()
         {
             this.InitializeComponent();
+           
         }
 
+       
         /// <summary>
         /// Populates the page with content passed during navigation.  Any saved state is also
         /// provided when recreating a page from a prior session.
@@ -48,5 +51,8 @@ namespace FlashCardApp.Store.Views.Study
         protected override void SaveState(Dictionary<String, Object> pageState)
         {
         }
+
+
+       
     }
 }

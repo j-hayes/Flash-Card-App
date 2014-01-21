@@ -25,13 +25,21 @@ namespace FlashCardApp.Core.ViewModels.Dictionary
             _dictionarySearchManager = dictionarySearchManager;
             _flashCardManager = flashCardManager;
 
-            SearchInputType = DictionarySearchInputType.English; 
+            SearchInputType = DictionarySearchInputType.Chinese; 
             AvailibleDictionarySearchInputTypes = new DictionarySearchInputType[]
             {
                 DictionarySearchInputType.English,
                 DictionarySearchInputType.Chinese,
                 DictionarySearchInputType.Pinyin
             };
+
+            SetListPopUpIsOpen = false;
+        }
+
+        public bool SetListPopUpIsOpen
+        {
+            get { return _setListPopUpIsOpen; }
+            set { _setListPopUpIsOpen = value;RaisePropertyChanged(()=>SetListPopUpIsOpen); }
         }
 
         private List<SearchResult> _searchResults = new List<SearchResult>();
@@ -164,6 +172,8 @@ namespace FlashCardApp.Core.ViewModels.Dictionary
         }
 
         private FlashCardSet _selectedSet;
+        private bool _setListPopUpIsOpen;
+
         public FlashCardSet SelectedSet
         {
             get { return _selectedSet; }
@@ -196,6 +206,7 @@ namespace FlashCardApp.Core.ViewModels.Dictionary
             
             int flashCardId = _flashCardManager.CreateCard(SelectedCard);
             _flashCardManager.AddCardtoSet(flashCardId, SelectedSet.ID);
+            SetListPopUpIsOpen = false;
         }
     }
 }

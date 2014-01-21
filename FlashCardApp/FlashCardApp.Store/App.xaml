@@ -14,7 +14,10 @@
                  -->
                 <ResourceDictionary Source="Common/StandardStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <x:String x:Key="AppName">Chinese Flash Card App</x:String>
 
         </ResourceDictionary>
+        
     </Application.Resources>
+   
 </Application>

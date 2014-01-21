@@ -38,6 +38,19 @@ namespace FlashCardCloudService
 
         }
 
+        public bool VerifyUser(string emailAddress, string password)
+        {
+            CloudUser user = VerifyUserAndGetUser(emailAddress, password);
+            if (user != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public bool DeleteUser(string emailAddress, string password)
         {
             if (_dbContext.CloudUsers.FirstOrDefault(x => x.UserEmail == emailAddress & x.Password == password) == null)

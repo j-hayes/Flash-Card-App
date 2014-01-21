@@ -6,7 +6,7 @@ using System.Windows.Input;
 using Cirrious.MvvmCross.ViewModels;
 using FlashCardApp.Core.Entities;
 using FlashCardApp.Core.Managers;
-using Cirrious.MvvmCross.Plugins.Sqlite;
+using Cirrious.MvvmCross.Community.Plugins.Sqlite;
 using FlashCardApp.Core.Managers.FlashCardApp.Core.Services;
 using FlashCardApp.Core.ViewModels.Dictionary;
 using FlashCardApp.Core.ViewModels.Study;
@@ -67,7 +67,7 @@ namespace FlashCardApp.Core.ViewModels
 
         private void NavigateToCloudCardSave()
         {
-            ShowViewModel<CloudCardSaveViewModel>();
+            ShowViewModel<LoginViewModel>();
         }
     }
 }

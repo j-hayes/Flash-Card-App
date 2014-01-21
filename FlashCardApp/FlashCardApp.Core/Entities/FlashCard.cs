@@ -1,6 +1,6 @@
 ﻿
 using System;
-using Cirrious.MvvmCross.Plugins.Sqlite;
+using Cirrious.MvvmCross.Community.Plugins.Sqlite;
 using FlashCardApp.Core.Helpers;
 
 namespace FlashCardApp.Core.Entities

@@ -4,7 +4,7 @@ using System.Linq;
 using System.ServiceModel;
 using Cirrious.CrossCore.Parse;
 using Cirrious.MvvmCross.Plugins.Messenger;
-using Cirrious.MvvmCross.Plugins.Sqlite;
+using Cirrious.MvvmCross.Community.Plugins.Sqlite;
 using FlashCardApp.Core.Entities;
 
 using System.Threading.Tasks;
@@ -75,6 +75,8 @@ namespace FlashCardApp.Core.Managers
         {
 
             _connection.Delete<FlashCardSet>(flashCardSet.ID);
+            string query = "Delete from CardInSet where SetID == ?"; //todo:create query that adds //and make these tables cascade foreign keys
+            _connection.Execute(query, flashCardSet.ID);
             _messenger.Publish(new FlashCardSetListChangedMessage(this));
             //todo:add messaging to alert that a set no longer exists
         }

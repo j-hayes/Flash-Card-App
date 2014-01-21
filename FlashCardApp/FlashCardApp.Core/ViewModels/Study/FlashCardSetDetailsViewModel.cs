@@ -16,14 +16,14 @@ namespace FlashCardApp.Core.ViewModels.Study
             _flashCardManager = flashCardManager;
         }
 
+       
+
+        private StudyFlashCardSetSettingsViewModel Settings { get; set; }
         public class Nav
         {
             public int Id { get; set; }
-            
+
         }
-
-        private StudyFlashCardSetSettingsViewModel Settings { get; set; }
-
         public void Init(Nav navigation)
         {
             GetSetCards(navigation.Id);
