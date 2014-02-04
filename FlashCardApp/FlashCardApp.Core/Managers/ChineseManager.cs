@@ -11,20 +11,27 @@ namespace FlashCardApp.Core.Managers
     public class ChineseManager : IChineseManager
     {
         private readonly ISQLiteConnection _connection;
+        private ISQLiteConnectionFactory _factory;
 
         public ChineseManager(ISQLiteConnectionFactory factory)
         {
-            _connection = factory.Create("Dictionary.sqlite");
-            _connection.CreateTable<Chinese>();
-            var i = _connection.Table<Chinese>().ToList();
+            _factory = factory;
+            
         }
 
         public List<Chinese> ChinesesMatching(string searchFilter)
         {
-            List<Chinese> matchingChinese = _connection.Query<Chinese>(
-                "Select * from Chinese WHERE Simplified match ? limit 100", searchFilter);
 
-            return matchingChinese;
+            using (ISQLiteConnection connection = _factory.Create("Dictionary.sqlite"))
+            {
+
+
+
+                List<Chinese> matchingChinese = connection.Query<Chinese>(
+                    "Select * from Chinese");// WHERE Simplified match ? limit 100", searchFilter);
+                return matchingChinese;
+            }
+            
         }
 
         public List<Chinese> ChinesesRelated(string searchFilter)
