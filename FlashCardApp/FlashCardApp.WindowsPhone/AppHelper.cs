@@ -17,7 +17,7 @@ namespace FlashCardApp.WindowsPhone
         {
             try
             {
-                await folder.GetFileAsync(fileName);
+                var s = await folder.GetFileAsync(fileName);
                 return true;
             }
             catch (FileNotFoundException)

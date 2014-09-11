@@ -1,8 +1,4 @@
-using System;
-using System.IO;
-
 using Cirrious.CrossCore.IoC;
-
 
 namespace FlashCardApp.Core
 {
@@ -14,7 +10,7 @@ namespace FlashCardApp.Core
                 .EndingWith("Manager")
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
-
+				
             RegisterAppStart<ViewModels.HomePageViewModel>();
         }
     }
