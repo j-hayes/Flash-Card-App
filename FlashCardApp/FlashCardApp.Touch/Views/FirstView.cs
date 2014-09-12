@@ -31,3 +31,4 @@ namespace FlashCardApp.Touch.Views
         }
     }
 }
+	

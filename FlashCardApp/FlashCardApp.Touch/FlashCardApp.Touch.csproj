@@ -3,8 +3,6 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{959AEE18-071A-4222-9A21-EC45BFBBA492}</ProjectGuid>
     <ProjectTypeGuids>{6BC8ED88-2882-458C-8E55-DFD12B67127B};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Exe</OutputType>
@@ -87,6 +85,14 @@
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="packages.config" />
+    <Compile Include="Views\DictionaryView.cs" />
+    <Compile Include="Views\DictionaryView.designer.cs">
+      <DependentUpon>DictionaryView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HomeView.cs" />
+    <Compile Include="Views\HomeView.designer.cs">
+      <DependentUpon>HomeView.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FlashCardApp.TouchViewController.designer.cs">
@@ -95,6 +101,8 @@
     <Compile Include="FlashCardApp.TouchViewController.cs" />
     <InterfaceDefinition Include="MainStoryboard.storyboard" />
     <BundleResource Include="Resources\Default-568h%402x.png" />
+    <InterfaceDefinition Include="Views\DictionaryView.xib" />
+    <InterfaceDefinition Include="Views\HomeView.xib" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppDelegate.cs.txt" />
@@ -138,7 +146,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FlashCardApp.Core\FlashCardApp.Core.csproj">
-      <Project>{063bec66-7fd5-4367-8608-6a075e562767}</Project>
+      <Project>{063BEC66-7FD5-4367-8608-6A075E562767}</Project>
       <Name>FlashCardApp.Core</Name>
     </ProjectReference>
   </ItemGroup>
