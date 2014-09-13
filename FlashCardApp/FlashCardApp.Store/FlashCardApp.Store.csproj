@@ -161,11 +161,6 @@
     </AppxManifest>
     <Content Include="Assets\d.sqlite" />
     <Content Include="Assets\sqlite3.dll" />
-    <Content Include="bin\Debug\sqlite3.dll" />
-    <Content Include="bin\x64\Debug\sqlite3.dll" />
-    <Content Include="bin\x64\sqlite3.dll" />
-    <Content Include="bin\x86\Debug\sqlite3.dll" />
-    <Content Include="bin\x86\sqlite3.dll" />
     <Content Include="Assets\Dictionary.sqlite" />
     <Content Include="ToDo-MvvmCross\_ Windows Store UI.txt" />
     <None Include="packages.config" />
@@ -286,14 +281,6 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <SDKReference Include="Microsoft.VCLibs, Version=11.0">
-      <Name>Microsoft Visual C++ Runtime Package</Name>
-    </SDKReference>
-    <SDKReference Include="SQLite.WinRT, Version=3.8.6">
-      <Name>SQLite for Windows Runtime</Name>
-    </SDKReference>
-  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>
   </PropertyGroup>

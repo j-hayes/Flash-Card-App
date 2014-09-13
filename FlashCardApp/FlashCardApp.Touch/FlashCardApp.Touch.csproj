@@ -13,16 +13,10 @@
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
-    <DefineConstants>DEBUG</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
     <MtouchLink>None</MtouchLink>
-    <MtouchDebug>true</MtouchDebug>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
@@ -88,20 +82,23 @@
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="packages.config" />
-    <Compile Include="Views\HomeView.cs" />
-    <Compile Include="Views\HomeView.designer.cs">
-      <DependentUpon>HomeView.cs</DependentUpon>
+    <Compile Include="Views\HomePageView.cs" />
+    <Compile Include="Views\HomePageView.designer.cs">
+      <DependentUpon>HomePageView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\DictionaryResultCell.cs" />
+    <Compile Include="Views\DictionaryResultCell.designer.cs">
+      <DependentUpon>DictionaryResultCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SQLite.cs" />
+    <Compile Include="SQLiteAsync.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FlashCardApp.TouchViewController.designer.cs">
-      <DependentUpon>FlashCardApp.TouchViewController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FlashCardApp.TouchViewController.cs" />
     <InterfaceDefinition Include="MainStoryboard.storyboard" />
     <BundleResource Include="Resources\Default-568h%402x.png" />
     <InterfaceDefinition Include="Views\DictionaryView.xib" />
-    <InterfaceDefinition Include="Views\HomeView.xib" />
+    <InterfaceDefinition Include="Views\HomePageView.xib" />
+    <InterfaceDefinition Include="Views\DictionaryResultCell.xib" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppDelegate.cs.txt" />

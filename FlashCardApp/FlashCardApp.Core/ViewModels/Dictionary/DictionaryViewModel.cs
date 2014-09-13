@@ -25,7 +25,7 @@ namespace FlashCardApp.Core.ViewModels.Dictionary
             _dictionarySearchManager = dictionarySearchManager;
             _flashCardManager = flashCardManager;
 
-            SearchInputType = DictionarySearchInputType.Chinese; 
+			SearchInputType = DictionarySearchInputType.English; 
             AvailibleDictionarySearchInputTypes = new DictionarySearchInputType[]
             {
                 DictionarySearchInputType.English,

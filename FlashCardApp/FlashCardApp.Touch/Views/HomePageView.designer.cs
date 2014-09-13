@@ -9,8 +9,8 @@ using System.CodeDom.Compiler;
 
 namespace FlashCardApp.Touch
 {
-	[Register ("HomeView")]
-	partial class HomeView
+	[Register ("HomePageView")]
+	partial class HomePageView
 	{
 		[Outlet]
 		MonoTouch.UIKit.UIButton DictionaryButton { get; set; }
