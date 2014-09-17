@@ -93,8 +93,8 @@ namespace FlashCardApp.Store
             try
             {
                 if (!(await AppHelper.ExistsInStorageFolder(AppHelper.localFolder, dbName )))
-                {
-                    StorageFile defaultDb = await AppHelper.installedLocation.GetFileAsync("Assets\\" + dbName);
+                {    StorageFile defaultDb = await AppHelper.installedLocation.GetFileAsync("Assets\\" + dbName);
+                
                     await defaultDb.CopyAsync(AppHelper.localFolder);
                 }
             }
