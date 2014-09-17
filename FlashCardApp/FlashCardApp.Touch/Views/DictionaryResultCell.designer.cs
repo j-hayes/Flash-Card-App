@@ -13,27 +13,19 @@ namespace FlashCardApp.Touch
 	partial class DictionaryResultCell
 	{
 		[Outlet]
+		MonoTouch.UIKit.UILabel CharactersLabel { get; set; }
+
+		[Outlet]
 		MonoTouch.UIKit.UILabel DefinitionLabel { get; set; }
 
 		[Outlet]
 		MonoTouch.UIKit.UILabel PinyinLabel { get; set; }
-
-		[Outlet]
-		MonoTouch.UIKit.UILabel SimplifiedLabel { get; set; }
-
-		[Outlet]
-		MonoTouch.UIKit.UILabel TraditionalLabel { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (SimplifiedLabel != null) {
-				SimplifiedLabel.Dispose ();
-				SimplifiedLabel = null;
-			}
-
-			if (TraditionalLabel != null) {
-				TraditionalLabel.Dispose ();
-				TraditionalLabel = null;
+			if (CharactersLabel != null) {
+				CharactersLabel.Dispose ();
+				CharactersLabel = null;
 			}
 
 			if (DefinitionLabel != null) {

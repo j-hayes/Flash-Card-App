@@ -2,10 +2,14 @@
 using System;
 using System.Drawing;
 
+using System.IO;
+
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.Binding.BindingContext;
+
+
 
 namespace FlashCardApp.Touch
 {
@@ -15,6 +19,7 @@ namespace FlashCardApp.Touch
 
 		public HomePageView () : base ("HomePageView", null)
 		{
+
 		}
 
 		public override void ViewDidLoad ()

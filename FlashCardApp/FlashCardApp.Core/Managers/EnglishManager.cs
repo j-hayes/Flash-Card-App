@@ -18,6 +18,8 @@ namespace FlashCardApp.Core.Managers
         public EnglishManager(ISQLiteConnectionFactory factory)
         {
             _connection = factory.Create("Dictionary.sqlite");
+
+
            
         }
 

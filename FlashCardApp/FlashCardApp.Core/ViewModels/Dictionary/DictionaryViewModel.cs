@@ -7,11 +7,14 @@ using FlashCardApp.Core.Managers;
 
 namespace FlashCardApp.Core.ViewModels.Dictionary
 {
-    public enum DictionarySearchInputType
+	public enum DictionarySearchInputType : int
     {
-        English,
-        Chinese,
-        Pinyin
+       
+        Chinese = 0,
+		English = 1,
+        Pinyin = 2 
+
+		
     }
 
     public class DictionaryViewModel: MvxViewModel

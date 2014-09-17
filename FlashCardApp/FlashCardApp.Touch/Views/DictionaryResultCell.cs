@@ -15,15 +15,23 @@ namespace FlashCardApp.Touch
 		public static readonly UINib Nib = UINib.FromName ("DictionaryResultCell", NSBundle.MainBundle);
 		public static readonly NSString Key = new NSString ("DictionaryResultCell");
 
+
 		public DictionaryResultCell (IntPtr handle) : base (handle)
 		{
-			this.DelayBind (() => {
-				var set = this.CreateBindingSet<DictionaryResultCell, DictionarySearchResult> ();
 
-				set.Bind (SimplifiedLabel).To (x => x.Simplified);
-				set.Bind (TraditionalLabel).To (x => x.Traditional);	
-				set.Bind (PinyinLabel).To (x => x.Pinyin);
-				set.Bind (DefinitionLabel).To (x => x.Definition);
+		
+
+			this.DelayBind (() => {
+				CharactersLabel.AdjustsFontSizeToFitWidth = true; 
+				PinyinLabel.AdjustsFontSizeToFitWidth = true; 
+				DefinitionLabel.AdjustsFontSizeToFitWidth = true; 
+
+				var set = this.CreateBindingSet<DictionaryResultCell, SearchResult> ();
+
+				set.Bind (CharactersLabel).To (x => x.Simplified); // eventaully make this both characters and traditional in Search Result VM
+				set.Bind (PinyinLabel).To (x => x.AccentedPinyin);	
+				set.Bind (DefinitionLabel).To (x => x.DefintionsString);
+				//set.Bind (EnglishLabel).To (x => x.DefintionsString);
 				set.Apply();
 			});
 		}

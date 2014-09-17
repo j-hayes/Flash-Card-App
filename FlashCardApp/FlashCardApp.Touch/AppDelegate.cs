@@ -3,6 +3,9 @@ using MonoTouch.UIKit;
 using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Touch.Platform;
 using Cirrious.MvvmCross.ViewModels;
+using System.Threading;
+using System.IO;
+using System;
 
 namespace FlashCardApp.Touch
 {
@@ -13,6 +16,7 @@ namespace FlashCardApp.Touch
 
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
+
 			_window = new UIWindow (UIScreen.MainScreen.Bounds);
 
 			var setup = new Setup(this, _window);
@@ -22,6 +26,28 @@ namespace FlashCardApp.Touch
 			startup.Start();
 
 			_window.MakeKeyAndVisible ();
+
+			string dbname = "Dictionary.sqlite";
+			string pathToDeployed = Path.Combine( Environment.GetFolderPath (Environment.SpecialFolder.Personal), dbname);
+			string assetDatabasePath = Path.Combine (NSBundle.MainBundle.BundlePath, dbname);
+
+
+			Console.WriteLine ("In App Delegate");
+
+			if (File.Exists(assetDatabasePath)) {
+				Console.WriteLine ("Asset Database Content Does exist at path");
+			}
+
+
+			File.Delete (pathToDeployed);
+			if (!File.Exists (pathToDeployed)) {
+				Console.WriteLine ("DB file Didn't Exist on app");
+				File.Copy (assetDatabasePath, pathToDeployed);
+
+			} else {
+				Console.WriteLine ("DB file Did Exist");
+			}
+
 
 			return true;
 		}

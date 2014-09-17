@@ -20,17 +20,25 @@ namespace FlashCardApp.Touch.Views
 
 		[Outlet]
 		MonoTouch.UIKit.UITableView ResultsTableView { get; set; }
+
+		[Outlet]
+		MonoTouch.UIKit.UISegmentedControl SearchInputTypeChooser { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (FilterTextField != null) {
-				FilterTextField.Dispose ();
-				FilterTextField = null;
+			if (SearchInputTypeChooser != null) {
+				SearchInputTypeChooser.Dispose ();
+				SearchInputTypeChooser = null;
 			}
 
 			if (filterLabel_delete != null) {
 				filterLabel_delete.Dispose ();
 				filterLabel_delete = null;
+			}
+
+			if (FilterTextField != null) {
+				FilterTextField.Dispose ();
+				FilterTextField = null;
 			}
 
 			if (ResultsTableView != null) {
