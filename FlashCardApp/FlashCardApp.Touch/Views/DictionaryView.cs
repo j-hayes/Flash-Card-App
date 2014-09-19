@@ -24,38 +24,37 @@ namespace FlashCardApp.Touch.Views
      
         public override void ViewDidLoad()
         {
-           
+			base.ViewDidLoad();
+
 			// ios7 layout
 			if (RespondsToSelector (new Selector ("edgesForExtendedLayout"))) {
 				EdgesForExtendedLayout = UIRectEdge.None;
 			}
-             base.ViewDidLoad();
+            
 
-//            var searchField = new UITextField(new RectangleF(10, 10, 300, 40));
-//            Add(searchField);
-//
-//            var tableView = new UITableView(new RectangleF(0, 50, 320, 500), UITableViewStyle.Plain);
-//			tableView.RowHeight = 180;
 
-			ResultsTableView.ReloadData();
+			ResultsTableView.ScrollEnabled = true;
+
+
+
 
 			var source = new MvxSimpleTableViewSource(ResultsTableView, DictionaryResultCell.Key, DictionaryResultCell.Key);
+
 			ResultsTableView.Source = source;
 
+			var set = this.CreateBindingSet<DictionaryView, DictionaryViewModel> ();
 
+			set.Bind(SearchInputTypeChooser).To(ViewModel=>ViewModel.SearchInputType).Mode(Cirrious.MvvmCross.Binding.MvxBindingMode.OneWayToSource);
 
+			set.Bind (FilterTextField).To (vm => vm.Filter);//.Mode (Cirrious.MvvmCross.Binding.MvxBindingMode.TwoWay);
+			set.Bind (source).To (vm => vm.SearchResults);
 
+			source.SelectedItemChanged += (object sender, EventArgs e) => {
 
+				var selectedItem = (SearchResult)source.SelectedItem;
+				((DictionaryViewModel)ViewModel).SelectedSearchResult = selectedItem;
+			};
 
-
-
-
-				var set = this.CreateBindingSet<DictionaryView, DictionaryViewModel> ();
-
-				//set.Bind(SearchInputTypeChooser).To(ViewModel=>ViewModel.SearchInputType).Mode(Cirrious.MvvmCross.Binding.MvxBindingMode.OneWayToSource);
-
-				set.Bind (FilterTextField).To (vm => vm.Filter);//.Mode (Cirrious.MvvmCross.Binding.MvxBindingMode.TwoWay);
-				set.Bind (source).To (vm => vm.SearchResults);
 
 				set.Apply ();
 
@@ -75,7 +74,10 @@ namespace FlashCardApp.Touch.Views
 			var gesture = new UITapGestureRecognizer(() =>
 				{
 					FilterTextField.ResignFirstResponder();
+
 				});
+			gesture.CancelsTouchesInView = false;
+
 			View.AddGestureRecognizer(gesture);
 
             // Perform any additional setup after loading the view, typically from a nib.
