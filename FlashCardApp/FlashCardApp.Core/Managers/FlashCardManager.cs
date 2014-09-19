@@ -62,6 +62,7 @@ namespace FlashCardApp.Core.Managers
 
         public void CreateSet(FlashCardSet set)
         {
+
             _connection.Insert(set);
             _messenger.Publish(new FlashCardSetListChangedMessage(this));
         }

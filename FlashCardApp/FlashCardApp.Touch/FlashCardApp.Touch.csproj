@@ -104,6 +104,14 @@
     <Compile Include="Views\DictionaryResultCell.designer.cs">
       <DependentUpon>DictionaryResultCell.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\FlashCardSetListView.cs" />
+    <Compile Include="Views\FlashCardSetListView.designer.cs">
+      <DependentUpon>FlashCardSetListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FlashCardSetTableViewCell.cs" />
+    <Compile Include="Views\FlashCardSetTableViewCell.designer.cs">
+      <DependentUpon>FlashCardSetTableViewCell.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainStoryboard.storyboard" />
@@ -112,11 +120,15 @@
     <InterfaceDefinition Include="Views\HomePageView.xib" />
     <InterfaceDefinition Include="Views\DictionaryResultCell.xib" />
     <BundleResource Include="Resources\greatwall.jpeg" />
+    <InterfaceDefinition Include="Views\FlashCardSetListView.xib" />
+    <InterfaceDefinition Include="Views\FlashCardSetTableViewCell.xib" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppDelegate.cs.txt" />
     <Content Include="ToDo-MvvmCross\_ Touch UI.txt" />
-    <Content Include="Dictionary.sqlite" />
+    <Content Include="Dictionary.sqlite">
+      <DependentUpon>Dictionary.sqlite</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Cirrious.CrossCore">

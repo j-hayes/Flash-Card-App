@@ -169,7 +169,7 @@ namespace FlashCardApp.Core.ViewModels.Study
             if
             (!string.IsNullOrEmpty(NewSetName))
                 {
-                    FlashCardSet set = new FlashCardSet {SetName = NewSetName};
+				FlashCardSet set = new FlashCardSet {SetName = NewSetName};
                     _flashCardManager.CreateSet(set);
                 }
             }

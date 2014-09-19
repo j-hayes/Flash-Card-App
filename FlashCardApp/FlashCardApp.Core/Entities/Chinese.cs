@@ -9,6 +9,7 @@ namespace FlashCardApp.Core.Entities
 
    public class Chinese
     {
+		[PrimaryKey, AutoIncrement]
         public int ID { get; set; }
         public string Traditional { get; set; }
         public string Simplified { get; set; }
