@@ -7,6 +7,7 @@ using MonoTouch.UIKit;
 using Cirrious.MvvmCross.Binding.Touch.Views;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using FlashCardApp.Core.ViewModels.Dictionary;
+using FlashCardApp.Core.Entities;
 
 namespace FlashCardApp.Touch
 {
@@ -31,7 +32,7 @@ namespace FlashCardApp.Touch
 				set.Bind (CharactersLabel).To (x => x.Simplified); // eventaully make this both characters and traditional in Search Result VM
 				set.Bind (PinyinLabel).To (x => x.AccentedPinyin);	
 				set.Bind (DefinitionLabel).To (x => x.DefintionsString);
-				//set.Bind (EnglishLabel).To (x => x.DefintionsString);
+
 				set.Apply();
 			});
 		}

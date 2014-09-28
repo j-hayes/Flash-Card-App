@@ -84,7 +84,6 @@
     <Compile Include="ViewModels\Dictionary\DictionarySearchResult.cs" />
     <Compile Include="ViewModels\Dictionary\DictionaryViewModel.cs" />
     <Compile Include="ViewModels\FirstViewModel.cs" />
-    <Compile Include="ViewModels\SearchResult.cs" />
     <Compile Include="ViewModels\HomePageViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\Study\CloudCardSaveViewModel.cs" />
@@ -95,6 +94,9 @@
     <Compile Include="ViewModels\Study\StudyFlashCardSetSettingsViewModel.cs" />
     <Compile Include="ViewModels\Study\StudyFlashCardSetViewModel.cs" />
     <Compile Include="ViewModels\TestNavigationViewModel.cs" />
+    <Compile Include="ViewModels\Dictionary\SearchResultViewModel.cs" />
+    <Compile Include="Entities\SearchResult.cs" />
+    <Compile Include="ViewModels\Nav.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ToDo-MvvmCross\_ Core.txt" />

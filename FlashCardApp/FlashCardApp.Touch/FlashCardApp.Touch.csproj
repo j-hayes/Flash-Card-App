@@ -87,10 +87,6 @@
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Setup.cs" />
-    <Compile Include="Views\DictionaryView.cs" />
-    <Compile Include="Views\DictionaryView.designer.cs">
-      <DependentUpon>DictionaryView.cs</DependentUpon>
-    </Compile>
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="packages.config" />
@@ -100,28 +96,52 @@
     </Compile>
     <Compile Include="SQLite.cs" />
     <Compile Include="SQLiteAsync.cs" />
-    <Compile Include="Views\DictionaryResultCell.cs" />
-    <Compile Include="Views\DictionaryResultCell.designer.cs">
+    <Compile Include="Views\Dictionary\DictionaryResultCell.cs" />
+    <Compile Include="Views\Dictionary\DictionaryResultCell.designer.cs">
       <DependentUpon>DictionaryResultCell.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\FlashCardSetListView.cs" />
-    <Compile Include="Views\FlashCardSetListView.designer.cs">
+    <Compile Include="Views\Dictionary\DictionaryView.cs" />
+    <Compile Include="Views\Dictionary\DictionaryView.designer.cs">
+      <DependentUpon>DictionaryView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Study\FlashCardSetListView.cs" />
+    <Compile Include="Views\Study\FlashCardSetListView.designer.cs">
       <DependentUpon>FlashCardSetListView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\FlashCardSetTableViewCell.cs" />
-    <Compile Include="Views\FlashCardSetTableViewCell.designer.cs">
+    <Compile Include="Views\Study\FlashCardSetTableViewCell.cs" />
+    <Compile Include="Views\Study\FlashCardSetTableViewCell.designer.cs">
       <DependentUpon>FlashCardSetTableViewCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dictionary\SearchResultView.cs" />
+    <Compile Include="Views\Dictionary\SearchResultView.designer.cs">
+      <DependentUpon>SearchResultView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Study\FlashCardTableViewCell.cs" />
+    <Compile Include="Views\Study\FlashCardTableViewCell.designer.cs">
+      <DependentUpon>FlashCardTableViewCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Study\FlashCardSetDetailsView.cs" />
+    <Compile Include="Views\Study\FlashCardSetDetailsView.designer.cs">
+      <DependentUpon>FlashCardSetDetailsView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Study\FlashCardDetailsView.cs" />
+    <Compile Include="Views\Study\FlashCardDetailsView.designer.cs">
+      <DependentUpon>FlashCardDetailsView.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainStoryboard.storyboard" />
     <BundleResource Include="Resources\Default-568h%402x.png" />
-    <InterfaceDefinition Include="Views\DictionaryView.xib" />
     <InterfaceDefinition Include="Views\HomePageView.xib" />
-    <InterfaceDefinition Include="Views\DictionaryResultCell.xib" />
     <BundleResource Include="Resources\greatwall.jpeg" />
-    <InterfaceDefinition Include="Views\FlashCardSetListView.xib" />
-    <InterfaceDefinition Include="Views\FlashCardSetTableViewCell.xib" />
+    <InterfaceDefinition Include="Views\Dictionary\DictionaryResultCell.xib" />
+    <InterfaceDefinition Include="Views\Dictionary\DictionaryView.xib" />
+    <InterfaceDefinition Include="Views\Study\FlashCardSetListView.xib" />
+    <InterfaceDefinition Include="Views\Study\FlashCardSetTableViewCell.xib" />
+    <InterfaceDefinition Include="Views\Dictionary\SearchResultView.xib" />
+    <InterfaceDefinition Include="Views\Study\FlashCardTableViewCell.xib" />
+    <InterfaceDefinition Include="Views\Study\FlashCardSetDetailsView.xib" />
+    <InterfaceDefinition Include="Views\Study\FlashCardDetailsView.xib" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppDelegate.cs.txt" />
@@ -184,5 +204,9 @@
   <ItemGroup>
     <ImageAsset Include="FlashCardApp.xcassets\AppIcons.appiconset\Contents.json" />
     <ImageAsset Include="FlashCardApp.xcassets\LaunchImages.launchimage\Contents.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Dictionary\" />
+    <Folder Include="Views\Study\" />
   </ItemGroup>
 </Project>

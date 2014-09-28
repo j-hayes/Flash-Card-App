@@ -4,7 +4,10 @@ using System.Windows.Input;
 using Cirrious.MvvmCross.ViewModels;
 using FlashCardApp.Core.Entities;
 using FlashCardApp.Core.Managers;
+using FlashCardApp.Core.ViewModels;
 using System.Linq;
+using FlashCardApp.Core.ViewModels.Study;
+using System.Windows;
 
 namespace FlashCardApp.Core.ViewModels.Dictionary
 {
@@ -196,20 +199,9 @@ namespace FlashCardApp.Core.ViewModels.Dictionary
             }
         }
 
-		public ICommand SelectedSearchResultChangedCommand
 
-		{
-			get
-			{
-				return new MvxCommand<SearchResult>((searchResult) => DoChangeSelectedSearchResult(searchResult.ChineseId));
-			}
-		}
 
-		private void DoChangeSelectedSearchResult(int chineseId)
-		{
-			SelectedSearchResult = SearchResults.First (x => x.ChineseId == chineseId);
-		}
-
+	
         public ICommand AddCardToSetCommand
  
         {
@@ -219,12 +211,20 @@ namespace FlashCardApp.Core.ViewModels.Dictionary
             }
         }
 
-        private void DoAddToSetCommand()
+		private void DoAddToSetCommand()
         {
             
             int flashCardId = _flashCardManager.CreateCard(SelectedCard);
             _flashCardManager.AddCardtoSet(flashCardId, SelectedSet.ID);
             SetListPopUpIsOpen = false;
         }
+
+		public void ShowSearchResultViewModel()
+		{
+			ShowViewModel<SearchResultViewModel>(new FlashCardApp.Core.ViewModels.Dictionary.SearchResultViewModel.DictionarySearchResultNav()
+				{
+					Id = SelectedSearchResult.ChineseId
+				});
+		}
     }
 }

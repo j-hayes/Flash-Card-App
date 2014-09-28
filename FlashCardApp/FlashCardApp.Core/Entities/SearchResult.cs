@@ -4,22 +4,35 @@ using System.Text;
 using FlashCardApp.Core.Entities;
 using FlashCardApp.Core.Helpers;
 
-namespace FlashCardApp.Core.ViewModels.Dictionary
+namespace FlashCardApp.Core.Entities
 {
     public class SearchResult
     {
         public Chinese Chinese { get; set; }
         public string Traditional { get; set; }
         public string Simplified { get; set; }
-        public string Pinyin { get; set; }
+		private string _pinyin;
+        public string Pinyin {
+			get {
+				return _pinyin;
+			}
+			set {
+				_pinyin = value;
+				AccentedPinyin = value;
+			}
+		}
         public int ChineseId;
 
 
+		private string _accentedPinyin;
         public string AccentedPinyin
         {
+			set{ 
+				_accentedPinyin = value;
+			}
             get
             {
-                return PinyinFormatHelper.ConvertNumericalPinYinToAccented(Pinyin);
+				return PinyinFormatHelper.ConvertNumericalPinYinToAccented(_accentedPinyin);
             }
         }
 
@@ -53,6 +66,20 @@ namespace FlashCardApp.Core.ViewModels.Dictionary
         {
             Definitions = new List<string>();
         }
+
+		public SearchResult(List<English> englishes, Chinese chinese)
+		{
+			Definitions = new List<string> ();
+			foreach (English e in englishes) 
+			{
+				Definitions.Add (e.Definition);
+			}
+
+			Traditional = chinese.Traditional;
+			Simplified = chinese.Simplified;
+			Pinyin = chinese.Pinyin;
+			ChineseId = chinese.ID;
+		}
 
         public override bool Equals(object obj)
         {

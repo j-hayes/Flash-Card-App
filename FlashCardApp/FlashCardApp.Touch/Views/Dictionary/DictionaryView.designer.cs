@@ -7,33 +7,25 @@
 using MonoTouch.Foundation;
 using System.CodeDom.Compiler;
 
-namespace FlashCardApp.Touch.Views
+namespace FlashCardApp.Touch
 {
 	[Register ("DictionaryView")]
 	partial class DictionaryView
 	{
 		[Outlet]
-		MonoTouch.UIKit.UILabel filterLabel_delete { get; set; }
-
-		[Outlet]
 		MonoTouch.UIKit.UITextField FilterTextField { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITableView ResultsTableView { get; set; }
+		MonoTouch.UIKit.UITableView SearchResultsTableView { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UISegmentedControl SearchInputTypeChooser { get; set; }
+		MonoTouch.UIKit.UISegmentedControl SearchTypeSegmentedControl { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (SearchInputTypeChooser != null) {
-				SearchInputTypeChooser.Dispose ();
-				SearchInputTypeChooser = null;
-			}
-
-			if (filterLabel_delete != null) {
-				filterLabel_delete.Dispose ();
-				filterLabel_delete = null;
+			if (SearchTypeSegmentedControl != null) {
+				SearchTypeSegmentedControl.Dispose ();
+				SearchTypeSegmentedControl = null;
 			}
 
 			if (FilterTextField != null) {
@@ -41,9 +33,9 @@ namespace FlashCardApp.Touch.Views
 				FilterTextField = null;
 			}
 
-			if (ResultsTableView != null) {
-				ResultsTableView.Dispose ();
-				ResultsTableView = null;
+			if (SearchResultsTableView != null) {
+				SearchResultsTableView.Dispose ();
+				SearchResultsTableView = null;
 			}
 		}
 	}

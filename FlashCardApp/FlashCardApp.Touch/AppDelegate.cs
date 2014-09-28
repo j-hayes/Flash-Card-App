@@ -39,7 +39,7 @@ namespace FlashCardApp.Touch
 			}
 
 
-			File.Delete (pathToDeployed);
+		
 			if (!File.Exists (pathToDeployed)) {
 				Console.WriteLine ("DB file Didn't Exist on app");
 				File.Copy (assetDatabasePath, pathToDeployed);

@@ -54,6 +54,15 @@ namespace FlashCardApp.Core.Managers
             return results;
         }
 
+		public SearchResult SearchByChineseId(int id)
+		{
+			Chinese chinese = _chineseManager.GetById (id);
+			List<English> englishes = _englishManager.GetEnglishesByChineseIds (new List<int> { id});
+
+			SearchResult result = new SearchResult (englishes, chinese);
+			return result;
+		}
+
         public List<SearchResult> SearchForMoreChinese(string searchTerm)
         {
             searchTerm = clearnSearchTerm(searchTerm);
