@@ -9,7 +9,7 @@ using FlashCardApp.Core.Managers;
 
 namespace FlashCardApp.Core.ViewModels.Study
 {
-    class CreateCustomCardViewModel : MvxViewModel
+    public class CreateCustomCardViewModel : MvxViewModel
     {
        
         private IFlashCardManager _flashCardManager;

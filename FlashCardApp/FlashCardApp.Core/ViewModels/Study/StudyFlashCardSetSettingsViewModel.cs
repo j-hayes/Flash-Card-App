@@ -22,7 +22,6 @@ namespace FlashCardApp.Core.ViewModels.Study
 
         public StudyFlashCardSetSettingsViewModel()
         {
-
             _showDefinition = true;
             _showPinyin = true;
             _showTraditional = true;
@@ -58,6 +57,7 @@ namespace FlashCardApp.Core.ViewModels.Study
             set
             {
                 _pinyinFirst = value;
+				UpdateShowFirstSetting("Pinyin");
                 RaisePropertyChanged(() => PinyinFirst);
             }
 
@@ -70,6 +70,7 @@ namespace FlashCardApp.Core.ViewModels.Study
             set
             {
                 _charactersFirst = value;
+				UpdateShowFirstSetting("Characters");//todo this should be a global enum. oh it is the windows version is the problems refactor it
                 RaisePropertyChanged(() => CharactersFirst);
 
             }
@@ -82,6 +83,7 @@ namespace FlashCardApp.Core.ViewModels.Study
             set
             {
                 _englishFirst = value;
+				UpdateShowFirstSetting("English");
                 RaisePropertyChanged(() => EnglishFirst);
             }
         }

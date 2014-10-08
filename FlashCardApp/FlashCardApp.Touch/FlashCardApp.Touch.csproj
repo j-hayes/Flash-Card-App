@@ -128,6 +128,14 @@
     <Compile Include="Views\Study\FlashCardDetailsView.designer.cs">
       <DependentUpon>FlashCardDetailsView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Study\StudyFlashCardSetSettingsView.cs" />
+    <Compile Include="Views\Study\StudyFlashCardSetSettingsView.designer.cs">
+      <DependentUpon>StudyFlashCardSetSettingsView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Study\CreateCustomCardView.cs" />
+    <Compile Include="Views\Study\CreateCustomCardView.designer.cs">
+      <DependentUpon>CreateCustomCardView.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainStoryboard.storyboard" />
@@ -142,6 +150,8 @@
     <InterfaceDefinition Include="Views\Study\FlashCardTableViewCell.xib" />
     <InterfaceDefinition Include="Views\Study\FlashCardSetDetailsView.xib" />
     <InterfaceDefinition Include="Views\Study\FlashCardDetailsView.xib" />
+    <InterfaceDefinition Include="Views\Study\StudyFlashCardSetSettingsView.xib" />
+    <InterfaceDefinition Include="Views\Study\CreateCustomCardView.xib" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppDelegate.cs.txt" />

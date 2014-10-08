@@ -18,6 +18,8 @@ namespace FlashCardApp.Touch
 		private float bottom = 0.0f;           // bottom point
 		private float offset = 10.0f;          // extra offset
 		private bool moveViewUp = false;           // which direction are we moving
+		private float _moveTextBoxY = 0.0f;
+
 
 		public FlashCardDetailsView () : base ("FlashCardDetailsView", null)
 		{
@@ -39,13 +41,8 @@ namespace FlashCardApp.Touch
 		
 			this.View.AddSubview (InputScrollView);
 
-
-			NSNotificationCenter.DefaultCenter.AddObserver
-			(UIKeyboard.DidShowNotification,KeyBoardUpNotification);
-
-			// Keyboard Down
-			NSNotificationCenter.DefaultCenter.AddObserver
-			(UIKeyboard.WillHideNotification,KeyBoardDownNotification);
+			NSNotificationCenter.DefaultCenter.AddObserver(UIKeyboard.WillShowNotification, OnKeyboardWillShow);
+			NSNotificationCenter.DefaultCenter.AddObserver(UIKeyboard.WillHideNotification, OnKeyboardWillHide);
 
 
 
@@ -84,61 +81,35 @@ namespace FlashCardApp.Touch
 			View.AddGestureRecognizer(gesture);
 		}
 
-		private void ScrollTheView(bool move)
+		private void OnKeyboardWillShow (NSNotification notification)
 		{
+			var keyboardObject = notification.UserInfo.ValueForKey(new NSString("UIKeyboardFrameEndUserInfoKey"));
+			var keyboardRect = new NSValue(keyboardObject.Handle).RectangleFValue;
+			var keyboardY = keyboardRect.Y;
+			var textBoxViewBottom = InputScrollView.Frame.Height;
+			if (keyboardY < textBoxViewBottom)
+			{
+				_moveTextBoxY = textBoxViewBottom - keyboardY + 10;
+				UIView.Animate(0.3, () => {
+					var frame = new RectangleF(InputScrollView.Frame.X, InputScrollView.Frame.Y - _moveTextBoxY, InputScrollView.Frame.Width, 
+						InputScrollView.Frame.Height);
+					InputScrollView.Frame = frame;
+				});
 
-			// scroll the view up or down
-			UIView.BeginAnimations (string.Empty, System.IntPtr.Zero);
-			UIView.SetAnimationDuration (0.3);
-
-			RectangleF frame = View.Frame;
-
-			if (move) {
-				frame.Y -= scroll_amount;
-			} else {
-				frame.Y += scroll_amount;
-				scroll_amount = 0;
 			}
-
-			View.Frame = frame;
-			UIView.CommitAnimations();
 		}
 
-		private void KeyBoardDownNotification(NSNotification notification)
+		private void OnKeyboardWillHide(NSNotification notification)
 		{
-			var val = new NSValue(notification.UserInfo.ValueForKey(UIKeyboard.FrameBeginUserInfoKey).Handle);
-			RectangleF keyboard = val.RectangleFValue;
-			if(moveViewUp){ScrollTheView(false);}
-		}
-
-		private void KeyBoardUpNotification(NSNotification notification)
-		{
-			// get the keyboard size
-			var val = new NSValue(notification.UserInfo.ValueForKey(UIKeyboard.FrameBeginUserInfoKey).Handle);
-			RectangleF keyboard = val.RectangleFValue;
-
-			// Find what opened the keyboard
-			foreach (UIView view in this.View.Subviews[0].Subviews) {
-				if (view.IsFirstResponder)
-					activeview = view;
+			// View has moved
+			if (_moveTextBoxY != 0)
+			{
+				UIView.Animate(0.3, () => {
+					var frame = new RectangleF(InputScrollView.Frame.X, InputScrollView.Frame.Y + _moveTextBoxY, 
+						InputScrollView.Frame.Width, InputScrollView.Frame.Height);
+					InputScrollView.Frame = frame;
+				});
 			}
-
-		
-
-			// Bottom of the controller = initial position + height + offset      
-			bottom = (activeview.Frame.Y + activeview.Frame.Top + offset);
-
-			// Calculate how far we need to scroll
-			scroll_amount = (keyboard.Height - (View.Frame.Size.Height - bottom)) ;
-
-			// Perform the scrolling
-			if (scroll_amount > 0) {
-				moveViewUp = true;
-				ScrollTheView (moveViewUp);
-			} else {
-				moveViewUp = false;
-			}
-
 		}
 	}
 }
