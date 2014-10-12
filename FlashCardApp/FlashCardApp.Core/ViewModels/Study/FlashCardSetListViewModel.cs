@@ -5,6 +5,8 @@ using Cirrious.MvvmCross.Plugins.Messenger;
 using Cirrious.MvvmCross.ViewModels;
 using FlashCardApp.Core.Entities;
 using FlashCardApp.Core.Managers;
+using FlashCardApp.Core.Messages;
+using FlashCardApp.Core.Services;
 
 namespace FlashCardApp.Core.ViewModels.Study
 {
@@ -12,13 +14,18 @@ namespace FlashCardApp.Core.ViewModels.Study
     {
         private readonly IFlashCardManager _flashCardManager;
         private readonly MvxSubscriptionToken _flashCardSetSubscriptionToken;
+        private readonly IMvxMessenger _messenger;
+        private readonly IStudySettingsService _settingsService;
 
-        public FlashCardSetListViewModel(IFlashCardManager flashCardManager, IMvxMessenger messanger)
+        public FlashCardSetListViewModel(IFlashCardManager flashCardManager, IMvxMessenger messenger, IStudySettingsService settingsService)
         {
+
             _flashCardManager = flashCardManager;
+            _messenger = messenger;
+            _settingsService = settingsService;
             LoadList();
-            _flashCardSetSubscriptionToken = messanger.Subscribe<FlashCardSetListChangedMessage>(OnListChanged);
-            StudySettings = new StudyFlashCardSetSettingsViewModel() {MaxCardsInStudySet = 0};
+            _flashCardSetSubscriptionToken = _messenger.Subscribe<FlashCardSetListChangedMessage>(OnListChanged);
+            
                 //todo:start with users last settings saving states
             if (FlashCardSets.Count > 0)
             {
@@ -36,12 +43,13 @@ namespace FlashCardApp.Core.ViewModels.Study
             LoadList();
         }
 
-        private StudyFlashCardSetSettingsViewModel _studySettings;
+        //todo: remove this it isn't necessary with the new navigation
+       /* private StudyFlashCardSetSettingsViewModel _studySettings;
         public StudyFlashCardSetSettingsViewModel StudySettings
         {
             get { return _studySettings; }
             set { _studySettings = value; RaisePropertyChanged(()=>StudySettings);}
-        }
+        }*/
 
         private FlashCardSet _selectedSet;
         public FlashCardSet SelectedSet
@@ -52,8 +60,8 @@ namespace FlashCardApp.Core.ViewModels.Study
                 _selectedSet = value;
                 RaisePropertyChanged(() => SelectedSet);
                 SelectedSetFlashCards = GetCardsForSet();
-
-                StudySettings.MaxCardsInStudySet = SelectedSetFlashCards.Count;
+                _messenger.Publish(new SelectedSetChangedMessage(this) {SelctedSet = SelectedSet});
+                _settingsService.SetSelectedSetId(SelectedSet.ID);
 
             }
         }
@@ -78,21 +86,6 @@ namespace FlashCardApp.Core.ViewModels.Study
             set { _selectedSetFlashCards = value;RaisePropertyChanged(()=>SelectedSetFlashCards); }
         }
 
-        public ICommand ShowPinyinFirstCommand
-        {
-            get { return new MvxCommand(() => StudySettings.UpdateShowFirstSetting("Pinyin")); }
-        }
-
-        public ICommand ShowCharactersFirstCommand
-        {
-            get { return new MvxCommand(() => StudySettings.UpdateShowFirstSetting("Characters")); }
-        }
-
-        public ICommand ShowDefinitionFirstCommand
-        {
-            get { return new MvxCommand(() => StudySettings.UpdateShowFirstSetting("Definition")); }
-        }
-
 
         public ICommand ShowDetailCommand
         {
@@ -110,28 +103,9 @@ namespace FlashCardApp.Core.ViewModels.Study
 
        
 
-        public ICommand StudySetCommand
-        {
-            get
-            {
-                return new MvxCommand<FlashCardSet>(
-                    item => 
-                        ShowViewModel<StudyFlashCardSetViewModel>(new Nav()
-                    {
-                        Id = SelectedSet.ID,
-                        firstSideState = StudySettings.FirstSide.ToString() ,        //todo:change this?
-                        MaxCardsInStudySet = StudySettings.MaxCardsInStudySet,
-                        ShowDefinition = StudySettings.ShowDefinition,
-                        ShowPinyin = StudySettings.ShowPinyin,
-                        ShowSimplified = StudySettings.ShowSimplified,
-                        ShowTraditional = StudySettings.ShowTraditional
-                    }
-                    ));
-            }
-        }
+       
 
         private Cirrious.MvvmCross.ViewModels.MvxCommand _addSetCommand;
-
         public ICommand AddSetCommand
         {
             get

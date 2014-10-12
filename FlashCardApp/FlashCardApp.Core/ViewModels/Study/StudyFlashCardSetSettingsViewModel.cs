@@ -2,8 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Input;
+using Cirrious.CrossCore;
+using Cirrious.MvvmCross.Plugins.Messenger;
 using Cirrious.MvvmCross.ViewModels;
 using FlashCardApp.Core.Entities;
+using FlashCardApp.Core.Managers;
+using FlashCardApp.Core.Messages;
+using FlashCardApp.Core.Services;
 
 namespace FlashCardApp.Core.ViewModels.Study
 {
@@ -16,20 +22,64 @@ namespace FlashCardApp.Core.ViewModels.Study
     }
 
  
-
+   
     public class StudyFlashCardSetSettingsViewModel : MvxViewModel
     {
+        private  IMvxMessenger _messenger;
+        private IFlashCardManager _manager;
+        private readonly MvxSubscriptionToken _token;
+        private IStudySettingsService _settingsService;
+      
+       
 
-        public StudyFlashCardSetSettingsViewModel()
+
+        public StudyFlashCardSetSettingsViewModel(IMvxMessenger messenger, IFlashCardManager manager, IStudySettingsService settingsService)
         {
-            _showDefinition = true;
+            _messenger = messenger;
+            _manager = manager;
+            _settingsService = settingsService;
+            _settings = _settingsService.GetStudySettings();
+            _selectedSet = manager.GetSet(settingsService.GetSelectedSetId());
+            _selectedSet.FlashCards = manager.GetCardsForSet(_selectedSet.ID);
+            //   _token = _messenger.Subscribe<SelectedSetChangedMessage>();
+            /*_showDefinition = true;
             _showPinyin = true;
             _showTraditional = true;
             _showSimplified = true;
             _canShowCharacters = true;
+         */
         }
 
-        private bool _canShowCharacters;
+
+
+
+        private StudySettings _settings;
+        public StudySettings Settings
+        {
+            get { return _settings; }
+            set
+            {
+                _settings = value;
+                RaisePropertyChanged(()=>Settings);
+                _settingsService.SetStudySettings(_settings);
+            }
+        }
+
+        private FlashCardSet _selectedSet;
+        public FlashCardSet SelectedSet
+        {
+            get { return _selectedSet; }
+            set
+            {
+               
+                _selectedSet = value;
+                RaisePropertyChanged(()=>SelectedSet);
+             
+            }
+        }
+
+
+         private bool _canShowCharacters;
         public bool CanShowCharacters
         {
             get { return _canShowCharacters; }
@@ -87,91 +137,8 @@ namespace FlashCardApp.Core.ViewModels.Study
                 RaisePropertyChanged(() => EnglishFirst);
             }
         }
-
-        private bool _showPinyin;
-        public bool ShowPinyin
-        {
-            get { return _showPinyin; }
-            set
-            {
-                _showPinyin = value;
-                if (value == false)
-                {
-                    PinyinFirst = false;
-                }
-                RaiseAllPropertiesChanged();
-            }
-        }
-
-        private bool _showTraditional;
-        public bool ShowTraditional
-        {
-            get { return _showTraditional; }
-            set
-            {
-                _showTraditional = value;
-                RaisePropertyChanged(() => ShowTraditional);
-                if (value)
-                {
-                    CanShowCharacters = true;
-                    
-
-                }
-                else if (ShowSimplified)
-                {
-
-                }
-                else
-                {
-                    CanShowCharacters = false;
-                    CharactersFirst = false;
-                }
-                RaiseAllPropertiesChanged();
-            }
-
-        }
-
-        private bool _showSimplified;
-        public bool ShowSimplified
-        {
-            get { return _showSimplified; }
-            set
-            {
-                _showSimplified = value;
-                RaisePropertyChanged(() => ShowSimplified);
-                if (value)
-                {
-                    CanShowCharacters = true;
-                }
-                else if (ShowTraditional)
-                {
-
-                }
-                else
-                {
-                    CanShowCharacters = false;
-                    CharactersFirst = false;
-                }
-                RaiseAllPropertiesChanged();
-            }
-        }
         
-        private bool _showDefinition;
-        public bool ShowDefinition
-        {
-            get { return _showDefinition; }
-            set
-            {
-                _showDefinition = value;
-                if (value == false)
-                {
-                    EnglishFirst = false;
-                }
-                RaiseAllPropertiesChanged();
-            }
-
-
-        }
+       
 
 
         public void UpdateShowFirstSetting(string sideString)
@@ -182,23 +149,51 @@ namespace FlashCardApp.Core.ViewModels.Study
             if (sideString == "Pinyin")
             {
                 PinyinFirst = true;
-                FirstSide = ShowSideFirstSetting.Pinyin;
+                Settings.FirstSide = "Pinyin";
             }
             else if (sideString == "Characters")
             {
                 CharactersFirst = true;
-                FirstSide = ShowSideFirstSetting.Characters;
+                Settings.FirstSide = "Characters";
             }
             else if (sideString == "Definition")
             {
                 EnglishFirst = true;
-                FirstSide = ShowSideFirstSetting.English;
+                Settings.FirstSide = "Definition";
             }
             else
             {
-                throw new NotSupportedException("The side string is incorrect choices are Definition, Characters, or Pinyin");
+                throw new NotSupportedException(
+                    "The side string is incorrect choices are Definition, Characters, or Pinyin");
             }
             RaiseAllPropertiesChanged();
         }
+
+        #region commands
+        public ICommand NavigateToSetListCommand
+        {
+            get
+            {
+                return new MvxCommand(NavigateToSetList);
+            }
+        }
+
+        private void NavigateToSetList()
+        {
+            ShowViewModel<FlashCardSetListViewModel>();
+        }
+
+        public ICommand StudySetCommand {
+            get {return new MvxCommand(NavigateToStudyViewModel); }
+        }
+
+        private void NavigateToStudyViewModel()
+        {
+            ShowViewModel<StudyFlashCardSetViewModel>();
+
+        }
+
+        #endregion 
+
     }
 }

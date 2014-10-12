@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Navigation;
 using Cirrious.MvvmCross.WindowsPhone.Views;
+using FlashCardApp.Core.Entities;
 using FlashCardApp.Core.ViewModels.Dictionary;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;

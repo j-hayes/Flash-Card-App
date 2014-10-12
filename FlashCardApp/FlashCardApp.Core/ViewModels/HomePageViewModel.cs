@@ -44,15 +44,15 @@ namespace FlashCardApp.Core.ViewModels
         {
             get
             {
-                _flashCardCommand = _flashCardCommand ?? new Cirrious.MvvmCross.ViewModels.MvxCommand(NavigateToFlashCardSetList);
+                _flashCardCommand = _flashCardCommand ?? new Cirrious.MvvmCross.ViewModels.MvxCommand(NavigateToStudyFlashCardSetSettings);
                 return _flashCardCommand;
             }
         }
 
         
-        private void NavigateToFlashCardSetList()
+        private void NavigateToStudyFlashCardSetSettings()
         {
-            ShowViewModel<FlashCardSetListViewModel>();
+            ShowViewModel<StudyFlashCardSetSettingsViewModel>();
         }
 
         private Cirrious.MvvmCross.ViewModels.MvxCommand _saveCardCloudCommand;

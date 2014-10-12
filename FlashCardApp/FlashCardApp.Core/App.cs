@@ -11,6 +11,11 @@ namespace FlashCardApp.Core
                 .EndingWith("Manager")
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
+
+            CreatableTypes()
+               .EndingWith("Service")
+               .AsInterfaces()
+               .RegisterAsLazySingleton();
 				
 			RegisterAppStart<HomePageViewModel>();
         }

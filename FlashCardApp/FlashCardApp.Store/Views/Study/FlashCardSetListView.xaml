@@ -81,7 +81,7 @@
             <GridView
                 Grid.Row="0"
                Grid.Column="1"
-                ItemsSource="{Binding SelectedSetFlashCards}">
+                ItemsSource="{Binding SelectedSetFlashCards}" Margin="0,-121,0,121">
                 <GridView.Header>
                     <TextBlock Text="{Binding SelectedSet.Name}"></TextBlock>
                 </GridView.Header>
@@ -107,31 +107,7 @@
                 </GridView.ItemTemplate>
             </GridView>
 
-            <Grid Row="0" Grid.Column="2">
-                <StackPanel>
-                    <TextBlock Text="Show:" FontSize="36" ></TextBlock>
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
-                        <ToggleButton Content="Pinyin" IsChecked="{Binding StudySettings.ShowPinyin, Mode=TwoWay }"/>
-                        <ToggleButton Content="Traditional"  IsChecked="{Binding StudySettings.ShowTraditional, Mode=TwoWay }"/>
-                        <ToggleButton Content="Simplified"  IsChecked="{Binding StudySettings.ShowSimplified, Mode=TwoWay }"/>
-                        <ToggleButton Content="Definition"  IsChecked="{Binding StudySettings.ShowDefinition, Mode=TwoWay }"/>
-                </StackPanel>
-                    <TextBlock Text="Show first:" FontSize="36" ></TextBlock>
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
-                        <ToggleButton Content="Pinyin" Command="{Binding ShowPinyinFirstCommand}" IsEnabled="{Binding StudySettings.ShowPinyin, Mode=OneWay}" 
-                                      IsChecked="{Binding StudySettings.PinyinFirst, Mode=TwoWay }"/>
-                        <ToggleButton Content="Characters" Command="{Binding ShowCharactersFirstCommand}" IsEnabled="{Binding StudySettings.CanShowCharacters, Mode=OneWay}" 
-                                      IsChecked="{Binding StudySettings.CharactersFirst, Mode=TwoWay }"/>
-                        <ToggleButton Content="Definition" Command="{Binding ShowDefinitionFirstCommand}"  IsEnabled="{Binding StudySettings.ShowDefinition, Mode=OneWay}" 
-                                      IsChecked="{Binding StudySettings.EnglishFirst, Mode=TwoWay }"/>
-                    </StackPanel>
-
-                    <TextBlock Text="Max Number of Cards:" FontSize="36" ></TextBlock>
-                    <Slider Maximum="{Binding SelectedSetFlashCards.Count}" Value="{Binding StudySettings.MaxCardsInStudySet, Mode=TwoWay}" ></Slider> <!-- todo: make this actually bind-->
-                    <TextBlock Text="{Binding StudySettings.MaxCardsInStudySet}" FontSize="24"></TextBlock>   
-                </StackPanel>
-            </Grid>
-
+           
         <Grid Row="1" Column="0">
                 <StackPanel Orientation="Horizontal">
                     <Button Command="{Binding AddSetCommand}"  Content="Add Set" Height="60" Width="180" FontSize="24"></Button>
