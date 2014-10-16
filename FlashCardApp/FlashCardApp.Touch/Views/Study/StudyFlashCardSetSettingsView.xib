@@ -9,6 +9,7 @@
                 <outlet property="MaxNumberOfCardsScroller" destination="9bz-mF-Jjf" id="rFD-xh-zIJ"/>
                 <outlet property="MaxNumberOfCardsText" destination="mcz-bz-j89" id="Qpu-Gg-nBF"/>
                 <outlet property="PageScrollView" destination="ELn-25-Pxm" id="jGq-Nw-6ur"/>
+                <outlet property="SelectedSetNameLabel" destination="gap-2J-loh" id="Def-cr-6LP"/>
                 <outlet property="ShowCharactersFirstSwitch" destination="s8S-sN-7cH" id="Qva-cH-Z7k"/>
                 <outlet property="ShowDefinitionFirstSwitch" destination="WZn-Gy-dZp" id="V1u-CE-3lC"/>
                 <outlet property="ShowDefinitionSwitch" destination="46j-85-a9w" id="Clf-gp-unm"/>
@@ -16,8 +17,6 @@
                 <outlet property="ShowPinyinSwitch" destination="Fdf-vc-91b" id="2eD-40-qi3"/>
                 <outlet property="ShowSimplifiedSwitch" destination="2ue-g3-zsn" id="uBf-5l-fO4"/>
                 <outlet property="ShowTraditionalSwitch" destination="FT1-VR-UEG" id="hjo-Uj-GT8"/>
-                <outlet property="Submit" destination="aG3-Gf-7Uc" id="TMw-Dp-6Dj"/>
-                <outlet property="SubmitButton" destination="aG3-Gf-7Uc" id="aOk-b4-eJ6"/>
                 <outlet property="view" destination="iN0-l3-epB" id="kCW-yf-GMq"/>
             </connections>
         </placeholder>
@@ -116,13 +115,18 @@
                             <rect key="frame" x="228" y="359" width="51" height="31"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </switch>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aG3-Gf-7Uc">
-                            <rect key="frame" x="20" y="430" width="281" height="30"/>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Set :" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Stp-Yn-jWa">
+                            <rect key="frame" x="20" y="398" width="36" height="31"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="Submit">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                        </button>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gap-2J-loh">
+                            <rect key="frame" x="64" y="398" width="213" height="31"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                 </scrollView>
             </subviews>

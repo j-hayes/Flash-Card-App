@@ -97,7 +97,10 @@ namespace FlashCardApp.Core.ViewModels.Study
         public ShowSideFirstSetting FirstSide
         {
             get { return _firstSide; }
-            set { _firstSide = value; RaisePropertyChanged(()=>FirstSide); }
+            set {
+				_firstSide = value; 
+				RaisePropertyChanged(()=>FirstSide); }
+
         }
 
         private bool _pinyinFirst;
@@ -177,9 +180,21 @@ namespace FlashCardApp.Core.ViewModels.Study
                 return new MvxCommand(NavigateToSetList);
             }
         }
+		public ICommand SaveSettingsCommand{
+			get{
+				return new MvxCommand (SaveSettings);
+			}
+		}
+
+		public void SaveSettings ()
+		{
+			_settingsService.SetStudySettings (Settings);
+			_settingsService.SetSelectedSetId (SelectedSet.ID);
+		}
 
         private void NavigateToSetList()
         {
+			SaveSettings ();
             ShowViewModel<FlashCardSetListViewModel>();
         }
 
@@ -189,9 +204,11 @@ namespace FlashCardApp.Core.ViewModels.Study
 
         private void NavigateToStudyViewModel()
         {
+			SaveSettings ();
             ShowViewModel<StudyFlashCardSetViewModel>();
 
         }
+
 
         #endregion 
 

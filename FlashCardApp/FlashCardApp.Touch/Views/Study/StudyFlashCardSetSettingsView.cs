@@ -1,4 +1,4 @@
-﻿
+﻿using System.Windows.Input;
 using System;
 using System.Drawing;
 
@@ -59,18 +59,26 @@ namespace FlashCardApp.Touch
 			set.Bind (ShowPinyinFirstSwitch).To (ViewModel => ViewModel.PinyinFirst).TwoWay();
 			set.Bind (ShowDefinitionFirstSwitch).To (ViewModel => ViewModel.EnglishFirst).TwoWay();
 
-			set.Bind (ShowDefinitionSwitch).To (ViewModel => ViewModel.ShowDefinition).TwoWay();
-			set.Bind (ShowSimplifiedSwitch).To (ViewModel => ViewModel.ShowSimplified).TwoWay();
-			set.Bind (ShowTraditionalSwitch).To (ViewModel => ViewModel.ShowTraditional).TwoWay();
-			set.Bind (ShowPinyinSwitch).To (ViewModel => ViewModel.ShowPinyin).TwoWay();
+			set.Bind (ShowDefinitionSwitch).To (ViewModel => ViewModel.Settings.ShowDefinition).TwoWay();
+			set.Bind (ShowSimplifiedSwitch).To (ViewModel => ViewModel.Settings.ShowSimplified).TwoWay();
+			set.Bind (ShowTraditionalSwitch).To (ViewModel => ViewModel.Settings.ShowTraditional).TwoWay();
+			set.Bind (ShowPinyinSwitch).To (ViewModel => ViewModel.Settings.ShowPinyin).TwoWay();
+
+			set.Bind (SelectedSetNameLabel).To (ViewModel => ViewModel.SelectedSet.SetName);
 
 
-			set.Bind (SubmitButton).To ("SubmitSettingsCommand");
 
 
 			set.Apply ();
 			
 			// Perform any additional setup after loading the view, typically from a nib.
+		}
+
+		public override void ViewWillDisappear (bool animated)
+		{
+			base.ViewWillDisappear (animated);
+			ViewModel.SaveSettings();//id prefer to use icommand execute but it doesn't seem to be able to http://stackoverflow.com/questions/18366340/mvvmcross-get-this-error-after-upgrade-to-monotouch-version-3-2-1
+
 		}
 	}
 }

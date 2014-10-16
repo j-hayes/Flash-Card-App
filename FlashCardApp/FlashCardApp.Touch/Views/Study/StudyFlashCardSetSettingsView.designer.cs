@@ -22,6 +22,9 @@ namespace FlashCardApp.Touch
 		MonoTouch.UIKit.UIScrollView PageScrollView { get; set; }
 
 		[Outlet]
+		MonoTouch.UIKit.UILabel SelectedSetNameLabel { get; set; }
+
+		[Outlet]
 		MonoTouch.UIKit.UISwitch ShowCharactersFirstSwitch { get; set; }
 
 		[Outlet]
@@ -41,37 +44,9 @@ namespace FlashCardApp.Touch
 
 		[Outlet]
 		MonoTouch.UIKit.UISwitch ShowTraditionalSwitch { get; set; }
-
-		[Outlet]
-		MonoTouch.UIKit.UIButton SubmitButton { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (PageScrollView != null) {
-				PageScrollView.Dispose ();
-				PageScrollView = null;
-			}
-
-			if (ShowSimplifiedSwitch != null) {
-				ShowSimplifiedSwitch.Dispose ();
-				ShowSimplifiedSwitch = null;
-			}
-
-			if (ShowTraditionalSwitch != null) {
-				ShowTraditionalSwitch.Dispose ();
-				ShowTraditionalSwitch = null;
-			}
-
-			if (ShowPinyinSwitch != null) {
-				ShowPinyinSwitch.Dispose ();
-				ShowPinyinSwitch = null;
-			}
-
-			if (ShowDefinitionSwitch != null) {
-				ShowDefinitionSwitch.Dispose ();
-				ShowDefinitionSwitch = null;
-			}
-
 			if (MaxNumberOfCardsScroller != null) {
 				MaxNumberOfCardsScroller.Dispose ();
 				MaxNumberOfCardsScroller = null;
@@ -80,6 +55,11 @@ namespace FlashCardApp.Touch
 			if (MaxNumberOfCardsText != null) {
 				MaxNumberOfCardsText.Dispose ();
 				MaxNumberOfCardsText = null;
+			}
+
+			if (PageScrollView != null) {
+				PageScrollView.Dispose ();
+				PageScrollView = null;
 			}
 
 			if (ShowCharactersFirstSwitch != null) {
@@ -92,14 +72,34 @@ namespace FlashCardApp.Touch
 				ShowDefinitionFirstSwitch = null;
 			}
 
+			if (ShowDefinitionSwitch != null) {
+				ShowDefinitionSwitch.Dispose ();
+				ShowDefinitionSwitch = null;
+			}
+
 			if (ShowPinyinFirstSwitch != null) {
 				ShowPinyinFirstSwitch.Dispose ();
 				ShowPinyinFirstSwitch = null;
 			}
 
-			if (SubmitButton != null) {
-				SubmitButton.Dispose ();
-				SubmitButton = null;
+			if (ShowPinyinSwitch != null) {
+				ShowPinyinSwitch.Dispose ();
+				ShowPinyinSwitch = null;
+			}
+
+			if (ShowSimplifiedSwitch != null) {
+				ShowSimplifiedSwitch.Dispose ();
+				ShowSimplifiedSwitch = null;
+			}
+
+			if (ShowTraditionalSwitch != null) {
+				ShowTraditionalSwitch.Dispose ();
+				ShowTraditionalSwitch = null;
+			}
+
+			if (SelectedSetNameLabel != null) {
+				SelectedSetNameLabel.Dispose ();
+				SelectedSetNameLabel = null;
 			}
 		}
 	}
