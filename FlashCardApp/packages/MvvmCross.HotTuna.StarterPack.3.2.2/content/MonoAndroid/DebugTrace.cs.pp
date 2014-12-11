@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics;
 using Cirrious.CrossCore.Platform;
 
-namespace FlashCardApp.WindowsPhone
+namespace $rootnamespace$
 {
     public class DebugTrace : IMvxTrace
     {

@@ -10,7 +10,7 @@ using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using Cirrious.MvvmCross.WindowsStore.Views;
+using Cirrious.MvvmCross.WindowsCommon.Views;
 
 namespace FlashCardApp.Store.Common
 {
@@ -35,7 +35,7 @@ namespace FlashCardApp.Store.Common
     /// </list>
     /// </summary>
     [Windows.Foundation.Metadata.WebHostHidden]
-    public class LayoutAwarePage : MvxStorePage
+    public class LayoutAwarePage : MvxWindowsPage
     {
         /// <summary>
         /// Identifies the <see cref="DefaultViewModel"/> dependency property.

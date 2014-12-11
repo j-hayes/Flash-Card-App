@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Cirrious.MvvmCross.ViewModels;
 using FlashCardApp.Core.Entities;
@@ -80,7 +81,8 @@ namespace FlashCardApp.Core.ViewModels.Dictionary
             {
                 _filter = value;
                 RaisePropertyChanged(() => Filter);
-                ThreadPool.QueueUserWorkItem(DoApplyFilter, Filter);
+                Task.Run(() => DoApplyFilter(Filter));
+
                 //todo: use the expanded search functionarlity and add them to the searchresult list
             }
         }
