@@ -18,5 +18,25 @@ namespace FlashCardApp.WindowsPhone.Views
         {
             InitializeComponent();
         }
+
+        public HomePageViewModel viewModel
+        {
+            get { return ((HomePageViewModel) base.ViewModel); }
+        }
+
+        private void DictionaryFilterTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void DictionaryResultsView_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void DictionarySetListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

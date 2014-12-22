@@ -89,7 +89,8 @@
     <Compile Include="ViewModels\FirstViewModel.cs" />
     <Compile Include="ViewModels\HomePageViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
-    <Compile Include="ViewModels\Study\CloudCardSaveViewModel.cs" />
+    <Compile Include="ViewModels\NotUsed\CloudCardSaveViewModel.cs" />
+    <Compile Include="ViewModels\Random\RandomResultViewModel.cs" />
     <Compile Include="ViewModels\Study\CreateCustomCardViewModel.cs" />
     <Compile Include="ViewModels\Study\FlashCardDetailsViewModel.cs" />
     <Compile Include="ViewModels\Study\FlashCardSetDetailsViewModel.cs" />

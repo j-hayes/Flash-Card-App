@@ -41,6 +41,7 @@ namespace FlashCardApp.Core.ViewModels.Dictionary
             };
 
             SetListPopUpIsOpen = false;
+            GetFlashCardSets();
         }
 
         public bool SetListPopUpIsOpen
@@ -195,13 +196,16 @@ namespace FlashCardApp.Core.ViewModels.Dictionary
         {
             get
             {
-                return new MvxCommand(() => FlashCardSetList = _flashCardManager.GetSetList());
+                return new MvxCommand(GetFlashCardSets);
             }
         }
 
+        private void GetFlashCardSets()
+        {
+            FlashCardSetList = _flashCardManager.GetSetList();
+        }
 
 
-	
         public ICommand AddCardToSetCommand
  
         {

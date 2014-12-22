@@ -131,8 +131,8 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\HomePageView.xaml">
-      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -191,9 +191,9 @@
       <HintPath>..\packages\MvvmCross.HotTuna.MvvmCrossLibraries.3.1.1\lib\wp8\Cirrious.MvvmCross.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Cirrious.MvvmCross.Community.Plugins.Sqlite">
+    <Reference Include="Cirrious.MvvmCross.Community.Plugins.Sqlite, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MvvmCross.Community.Plugin.Sqlite.3.1.1\lib\wp8\Cirrious.MvvmCross.Community.Plugins.Sqlite.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Community.Plugins.Sqlite.WindowsPhone">
       <HintPath>..\packages\MvvmCross.Community.Plugin.Sqlite.3.1.1\lib\wp8\Cirrious.MvvmCross.Community.Plugins.Sqlite.WindowsPhone.dll</HintPath>
@@ -217,10 +217,11 @@
       <HintPath>..\packages\MvvmCross.HotTuna.MvvmCrossLibraries.3.1.1\lib\wp8\Cirrious.MvvmCross.WindowsPhone.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Community.CsharpSqlite.WP7">
+    <Reference Include="Community.CsharpSqlite.WP7, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MvvmCross.Community.Plugin.Sqlite.3.1.1\lib\wp8\Community.CsharpSqlite.WP7.dll</HintPath>
-      <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Phone.Controls, Version=8.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
