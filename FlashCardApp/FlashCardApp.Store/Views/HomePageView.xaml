@@ -17,7 +17,7 @@
         <x:String x:Key="ChevronGlyph">&#xE26B;</x:String>
 
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
-        <x:String x:Key="AppName">My Application</x:String>
+        <x:String x:Key="AppName">Flash Card App</x:String>
         <valueConverters:SearchEnumConverter x:Key="SearchEnumConverter" />
 
     </Page.Resources>
@@ -51,45 +51,41 @@
                 </Grid>
             </Hub.Header>
 
-            <HubSection Header="Dictionary" Width="1142" DataContext="{Binding DictionaryViewModel}" >
-
+            <HubSection Header="Dictionary"  Width="1142" DataContext="{Binding DictionaryViewModel}" >
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <Grid Width="750" x:Name="DictionaryGrid" Background="Transparent">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="75"/>
-                                <RowDefinition Height="100"/>
+                                <RowDefinition Height="110"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
                             <StackPanel x:Name="ContentPanel" Grid.Row="0">
                                 <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                    <Image Source="../Assets/SmallLogo.png"></Image><!--todo search icon -->
-                                    <TextBox IsReadOnly="False" Name="DictionaryFilterTextBox" Text="{Binding Filter, Mode=TwoWay}" VerticalAlignment="Top" Height="65"  Width="708"/>
+                                    <SearchBox PlaceholderText="Search" FontSize="30" QueryChanged="SearchBox_OnQueryChanged"  VerticalAlignment="Top" Height="65"  Width="708"></SearchBox>
                                 </StackPanel>
                             </StackPanel>
                             <Grid Row="1">
-                                <ListBox ItemsSource="{Binding Path=AvailibleDictionarySearchInputTypes }" SelectedItem="{Binding SearchInputType, Mode=TwoWay}" Padding="12,0,0,10" SelectionMode="Single"  Margin="0,10,0,-16">
-                                    <ListBox.ItemTemplate>
+                                <GridView ItemsSource="{Binding Path=AvailibleDictionarySearchInputTypes}" SelectedItem="{Binding SearchInputType, Mode=TwoWay}" SelectionMode="Single">
+                                    <GridView.ItemTemplate>
                                         <DataTemplate>
-                                            <StackPanel Orientation="Horizontal">
-                                                <StackPanel Background="Black">
-                                                    <TextBlock Width="120" Text="{Binding Converter={StaticResource SearchEnumConverter}}" LineHeight="10" />
-                                                </StackPanel>
-                                            </StackPanel>
+                                                <Grid Style="{StaticResource SearchTypeSelection}">
+                                                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Converter={StaticResource SearchEnumConverter}}" />
+                                                </Grid>
                                         </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
+                                    </GridView.ItemTemplate>
+                                </GridView>
                             </Grid>
                             <Grid Row="2">
-                                <ListBox x:Name="DictionaryResultsView" ItemsSource="{Binding SearchResults, Mode=TwoWay }" SelectionChanged="DictionaryResultsView_OnSelectionChanged"  SelectionMode="Single" Background="Black">
+                                <ListBox x:Name="DictionaryResultsView" Style="{StaticResource SearchResultsListView}" ItemsSource="{Binding SearchResults, Mode=TwoWay }" SelectionChanged="DictionaryResultsView_OnSelectionChanged"  SelectionMode="Single" Height="Auto">
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Vertical" Width="400">
                                                 <StackPanel>
-                                                    <TextBlock Text="{Binding Traditional }"  MaxHeight="40"  LineHeight="10" Grid.Row="2"/>
-                                                    <TextBlock Text="{Binding Simplified}" MaxHeight="40" Grid.Row="2"/>
-                                                    <TextBlock Text="{Binding AccentedPinyin}"  MaxHeight="40" Grid.Row="3" />
-                                                    <TextBlock Text="{Binding DefintionsString}" MaxHeight="40" Grid.Row="4"/>
+                                                    <TextBlock Text="{Binding Traditional }"  MaxHeight="40"  LineHeight="10" />
+                                                    <TextBlock Text="{Binding Simplified}" MaxHeight="40" />
+                                                    <TextBlock Text="{Binding AccentedPinyin}"  MaxHeight="40" />
+                                                    <TextBlock Text="{Binding DefintionsString}" MaxHeight="40" />
                                                 </StackPanel>
                                             </StackPanel>
                                         </DataTemplate>
@@ -98,17 +94,16 @@
                             </Grid>
                         </Grid>
                         <StackPanel Orientation="Vertical" Width="154" Margin="10" >
-                            <ListBox x:Name="SetListBox" ItemsSource="{Binding FlashCardSetList, Mode=TwoWay }" SelectionChanged="DictionarySetListBox_OnSelectionChanged"  SelectionMode="Single" Margin="0,10,0,0" Height="537">
-                                <ListBox.ItemTemplate>
+                            <GridView x:Name="SetListBox" ItemsSource="{Binding FlashCardSetList, Mode=TwoWay}" SelectionChanged="DictionarySetListBox_OnSelectionChanged"  SelectionMode="Single" Height="108">
+                                <GridView.ItemTemplate>
                                     <DataTemplate>
-                                        <StackPanel Orientation="Vertical" Width="400">
-                                            <Grid Width="400" Height="400">
-                                                <TextBlock Text="{Binding SetName}"  MaxHeight="40" LineHeight="10"/>
-                                            </Grid>
-                                        </StackPanel>
+                                        <Grid Style="{StaticResource SearchTypeSelection}">
+                                            <TextBlock Text="{Binding SetName}"/>
+                                        </Grid>
+                                      
                                     </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
+                                </GridView.ItemTemplate>
+                            </GridView>
                         </StackPanel>
                     </StackPanel >
                 </DataTemplate>

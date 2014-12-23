@@ -21,10 +21,12 @@
         <ResourceDictionary x:Key="Default">
             <x:String x:Key="BackButtonGlyph">&#xE071;</x:String>
             <x:String x:Key="BackButtonSnappedGlyph">&#xE0BA;</x:String>
-           
+            <SolidColorBrush x:Key="TextBoxPlaceholderTextThemeBrush" Color="#CCCCCC"/>
 
 
-        </ResourceDictionary>
+
+
+</ResourceDictionary>
       <ResourceDictionary x:Key="HighContrast">
             <x:String x:Key="BackButtonGlyph">&#xE071;</x:String>
             <x:String x:Key="BackButtonSnappedGlyph">&#xE0C4;</x:String>
@@ -33,63 +35,167 @@
     </ResourceDictionary.ThemeDictionaries>
 
 
-
-
-
-    <Color x:Key="FlashCardGreen">#FFB7BF10</Color>
-    <Color x:Key="FlashCardGreenDark">#FF7A9A01</Color>
-    <Color x:Key="FlashCardGreenDark80%">#CC7A9A01</Color>
-    <Color x:Key="FlashCardGreenDark60%">#997A9A01</Color>
-    <Color x:Key="FlashCardBlue">#FF41B6E6</Color>
-    <Color x:Key="FlashCardBlueDark">#FF004F71</Color>
-    <Color x:Key="FlashCardOrange">#FFF6BE00</Color>
-    <Color x:Key="FlashCardOrangeDark">#FFF2BE00</Color>
-    <Color x:Key="FlashCardBlue40%">#6641B6E6</Color>
-
-
     <Color x:Key="FlashCardPrimary">#1244A0</Color>
+
+
+    <Color x:Key="FlashCardAccent">#3615A6</Color>
+    <Color x:Key="FlashCardAccentDark">#3615A6</Color>
+    <Color x:Key="FlashCardAccentDark80%">#2F0AB0</Color>
+ 
+    <Color x:Key="FlashCardDisabled">#FF808080</Color>
+
+
+    
     <Color x:Key="FlashCardSecondary">#029980</Color>
     <Color x:Key="FlashCardTernary">#3615A6</Color>
     <Color x:Key="FlashCardComplement">#F1C803</Color>
     <Color x:Key="FlashCardBackground">#FFFFFF</Color>
 
 
-    <SolidColorBrush x:Key="AppBarBackgroundThemeBrush" Color="{StaticResource FlashCardBackground}" />
+        <SolidColorBrush x:Key="AppBarBackgroundThemeBrush" Color="{StaticResource FlashCardBackground}" />
         <SolidColorBrush x:Key="AppBarBorderThemeBrush" Color="{StaticResource FlashCardSecondary}" />
         <SolidColorBrush x:Key="ApplicationHeaderForegroundThemeBrush" Color="{StaticResource FlashCardPrimary}" />
         <SolidColorBrush x:Key="ApplicationSecondaryForegroundThemeBrush" Color="{StaticResource FlashCardPrimary}" />
         <SolidColorBrush x:Key="AppRootBackground" Color="{StaticResource FlashCardBackground}" />
 
-        <SolidColorBrush x:Key="BackButtonDisabledForegroundThemeBrush" Color="{StaticResource FlashCardBlue40%}" />
-        <SolidColorBrush x:Key="BackButtonForegroundThemeBrush" Color="{StaticResource FlashCardBlue}" />
-        <SolidColorBrush x:Key="BackButtonPointerOverForegroundThemeBrush" Color="{StaticResource FlashCardBlue}" />
-        <SolidColorBrush x:Key="BackButtonPointerOverBackgroundThemeBrush" Color="{StaticResource FlashCardBlue40%}" />
-        <SolidColorBrush x:Key="ComboBoxItemSelectedBackgroundThemeBrush" Color="{StaticResource FlashCardGreenDark}"/>
-        <SolidColorBrush x:Key="ComboBoxItemSelectedPointerOverBackgroundThemeBrush" Color="{StaticResource FlashCardGreenDark}" />
-        <SolidColorBrush x:Key="ComboBoxSelectedBackgroundThemeBrush" Color="{StaticResource FlashCardGreenDark}" />
-        <SolidColorBrush x:Key="ComboBoxSelectedPointerOverBackgroundThemeBrush" Color="{StaticResource FlashCardGreen}" />
-        <SolidColorBrush x:Key="HyperlinkForegroundThemeBrush" Color="{StaticResource FlashCardGreenDark}" />
-        <SolidColorBrush x:Key="HyperlinkPointerOverForegroundThemeBrush" Color="{StaticResource FlashCardGreenDark80%}" />
-        <SolidColorBrush x:Key="HyperlinkPressedForegroundThemeBrush" Color="{StaticResource FlashCardGreenDark60%}" />
-        <SolidColorBrush x:Key="ListBoxItemSelectedBackgroundThemeBrush" Color="{StaticResource FlashCardGreenDark}" />
-        <SolidColorBrush x:Key="ListBoxItemSelectedPointerOverBackgroundThemeBrush" Color="{StaticResource FlashCardGreen}" />
-        <SolidColorBrush x:Key="ListViewItemCheckHintThemeBrush" Color="{StaticResource FlashCardGreenDark}" />
-        <SolidColorBrush x:Key="ListViewItemCheckSelectingThemeBrush" Color="{StaticResource FlashCardGreenDark}" />
-        <SolidColorBrush x:Key="ListViewItemDragBackgroundThemeBrush" Color="{StaticResource FlashCardGreenDark60%}" />
-        <SolidColorBrush x:Key="ListViewItemSelectedBackgroundThemeBrush" Color="{StaticResource FlashCardGreenDark}" />
-        <SolidColorBrush x:Key="ListViewItemSelectedPointerOverBackgroundThemeBrush" Color="{StaticResource FlashCardGreen}" />
-        <SolidColorBrush x:Key="ListViewItemSelectedPointerOverBorderThemeBrush" Color="{StaticResource FlashCardGreen}" />
-        <SolidColorBrush x:Key="ProgressBarForegroundThemeBrush" Color="{StaticResource FlashCardGreenDark}" />
-        <SolidColorBrush x:Key="ProgressBarIndeterminateForegroundThemeBrush" Color="{StaticResource FlashCardGreenDark}" />
-        <SolidColorBrush x:Key="SliderTrackDecreaseBackgroundThemeBrush" Color="{StaticResource FlashCardGreenDark}" />
-        <SolidColorBrush x:Key="SliderTrackDecreasePointerOverBackgroundThemeBrush" Color="{StaticResource FlashCardGreen}" />
-        <SolidColorBrush x:Key="SliderTrackDecreasePressedBackgroundThemeBrush" Color="{StaticResource FlashCardGreen}" />
-        <SolidColorBrush x:Key="ToggleSwitchCurtainBackgroundThemeBrush" Color="{StaticResource FlashCardGreenDark}" />
-        <SolidColorBrush x:Key="ToggleSwitchCurtainPointerOverBackgroundThemeBrush" Color="{StaticResource FlashCardGreen}" />
-        <SolidColorBrush x:Key="ToggleSwitchCurtainPressedBackgroundThemeBrush" Color="{StaticResource FlashCardGreen}" />
+
+
+        <SolidColorBrush x:Key="SearchBoxBackgroundThemeBrush" Color="{StaticResource FlashCardPrimary}" />
+        <SolidColorBrush x:Key="SearchBoxBorderThemeBrush" Color="{StaticResource FlashCardBackground}" />
+        <SolidColorBrush x:Key="SearchBoxDisabledBackgroundThemeBrush" Color="{StaticResource FlashCardBackground}" />
+        <SolidColorBrush x:Key="SearchBoxDisabledTextThemeBrush" Color="{StaticResource FlashCardBackground}" />
+        <SolidColorBrush x:Key="SearchBoxDisabledBorderThemeBrush" Color="{StaticResource FlashCardBackground}" />
+        <SolidColorBrush x:Key="SearchBoxPointerOverBorderThemeBrush" Color="{StaticResource FlashCardBackground}" />
+       
+        <SolidColorBrush x:Key="SearchBoxFocusedBackgroundThemeBrush" Color="{StaticResource FlashCardPrimary}" />
+        <SolidColorBrush x:Key="SearchBoxPointerOverBackgroundThemeBrush" Color="{StaticResource FlashCardPrimary}" />
+        <SolidColorBrush x:Key="SearchBoxFocusedTextThemeBrush" Color="{StaticResource FlashCardBackground}" />
+        <SolidColorBrush x:Key="SearchBoxFocusedBorderThemeBrush" Color="{StaticResource FlashCardPrimary}" />
+        <SolidColorBrush x:Key="SearchBoxFocusedForegroundThemeBrush" Color="{StaticResource FlashCardPrimary}" />
+
+      
+
+        <SolidColorBrush x:Key="SearchBoxButtonBackgroundThemeBrush" Color="{StaticResource FlashCardPrimary}" />
+        <SolidColorBrush x:Key="SearchBoxButtonPointerOverBackgroundThemeBrush" Color="{StaticResource FlashCardPrimary}" />
+        
+        <SolidColorBrush x:Key="SearchBoxButtonForegroundThemeBrush" Color="{StaticResource FlashCardBackground}" />
+        <SolidColorBrush x:Key="SearchBoxButtonPointerOverForegroundThemeBrush" Color="{StaticResource FlashCardBackground}" />
+      
+
+
+
+
+
+        <SolidColorBrush x:Key="BackButtonDisabledForegroundThemeBrush" Color="{StaticResource FlashCardDisabled}" />
+        <SolidColorBrush x:Key="BackButtonForegroundThemeBrush" Color="{StaticResource FlashCardBackground}" />
+        <SolidColorBrush x:Key="BackButtonPointerOverForegroundThemeBrush" Color="{StaticResource FlashCardPrimary}" />
+        <SolidColorBrush x:Key="BackButtonPointerOverBackgroundThemeBrush" Color="{StaticResource FlashCardBackground}" />
+        <SolidColorBrush x:Key="ComboBoxItemSelectedBackgroundThemeBrush" Color="{StaticResource FlashCardAccentDark}"/>
+        <SolidColorBrush x:Key="ComboBoxItemSelectedPointerOverBackgroundThemeBrush" Color="{StaticResource FlashCardAccentDark}" />
+        <SolidColorBrush x:Key="ComboBoxSelectedBackgroundThemeBrush" Color="{StaticResource FlashCardAccentDark}" />
+        <SolidColorBrush x:Key="ComboBoxSelectedPointerOverBackgroundThemeBrush" Color="{StaticResource FlashCardAccent}" />
+        <SolidColorBrush x:Key="HyperlinkForegroundThemeBrush" Color="{StaticResource FlashCardAccentDark}" />
+        <SolidColorBrush x:Key="HyperlinkPointerOverForegroundThemeBrush" Color="{StaticResource FlashCardAccentDark80%}" />
+        <SolidColorBrush x:Key="HyperlinkPressedForegroundThemeBrush" Color="{StaticResource FlashCardPrimary}" />
+       
+        <SolidColorBrush x:Key="ListBoxItemSelectedBackgroundThemeBrush" Color="{StaticResource FlashCardAccentDark}" />
+        <SolidColorBrush x:Key="ListBoxItemSelectedPointerOverBackgroundThemeBrush" Color="{StaticResource FlashCardAccent}" />
+       
+        <SolidColorBrush x:Key="ListViewItemCheckHintThemeBrush" Color="{StaticResource FlashCardAccentDark}" />
+        <SolidColorBrush x:Key="ListViewItemCheckSelectingThemeBrush" Color="{StaticResource FlashCardAccentDark}" />
+        <SolidColorBrush x:Key="ListViewItemDragBackgroundThemeBrush" Color="{StaticResource FlashCardTernary}" />
+        <SolidColorBrush x:Key="ListViewItemSelectedBackgroundThemeBrush" Color="{StaticResource FlashCardAccentDark}" />
+        <SolidColorBrush x:Key="ListViewItemSelectedPointerOverBackgroundThemeBrush" Color="{StaticResource FlashCardAccent}" />
+        <SolidColorBrush x:Key="ListViewItemSelectedPointerOverBorderThemeBrush" Color="{StaticResource FlashCardAccent}" />
+        <SolidColorBrush x:Key="ProgressBarForegroundThemeBrush" Color="{StaticResource FlashCardAccentDark}" />
+        <SolidColorBrush x:Key="ProgressBarIndeterminateForegroundThemeBrush" Color="{StaticResource FlashCardAccentDark}" />
+        <SolidColorBrush x:Key="SliderTrackDecreaseBackgroundThemeBrush" Color="{StaticResource FlashCardAccentDark}" />
+        <SolidColorBrush x:Key="SliderTrackDecreasePointerOverBackgroundThemeBrush" Color="{StaticResource FlashCardAccent}" />
+        <SolidColorBrush x:Key="SliderTrackDecreasePressedBackgroundThemeBrush" Color="{StaticResource FlashCardAccent}" />
+        <SolidColorBrush x:Key="ToggleSwitchCurtainBackgroundThemeBrush" Color="{StaticResource FlashCardAccentDark}" />
+        <SolidColorBrush x:Key="ToggleSwitchCurtainPointerOverBackgroundThemeBrush" Color="{StaticResource FlashCardAccent}" />
+        <SolidColorBrush x:Key="ToggleSwitchCurtainPressedBackgroundThemeBrush" Color="{StaticResource FlashCardAccent}" />
 
 
     <x:String x:Key="ChevronGlyph">&#xE26B;</x:String>
+<!-- custom gridview-->
+    <!-- Default style for Windows.UI.Xaml.Controls.GridViewItem -->
+    <Style TargetType="GridViewItem">
+        <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
+        <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="TabNavigation" Value="Local"/>
+        <Setter Property="IsHoldingEnabled" Value="True"/>
+        <Setter Property="Margin" Value="0,0,2,2"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="GridViewItem">
+                    <GridViewItemPresenter
+                   
+                    ContentTransitions="{TemplateBinding ContentTransitions}"
+                    Padding="{TemplateBinding Padding}"
+                    SelectionCheckMarkVisualEnabled="True"
+                    CheckHintBrush="{ThemeResource ListViewItemCheckHintThemeBrush}"
+                    CheckSelectingBrush="{ThemeResource ListViewItemCheckSelectingThemeBrush}"
+                    CheckBrush="{ThemeResource ListViewItemCheckThemeBrush}"
+                    DragBackground="{ThemeResource ListViewItemDragBackgroundThemeBrush}"
+                    DragForeground="{ThemeResource ListViewItemDragForegroundThemeBrush}"
+                    FocusBorderBrush="{ThemeResource ListViewItemFocusBorderThemeBrush}"
+                    PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}"
+                    PointerOverBackground="{ThemeResource ListViewItemPointerOverBackgroundThemeBrush}"
+                    SelectedBorderThickness="{ThemeResource GridViewItemCompactSelectedBorderThemeThickness}"
+                    SelectedBackground="{ThemeResource ListViewItemSelectedBackgroundThemeBrush}"
+                    SelectedForeground="{ThemeResource ListViewItemSelectedForegroundThemeBrush}"
+                    SelectedPointerOverBackground="{ThemeResource ListViewItemSelectedPointerOverBackgroundThemeBrush}"
+                    SelectedPointerOverBorderBrush="{ThemeResource ListViewItemSelectedPointerOverBorderThemeBrush}"
+                    DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}"
+                    DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}"
+                    ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}"
+                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                    PointerOverBackgroundMargin="1"
+                    ContentMargin="4" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!-- Custom Created Styles -->
+
+    
+    <Style x:Key="SearchResultsListView" TargetType="ListBox">
+        <Setter Property="Background" Value="{StaticResource FlashCardPrimary}"></Setter>
+        <Setter Property="Width" Value="750"></Setter>
+        <Setter Property="MinHeight" Value="500"></Setter>
+        <Setter Property="Height" Value="500"></Setter>
+    </Style>
+
+    <Style x:Key="SearchTypeSelection" TargetType="Grid">
+        <Setter Property="Background" Value="{StaticResource FlashCardPrimary}"></Setter>
+       <Setter Property="Width" Value="100"></Setter>
+       <Setter Property="Height" Value="100"></Setter>
+    </Style>
+
+
+    <Style x:Key="DictionarySearchStyle" TargetType="SearchBox">
+        <Setter Property="Background" Value="{StaticResource FlashCardPrimary}"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource FlashCardBackground}"></Setter>
+        <Setter Property="FontSize" Value="30"></Setter>
+    </Style>
+    <Style x:Key="DictionarySectionStyle" TargetType="StackPanel">
+        <Setter Property="Background" Value="{StaticResource FlashCardPrimary}"></Setter>
+    
+    </Style>
+    <Style x:Key="FlashCardHeaderTextStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
+        <Setter Property="FontSize" Value="56"/>
+        <Setter Property="FontWeight" Value="Light"/>
+        <Setter Property="LineHeight" Value="40"/>
+        <Setter Property="Foreground" Value="Black"></Setter>
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <TranslateTransform X="-2" Y="8"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <!-- RichTextBlock styles -->
 
@@ -1875,20 +1981,5 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
-    <!-- Custom Created Styles -->
-    <Style x:Key="DictionarySectionStyle" TargetType="StackPanel">
-       <Setter Property="Background" Value="{StaticResource FlashCardPrimary}"></Setter>
-    </Style>
-    <Style x:Key="FlashCardHeaderTextStyle" TargetType="TextBlock" BasedOn="{StaticResource BaselineTextStyle}">
-        <Setter Property="FontSize" Value="56"/>
-        <Setter Property="FontWeight" Value="Light"/>
-        <Setter Property="LineHeight" Value="40"/>
-        <Setter Property="Foreground" Value="Black"></Setter>
-        <Setter Property="RenderTransform">
-            <Setter.Value>
-                <TranslateTransform X="-2" Y="8"/>
-            </Setter.Value>
-        </Setter>
-    </Style>
+  
 </ResourceDictionary>

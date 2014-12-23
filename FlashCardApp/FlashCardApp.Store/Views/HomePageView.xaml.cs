@@ -60,5 +60,10 @@ namespace FlashCardApp.Store.Views
                 ((ListBox) sender).SelectedIndex = -1;
             }
         }
+
+        private void SearchBox_OnQueryChanged(SearchBox sender, SearchBoxQueryChangedEventArgs args)
+        {
+                viewModel.DictionaryViewModel.Filter = sender.QueryText;
+        }
     }
 }
