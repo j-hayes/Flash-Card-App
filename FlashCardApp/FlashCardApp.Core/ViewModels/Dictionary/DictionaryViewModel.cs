@@ -11,28 +11,24 @@ using System.Windows;
 
 namespace FlashCardApp.Core.ViewModels.Dictionary
 {
-	public enum DictionarySearchInputType : int
+    public enum DictionarySearchInputType : int
     {
-       
         Chinese = 0,
-		English = 1,
-        Pinyin = 2 
-
-		
+        English = 1,
+        Pinyin = 2
     }
 
-    public class DictionaryViewModel: MvxViewModel
+    public class DictionaryViewModel : MvxViewModel
     {
-
-
         private readonly IDictionarySearchManager _dictionarySearchManager;
         private readonly IFlashCardManager _flashCardManager;
+
         public DictionaryViewModel(IDictionarySearchManager dictionarySearchManager, IFlashCardManager flashCardManager)
         {
             _dictionarySearchManager = dictionarySearchManager;
             _flashCardManager = flashCardManager;
 
-			SearchInputType = DictionarySearchInputType.English; 
+            SearchInputType = DictionarySearchInputType.English;
             AvailibleDictionarySearchInputTypes = new DictionarySearchInputType[]
             {
                 DictionarySearchInputType.English,
@@ -46,11 +42,16 @@ namespace FlashCardApp.Core.ViewModels.Dictionary
 
         public bool SetListPopUpIsOpen
         {
-            get { return _setListPopUpIsOpen; }
-            set { _setListPopUpIsOpen = value;RaisePropertyChanged(()=>SetListPopUpIsOpen); }
+            get { return SelectedSearchResult != null; }
+            set
+            {
+                _setListPopUpIsOpen = value;
+                RaisePropertyChanged(() => SetListPopUpIsOpen);
+            }
         }
 
         private List<SearchResult> _searchResults = new List<SearchResult>();
+
         public List<SearchResult> SearchResults
         {
             get { return _searchResults; }
@@ -59,10 +60,10 @@ namespace FlashCardApp.Core.ViewModels.Dictionary
                 _searchResults = value;
                 RaisePropertyChanged(() => SearchResults);
             }
-
         }
 
         private string _searchTerm = "";
+
         public string SearchTerm
         {
             get { return _searchTerm; }
@@ -74,6 +75,7 @@ namespace FlashCardApp.Core.ViewModels.Dictionary
         }
 
         private string _filter = "";
+
         public string Filter
         {
             get { return _filter; }
@@ -97,9 +99,10 @@ namespace FlashCardApp.Core.ViewModels.Dictionary
             }
         }*/
 
-        public DictionarySearchInputType[] AvailibleDictionarySearchInputTypes{get; private set;}
+        public DictionarySearchInputType[] AvailibleDictionarySearchInputTypes { get; private set; }
 
         private DictionarySearchInputType _searchInputType;
+
         public DictionarySearchInputType SearchInputType
         {
             get { return _searchInputType; }
@@ -107,6 +110,7 @@ namespace FlashCardApp.Core.ViewModels.Dictionary
             {
                 _searchInputType = value;
                 RaisePropertyChanged(() => SearchInputType);
+                DoApplyFilter(Filter);
             }
         }
 
@@ -116,28 +120,25 @@ namespace FlashCardApp.Core.ViewModels.Dictionary
             List<SearchResult> results;
             if (SearchInputType == DictionarySearchInputType.English)
             {
-                 results = _dictionarySearchManager.SearchByEnglish(Filter);
-               
+                results = _dictionarySearchManager.SearchByEnglish(Filter);
             }
             else if (SearchInputType == DictionarySearchInputType.Chinese)
             {
                 results = _dictionarySearchManager.SearchByChinese(Filter);
-              
             }
             else
             {
                 results = _dictionarySearchManager.SearchByPinYin(Filter);
-               
             }
             if (results != null & filterString == Filter)
             {
                 SearchResults = results;
             }
-           
         }
 
         private List<FlashCardSet> _flashCardList;
-        public List<FlashCardSet> FlashCardSetList 
+
+        public List<FlashCardSet> FlashCardSetList
         {
             get { return _flashCardList; }
             set
@@ -148,27 +149,30 @@ namespace FlashCardApp.Core.ViewModels.Dictionary
         }
 
         private SearchResult _selectedSearchResult;
+
         public SearchResult SelectedSearchResult
         {
             get { return _selectedSearchResult; }
             set
             {
                 _selectedSearchResult = value;
-                
-                
-                
                 RaisePropertyChanged(() => SelectedSearchResult);
-                SelectedCard = new FlashCard()
+                if (value != null)
                 {
-                    Definition = SelectedSearchResult.DefintionsString,
-                    Pinyin = SelectedSearchResult.Pinyin,
-                    Traditional = SelectedSearchResult.Traditional,
-                    Simplified = SelectedSearchResult.Simplified
-                };
+                    SelectedCard = new FlashCard()
+                    {
+                        Definition = SelectedSearchResult.DefintionsString,
+                        Pinyin = SelectedSearchResult.Pinyin,
+                        Traditional = SelectedSearchResult.Traditional,
+                        Simplified = SelectedSearchResult.Simplified
+                    };
+                }
+                RaisePropertyChanged(() => SetListPopUpIsOpen);
             }
         }
 
         private FlashCard _selectedCard;
+
         public FlashCard SelectedCard
         {
             get { return _selectedCard; }
@@ -194,10 +198,7 @@ namespace FlashCardApp.Core.ViewModels.Dictionary
 
         public ICommand GetFlashCardSetList
         {
-            get
-            {
-                return new MvxCommand(GetFlashCardSets);
-            }
+            get { return new MvxCommand(GetFlashCardSets); }
         }
 
         private void GetFlashCardSets()
@@ -207,28 +208,25 @@ namespace FlashCardApp.Core.ViewModels.Dictionary
 
 
         public ICommand AddCardToSetCommand
- 
+
         {
-            get
-            {
-                return new MvxCommand(DoAddToSetCommand);
-            }
+            get { return new MvxCommand(DoAddToSetCommand); }
         }
 
-		private void DoAddToSetCommand()
+        private void DoAddToSetCommand()
         {
-            
             int flashCardId = _flashCardManager.CreateCard(SelectedCard);
             _flashCardManager.AddCardtoSet(flashCardId, SelectedSet.ID);
             SetListPopUpIsOpen = false;
         }
 
-		public void ShowSearchResultViewModel()
-		{
-			ShowViewModel<SearchResultViewModel>(new FlashCardApp.Core.ViewModels.Dictionary.SearchResultViewModel.DictionarySearchResultNav()
-				{
-					Id = SelectedSearchResult.ChineseId
-				});
-		}
+        public void ShowSearchResultViewModel()
+        {
+            ShowViewModel<SearchResultViewModel>(new FlashCardApp.Core.ViewModels.Dictionary.SearchResultViewModel.
+                DictionarySearchResultNav()
+            {
+                Id = SelectedSearchResult.ChineseId
+            });
+        }
     }
 }

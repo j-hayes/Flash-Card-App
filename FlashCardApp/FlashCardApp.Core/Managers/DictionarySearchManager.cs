@@ -153,7 +153,7 @@ namespace FlashCardApp.Core.Managers
             string cleanedSearchTerm = searchTerm;
             for (int i = 0; i < cleanedSearchTerm.Length - 1; i++)
             {
-                if (searchTerm[i] == '\'')
+                if (searchTerm[i] == '\'')//todo:fix this crash on weird chinese typing
                 {
                     cleanedSearchTerm = cleanedSearchTerm.Insert(i, '\''.ToString());
                 }

@@ -42,14 +42,7 @@ namespace FlashCardApp.Store.Views
           
         }
 
-       private void DictionaryResultsView_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (e.AddedItems.Count == 1)
-            {
-                viewModel.DictionaryViewModel.SelectedSearchResult = (SearchResult)e.AddedItems[0];
-                
-            }
-        }
+ 
 
         private void DictionarySetListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -57,7 +50,7 @@ namespace FlashCardApp.Store.Views
             {
                 viewModel.DictionaryViewModel.SelectedSet = ((FlashCardSet)e.AddedItems[0]);
                 viewModel.DictionaryViewModel.AddCardToSetCommand.Execute(null);
-                ((ListBox) sender).SelectedIndex = -1;
+                ((ListView) sender).SelectedIndex = -1;
             }
         }
 

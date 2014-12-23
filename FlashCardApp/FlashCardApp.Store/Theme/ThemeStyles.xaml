@@ -36,6 +36,8 @@
 
 
     <Color x:Key="FlashCardPrimary">#1244A0</Color>
+    <Color x:Key="FlashCardPrimaryDark">#013EAC</Color>
+    <Color x:Key="FlashCardPrimaryDark80%">#0841A9</Color>
 
 
     <Color x:Key="FlashCardAccent">#3615A6</Color>
@@ -49,7 +51,7 @@
     <Color x:Key="FlashCardSecondary">#029980</Color>
     <Color x:Key="FlashCardTernary">#3615A6</Color>
     <Color x:Key="FlashCardComplement">#F1C803</Color>
-    <Color x:Key="FlashCardBackground">#FFFFFF</Color>
+    <Color x:Key="FlashCardBackground">#E6E6E6</Color>
 
 
         <SolidColorBrush x:Key="AppBarBackgroundThemeBrush" Color="{StaticResource FlashCardBackground}" />
@@ -60,7 +62,8 @@
 
 
 
-        <SolidColorBrush x:Key="SearchBoxBackgroundThemeBrush" Color="{StaticResource FlashCardPrimary}" />
+        <!--
+    <SolidColorBrush x:Key="SearchBoxBackgroundThemeBrush" Color="{StaticResource FlashCardPrimary}" />
         <SolidColorBrush x:Key="SearchBoxBorderThemeBrush" Color="{StaticResource FlashCardBackground}" />
         <SolidColorBrush x:Key="SearchBoxDisabledBackgroundThemeBrush" Color="{StaticResource FlashCardBackground}" />
         <SolidColorBrush x:Key="SearchBoxDisabledTextThemeBrush" Color="{StaticResource FlashCardBackground}" />
@@ -71,15 +74,89 @@
         <SolidColorBrush x:Key="SearchBoxPointerOverBackgroundThemeBrush" Color="{StaticResource FlashCardPrimary}" />
         <SolidColorBrush x:Key="SearchBoxFocusedTextThemeBrush" Color="{StaticResource FlashCardBackground}" />
         <SolidColorBrush x:Key="SearchBoxFocusedBorderThemeBrush" Color="{StaticResource FlashCardPrimary}" />
-        <SolidColorBrush x:Key="SearchBoxFocusedForegroundThemeBrush" Color="{StaticResource FlashCardPrimary}" />
-
-      
-
-        <SolidColorBrush x:Key="SearchBoxButtonBackgroundThemeBrush" Color="{StaticResource FlashCardPrimary}" />
+        <SolidColorBrush x:Key="SearchBoxFocusedForegroundThemeBrush" Color="{StaticResource FlashCardPrimary}" /> 
+    
+         <SolidColorBrush x:Key="SearchBoxButtonBackgroundThemeBrush" Color="{StaticResource FlashCardPrimary}" />
         <SolidColorBrush x:Key="SearchBoxButtonPointerOverBackgroundThemeBrush" Color="{StaticResource FlashCardPrimary}" />
         
         <SolidColorBrush x:Key="SearchBoxButtonForegroundThemeBrush" Color="{StaticResource FlashCardBackground}" />
         <SolidColorBrush x:Key="SearchBoxButtonPointerOverForegroundThemeBrush" Color="{StaticResource FlashCardBackground}" />
+    -->
+      
+    
+        <!--<SolidColorBrush x:Key="SearchBoxFocusedForegroundThemeBrush" Color="{StaticResource FlashCardPrimary}" />-->
+    <!-- SearchBox background when the mouse is out of the control -->
+    <SolidColorBrush x:Key="SearchBoxBackgroundThemeBrush" Color="{StaticResource FlashCardPrimary}" />
+
+    <!-- SearchBox background when the mouse is over the control -->
+    <SolidColorBrush x:Key="SearchBoxPointerOverBackgroundThemeBrush" Color="{StaticResource FlashCardPrimary}" />
+    <!-- SearchBox background when the control is focused. 
+             It is also the background of the Search button when it is pressed -->
+    <SolidColorBrush x:Key="SearchBoxFocusedBackgroundThemeBrush" Color="{StaticResource FlashCardPrimary}" />
+
+    <!-- SearchBox border when the mouse is out of the control -->
+    <SolidColorBrush x:Key="SearchBoxBorderThemeBrush" Color="{StaticResource FlashCardPrimary}" />
+
+    <!-- SearchBox border when the mouse is over the control -->
+    <SolidColorBrush x:Key="SearchBoxPointerOverBorderThemeBrush" Color="{StaticResource FlashCardPrimary}" />
+
+    <!-- SearchBox border when the control is focused -->
+    <SolidColorBrush x:Key="SearchBoxFocusedBorderThemeBrush" Color="#FF2A2A2A" />
+
+    <!-- Search button background when when the control is focused, but the mouse is 
+             out of the button.
+             It is also the background of search suggestions when the mouse is over 
+             them -->
+    <SolidColorBrush x:Key="SearchBoxButtonBackgroundThemeBrush" Color="{StaticResource FlashCardPrimary}" />
+
+    <!-- Search button background when the mouse is over the button
+             (when the control is focused or not) -->
+    <SolidColorBrush x:Key="SearchBoxButtonPointerOverBackgroundThemeBrush"
+                         Color="{StaticResource FlashCardPrimary}" />
+
+    <!-- Search button color when the mouse is out of the control -->
+    <SolidColorBrush x:Key="SearchBoxForegroundThemeBrush" Color="{StaticResource FlashCardBackground}" />
+
+    <!-- Search button color when the mouse is over the control -->
+    <SolidColorBrush x:Key="SearchBoxPointerOverTextThemeBrush" Color="{StaticResource FlashCardBackground}" />
+
+    <!-- Search button color when the control is focused. 
+             It is also the search suggestions color when the mouse is over them -->
+    <SolidColorBrush x:Key="SearchBoxButtonForegroundThemeBrush" Color="{StaticResource FlashCardBackground}" />
+
+    <!-- Search button color when the mouse is over the button and the control 
+             is focused -->
+    <SolidColorBrush x:Key="SearchBoxButtonPointerOverForegroundThemeBrush"
+                        Color="{StaticResource FlashCardBackground}"/>
+
+    <!-- Search button color when it is pressed -->
+    <SolidColorBrush x:Key="SearchBoxFocusedTextThemeBrush" Color="{StaticResource FlashCardBackground}" />
+
+    <!-- Search suggestions color seprator -->
+    <SolidColorBrush x:Key="SearchBoxSeparatorSuggestionForegroundThemeBrush"
+                         Color="#FF000000" />
+
+    <!-- Color of highlighted characters in the result suggestions -->
+    <SolidColorBrush x:Key="SearchBoxHitHighlightForegroundThemeBrush"
+                       Color="{StaticResource FlashCardBackground}" />
+
+    <!-- Color of highlighted characters in the result suggestions when the mouse is 
+             over the element -->
+    <SolidColorBrush x:Key="SearchBoxHitHighlightSelectedForegroundThemeBrush"
+                        Color="{StaticResource FlashCardBackground}"/>
+
+    <!-- Disabled SearchBox background -->
+    <SolidColorBrush x:Key="SearchBoxDisabledBackgroundThemeBrush"
+                         Color="Transparent" />
+
+    <!-- Disabled SearchBox border -->
+    <SolidColorBrush x:Key="SearchBoxDisabledBorderThemeBrush" Color="#FF666666" />
+
+    <!-- Disabled search button color -->
+    <SolidColorBrush x:Key="SearchBoxDisabledTextThemeBrush" Color="#66FFFFFF" />
+
+
+       
       
 
 
@@ -97,9 +174,11 @@
         <SolidColorBrush x:Key="HyperlinkForegroundThemeBrush" Color="{StaticResource FlashCardAccentDark}" />
         <SolidColorBrush x:Key="HyperlinkPointerOverForegroundThemeBrush" Color="{StaticResource FlashCardAccentDark80%}" />
         <SolidColorBrush x:Key="HyperlinkPressedForegroundThemeBrush" Color="{StaticResource FlashCardPrimary}" />
-       
-        <SolidColorBrush x:Key="ListBoxItemSelectedBackgroundThemeBrush" Color="{StaticResource FlashCardAccentDark}" />
-        <SolidColorBrush x:Key="ListBoxItemSelectedPointerOverBackgroundThemeBrush" Color="{StaticResource FlashCardAccent}" />
+
+        <SolidColorBrush x:Key="ListBoxItemSelectedBackgroundThemeBrush" Color="{StaticResource FlashCardAccent}" />
+    <SolidColorBrush x:Key="ListBoxItemSelectedPointerOverBackgroundThemeBrush" Color="{StaticResource FlashCardAccentDark80%}" />
+    <SolidColorBrush x:Key="ListBoxFocusBackgroundThemeBrush" Color="{StaticResource FlashCardPrimaryDark80%}" />
+    <SolidColorBrush x:Key="ListBoxItemPressedBackgroundThemeBrush" Color="{StaticResource FlashCardPrimaryDark80%}" />
        
         <SolidColorBrush x:Key="ListViewItemCheckHintThemeBrush" Color="{StaticResource FlashCardAccentDark}" />
         <SolidColorBrush x:Key="ListViewItemCheckSelectingThemeBrush" Color="{StaticResource FlashCardAccentDark}" />
@@ -115,6 +194,9 @@
         <SolidColorBrush x:Key="ToggleSwitchCurtainBackgroundThemeBrush" Color="{StaticResource FlashCardAccentDark}" />
         <SolidColorBrush x:Key="ToggleSwitchCurtainPointerOverBackgroundThemeBrush" Color="{StaticResource FlashCardAccent}" />
         <SolidColorBrush x:Key="ToggleSwitchCurtainPressedBackgroundThemeBrush" Color="{StaticResource FlashCardAccent}" />
+
+
+        <SolidColorBrush x:Key="ApplicationForegroundThemeBrush" Color="{StaticResource FlashCardPrimary}" />
 
 
     <x:String x:Key="ChevronGlyph">&#xE26B;</x:String>
@@ -164,18 +246,20 @@
     
     <Style x:Key="SearchResultsListView" TargetType="ListBox">
         <Setter Property="Background" Value="{StaticResource FlashCardPrimary}"></Setter>
-        <Setter Property="Width" Value="750"></Setter>
-        <Setter Property="MinHeight" Value="500"></Setter>
-        <Setter Property="Height" Value="500"></Setter>
+        <Setter Property="Width" Value="768"></Setter>
+        <Setter Property="MinHeight" Value="550"></Setter>
+        <Setter Property="MaxHeight" Value="550"></Setter>
     </Style>
 
     <Style x:Key="SearchTypeSelection" TargetType="Grid">
         <Setter Property="Background" Value="{StaticResource FlashCardPrimary}"></Setter>
-       <Setter Property="Width" Value="100"></Setter>
+       <Setter Property="Width" Value="250"></Setter>
        <Setter Property="Height" Value="100"></Setter>
+       <Setter Property="Margin" Value="0"></Setter>
+    
     </Style>
 
-
+   
     <Style x:Key="DictionarySearchStyle" TargetType="SearchBox">
         <Setter Property="Background" Value="{StaticResource FlashCardPrimary}"></Setter>
         <Setter Property="Foreground" Value="{StaticResource FlashCardBackground}"></Setter>
@@ -185,11 +269,25 @@
         <Setter Property="Background" Value="{StaticResource FlashCardPrimary}"></Setter>
     
     </Style>
+    <Style x:Key="FlashCardTextBlockStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="30"/>
+       <Setter Property="TextWrapping" Value="NoWrap"></Setter>
+        <Setter Property="TextTrimming" Value="WordEllipsis"></Setter>
+        <Setter Property="FontWeight" Value="Light"/>
+        <Setter Property="LineHeight" Value="40"/>
+        <Setter Property="Foreground" Value="{StaticResource FlashCardBackground}"></Setter>
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <TranslateTransform X="-2" Y="8"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
     <Style x:Key="FlashCardHeaderTextStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
         <Setter Property="FontSize" Value="56"/>
         <Setter Property="FontWeight" Value="Light"/>
         <Setter Property="LineHeight" Value="40"/>
-        <Setter Property="Foreground" Value="Black"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource FlashCardBackground}"></Setter>
         <Setter Property="RenderTransform">
             <Setter.Value>
                 <TranslateTransform X="-2" Y="8"/>
@@ -233,6 +331,18 @@
     </Style>
     <!-- TextBlock styles -->
 
+    <Style x:Key="DictionarySearchReslt" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource FlashCardBackground}"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontFamily" Value="{StaticResource ContentControlThemeFontFamily}"/>
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="Typography.StylisticSet20" Value="True"/>
+        <Setter Property="Typography.DiscretionaryLigatures" Value="True"/>
+        <Setter Property="Typography.CaseSensitiveForms" Value="True"/>
+    </Style>
+    
     <Style x:Key="BasicTextStyle" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{StaticResource ApplicationForegroundThemeBrush}"/>
         <Setter Property="FontSize" Value="{StaticResource ControlContentThemeFontSize}"/>
