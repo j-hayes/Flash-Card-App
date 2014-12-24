@@ -66,7 +66,8 @@
                                 </StackPanel>
                             </StackPanel>
                             <Grid Row="1">
-                                <GridView ItemsSource="{Binding Path=AvailibleDictionarySearchInputTypes}" SelectedItem="{Binding SearchInputType, Mode=TwoWay}"  Width="768" SelectionMode="Single">
+                                <GridView  ScrollViewer.HorizontalScrollMode="Disabled" ItemsSource="{Binding Path=AvailibleDictionarySearchInputTypes}" SelectedItem="{Binding SearchInputType, Mode=TwoWay}" SelectionMode="Single">
+                                    
                                     <GridView.ItemTemplate>
                                         <DataTemplate>
                                                 <Grid Style="{StaticResource SearchTypeSelection}">
@@ -116,21 +117,21 @@
 
             <HubSection Width="520" Header="Section 2"  DataContext="{Binding StudyFlashCardSetSettingsViewModel}">
                 <DataTemplate>
-                    <StackPanel Grid.Row="1">
+                    <StackPanel>
                         <TextBlock Text="Show:" FontSize="36" ></TextBlock>
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
-                            <ToggleButton Content="Pinyin" IsChecked="{Binding Settings.ShowPinyin, Mode=TwoWay }"/>
-                            <ToggleButton Content="Traditional"  IsChecked="{Binding Settings.ShowTraditional, Mode=TwoWay }"/>
-                            <ToggleButton Content="Simplified"  IsChecked="{Binding Settings.ShowSimplified, Mode=TwoWay }"/>
-                            <ToggleButton Content="Definition"  IsChecked="{Binding Settings.ShowDefinition, Mode=TwoWay }"/>
+                        <StackPanel  Orientation="Horizontal" VerticalAlignment="Top" Height="100">
+                            <ToggleButton Style="{StaticResource FlashCardButton}" Content="Pinyin" IsChecked="{Binding Settings.ShowPinyin, Mode=TwoWay }"/>
+                            <ToggleButton Style="{StaticResource FlashCardButton}"  Content="Simplified"  IsChecked="{Binding Settings.ShowSimplified, Mode=TwoWay }"/>
+                            <ToggleButton Style="{StaticResource FlashCardButton}"  Content="Definition"  IsChecked="{Binding Settings.ShowDefinition, Mode=TwoWay }"/>
+                            <ToggleButton Style="{StaticResource FlashCardButton}"  Content="Traditional"  IsChecked="{Binding Settings.ShowTraditional, Mode=TwoWay }"/>
                         </StackPanel>
                         <TextBlock Text="Show first:" FontSize="36" ></TextBlock>
 
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
-                            <ToggleButton Content="Pinyin" IsChecked="{Binding PinyinFirst, Mode=TwoWay }"/>
-                            <ToggleButton Content="Characters" Command="{Binding }" IsEnabled="{Binding CanShowCharacters, Mode=OneWay}" 
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Height="100" Width="401">
+                            <ToggleButton Style="{StaticResource FlashCardButton}"  Content="Pinyin" IsChecked="{Binding PinyinFirst, Mode=TwoWay }"/>
+                            <ToggleButton Style="{StaticResource FlashCardButton}"  Content="Characters" Command="{Binding }" IsEnabled="{Binding CanShowCharacters, Mode=OneWay}" 
                                       IsChecked="{Binding CharactersFirst, Mode=TwoWay }"/>
-                            <ToggleButton Content="Definition" Command="{Binding }"  IsChecked="{Binding EnglishFirst, Mode=TwoWay }"/>
+                            <ToggleButton Style="{StaticResource FlashCardButton}"  Content="Definition" Command="{Binding }"  IsChecked="{Binding EnglishFirst, Mode=TwoWay }"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
                             <TextBlock Text="{Binding SelectedSet.SetName}" FontSize="36" Width="200" TextTrimming="WordEllipsis" ></TextBlock>

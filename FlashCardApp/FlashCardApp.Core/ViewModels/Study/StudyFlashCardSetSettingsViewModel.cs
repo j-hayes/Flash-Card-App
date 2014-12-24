@@ -13,7 +13,7 @@ using FlashCardApp.Core.Services;
 
 namespace FlashCardApp.Core.ViewModels.Study
 {
-
+    //todo this is super broken. 
     public enum ShowSideFirstSetting
     {
         English,
@@ -61,7 +61,7 @@ namespace FlashCardApp.Core.ViewModels.Study
             {
                 _settings = value;
                 RaisePropertyChanged(()=>Settings);
-                _settingsService.SetStudySettings(_settings);
+              //  _settingsService.SetStudySettings(_settings);
             }
         }
 
@@ -110,7 +110,10 @@ namespace FlashCardApp.Core.ViewModels.Study
             set
             {
                 _pinyinFirst = value;
-				UpdateShowFirstSetting("Pinyin");
+                if (value)
+                {
+                    UpdateShowFirstSetting("Pinyin");
+                }
                 RaisePropertyChanged(() => PinyinFirst);
             }
 
@@ -123,7 +126,10 @@ namespace FlashCardApp.Core.ViewModels.Study
             set
             {
                 _charactersFirst = value;
-				UpdateShowFirstSetting("Characters");//todo this should be a global enum. oh it is the windows version is the problems refactor it
+                if (value)
+                {
+                    UpdateShowFirstSetting("Characters");
+                } //todo this should be a global enum. oh it is the windows version is the problems refactor it
                 RaisePropertyChanged(() => CharactersFirst);
 
             }
@@ -136,7 +142,10 @@ namespace FlashCardApp.Core.ViewModels.Study
             set
             {
                 _englishFirst = value;
-				UpdateShowFirstSetting("English");
+                if (value)
+                {
+                    UpdateShowFirstSetting("English");
+                }
                 RaisePropertyChanged(() => EnglishFirst);
             }
         }
@@ -146,22 +155,22 @@ namespace FlashCardApp.Core.ViewModels.Study
 
         public void UpdateShowFirstSetting(string sideString)
         {
-            PinyinFirst = false;
-            CharactersFirst = false;
-            EnglishFirst = false;
+            _pinyinFirst = false;
+            _charactersFirst = false;
+            _englishFirst = false;
             if (sideString == "Pinyin")
             {
-                PinyinFirst = true;
+                _pinyinFirst = true;
                 Settings.FirstSide = "Pinyin";
             }
             else if (sideString == "Characters")
             {
-                CharactersFirst = true;
+                _charactersFirst = true;
                 Settings.FirstSide = "Characters";
             }
             else if (sideString == "Definition")
             {
-                EnglishFirst = true;
+                _englishFirst = true;
                 Settings.FirstSide = "Definition";
             }
             else

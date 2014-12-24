@@ -243,7 +243,15 @@
     </Style>
     <!-- Custom Created Styles -->
 
-    
+
+    <Style x:Key="FlashCardButton" TargetType="ToggleButton">
+        <Setter Property="Background" Value="{StaticResource FlashCardPrimary}"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource FlashCardBackground}"></Setter>
+        <Setter Property="Width" Value="100"></Setter>
+        <Setter Property="Height" Value="100"></Setter>
+       
+    </Style>
+
     <Style x:Key="SearchResultsListView" TargetType="ListBox">
         <Setter Property="Background" Value="{StaticResource FlashCardPrimary}"></Setter>
         <Setter Property="Width" Value="768"></Setter>
@@ -255,8 +263,8 @@
         <Setter Property="Background" Value="{StaticResource FlashCardPrimary}"></Setter>
        <Setter Property="Width" Value="250"></Setter>
        <Setter Property="Height" Value="100"></Setter>
-       <Setter Property="Margin" Value="0"></Setter>
-    
+        <Setter Property="Margin" Value="0,0,0,0"></Setter>
+      
     </Style>
 
    
