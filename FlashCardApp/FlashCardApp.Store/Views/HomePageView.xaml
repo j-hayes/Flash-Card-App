@@ -28,7 +28,7 @@
     <Grid Background="{ThemeResource AppBarBackgroundThemeBrush}">
         <Grid.ChildrenTransitions>
             <TransitionCollection>
-                <EntranceThemeTransition/>
+                <EntranceThemeTransition />
             </TransitionCollection>
         </Grid.ChildrenTransitions>
 
@@ -37,105 +37,132 @@
                 <!-- Back button and page title -->
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="80"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="800" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Button  x:Name="backButton" Margin="-1,-1,39,0" Command="{Binding NavigationHelper.GoBackCommand, ElementName=pageRoot}"
-                        Style="{StaticResource NavigationBackButtonNormalStyle}"
-                        VerticalAlignment="Top"
-                        AutomationProperties.Name="Back"
-                        AutomationProperties.AutomationId="BackButton"
-                        AutomationProperties.ItemType="Navigation Button"/>
-                    <TextBlock x:Name="pageTitle" Text="{StaticResource AppName}"  Grid.Column="1" 
-                        IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Top"/>
+                    
+                    <TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Grid.Column="0"
+                               IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Top" />
                 </Grid>
             </Hub.Header>
 
-            <HubSection Header="Dictionary"  Width="1200" DataContext="{Binding DictionaryViewModel}" >
+            <HubSection Header="Dictionary" Width="1200" DataContext="{Binding DictionaryViewModel}">
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal" Width="1112">
-                        <Grid Width="768" x:Name="DictionaryGrid" Background="Transparent">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="75"/>
-                                <RowDefinition Height="110"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <StackPanel x:Name="ContentPanel" Grid.Row="0">
-                                <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                    <SearchBox PlaceholderText="Search" FontSize="30"  BorderThickness="0" QueryChanged="SearchBox_OnQueryChanged"  VerticalAlignment="Top" Height="65"  Width="768"></SearchBox>
-                                </StackPanel>
+                    <Grid Width="1112" x:Name="DictionaryGrid" Background="Transparent">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="65" />
+                            <RowDefinition Height="120" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="776" />
+                            <ColumnDefinition Width="424" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel x:Name="ContentPanel" Grid.Row="0" Grid.Column="0">
+                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                <SearchBox PlaceholderText="Search" FontSize="30" BorderThickness="0"
+                                           QueryChanged="SearchBox_OnQueryChanged" VerticalAlignment="Top" Height="65"
+                                           Width="768" />
                             </StackPanel>
-                            <Grid Row="1">
-                                <GridView  ScrollViewer.HorizontalScrollMode="Disabled" ItemsSource="{Binding Path=AvailibleDictionarySearchInputTypes}" SelectedItem="{Binding SearchInputType, Mode=TwoWay}" SelectionMode="Single">
-                                    
-                                    <GridView.ItemTemplate>
-                                        <DataTemplate>
-                                                <Grid Style="{StaticResource SearchTypeSelection}">
-                                                    <TextBlock FontSize="38" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Converter={StaticResource SearchEnumConverter}}" Style="{StaticResource FlashCardTextBlockStyle}" />
-                                                </Grid>
-                                        </DataTemplate>
-                                    </GridView.ItemTemplate>
-                                </GridView>
-                            </Grid>
-                            <Grid Row="2">
-                                <ListBox x:Name="DictionaryResultsView" Style="{StaticResource SearchResultsListView}" BorderThickness="0" ItemsSource="{Binding SearchResults, Mode=TwoWay }" SelectedItem="{Binding SelectedSearchResult, Mode=TwoWay}" SelectionMode="Single">
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Vertical" Width="400">
-                                                <StackPanel>
-                                                    <TextBlock Style="{StaticResource DictionarySearchReslt}"  Text="{Binding Traditional }"  MaxHeight="40"  LineHeight="10" />
-                                                    <TextBlock Style="{StaticResource DictionarySearchReslt}" Text="{Binding Simplified}" MaxHeight="40" />
-                                                    <TextBlock Style="{StaticResource DictionarySearchReslt}" Text="{Binding AccentedPinyin}"  MaxHeight="40" />
-                                                    <TextBlock Style="{StaticResource DictionarySearchReslt}" Text="{Binding DefintionsString}" MaxHeight="40" />
-                                                </StackPanel>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
-                            </Grid>
+                        </StackPanel>
+                        <Grid Row="1" Column="0">
+                            <GridView BorderThickness="0" ScrollViewer.HorizontalScrollMode="Disabled"
+                                      ItemsSource="{Binding Path=AvailibleDictionarySearchInputTypes}"
+                                      SelectedItem="{Binding SearchInputType, Mode=TwoWay}" SelectionMode="Single">
+                                <GridView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Style="{StaticResource SearchTypeSelection}">
+                                            <TextBlock FontSize="38" VerticalAlignment="Center"
+                                                       HorizontalAlignment="Center"
+                                                       Text="{Binding Converter={StaticResource SearchEnumConverter}}"
+                                                       Style="{StaticResource FlashCardTextBlockStyle}" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </GridView.ItemTemplate>
+                            </GridView>
                         </Grid>
-                        <StackPanel Orientation="Vertical" Width="250" Margin="10" >
-                            <ListView  IsEnabled="{Binding SetListPopUpIsOpen}" x:Name="SetListBox" ItemsSource="{Binding FlashCardSetList, Mode=TwoWay}" SelectionChanged="DictionarySetListBox_OnSelectionChanged"  SelectionMode="Single" Height="428" Width="250" HorizontalAlignment="Left">
+                        <Grid Row="2" Column="0">
+                            <ListBox x:Name="DictionaryResultsView" Style="{StaticResource SearchResultsListBox}"
+                                     HorizontalAlignment="Left" BorderThickness="0"
+                                     ItemsSource="{Binding SearchResults, Mode=TwoWay }"
+                                     SelectedItem="{Binding SelectedSearchResult, Mode=TwoWay}" SelectionMode="Single">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Vertical" Width="400">
+                                            <StackPanel>
+                                                <TextBlock Style="{StaticResource DictionarySearchReslt}"
+                                                           Text="{Binding Traditional }" MaxHeight="40" LineHeight="10" />
+                                                <TextBlock Style="{StaticResource DictionarySearchReslt}"
+                                                           Text="{Binding Simplified}" MaxHeight="40" />
+                                                <TextBlock Style="{StaticResource DictionarySearchReslt}"
+                                                           Text="{Binding AccentedPinyin}" MaxHeight="40" />
+                                                <TextBlock Style="{StaticResource DictionarySearchReslt}"
+                                                           Text="{Binding DefintionsString}" MaxHeight="40" />
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </Grid>
+
+                        <StackPanel Grid.Column="1"  Width="292" Grid.Row="0" Grid.RowSpan="3">
+                            <TextBlock FontSize="40" Text="Add To Set" />
+                            <ListView IsEnabled="{Binding SetListPopUpIsOpen}" x:Name="SetListBox"
+                                      ItemsSource="{Binding FlashCardSetList, Mode=TwoWay}"
+                                      SelectionChanged="DictionarySetListBox_OnSelectionChanged" SelectionMode="Single"
+                                      HorizontalAlignment="Left">
                                 <ListView.ItemsPanel>
                                     <ItemsPanelTemplate>
-                                        <WrapGrid Orientation="Horizontal" MaximumRowsOrColumns="1"/>
+                                        <WrapGrid Orientation="Horizontal" Margin="0" MaximumRowsOrColumns="1" />
                                     </ItemsPanelTemplate>
                                 </ListView.ItemsPanel>
 
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <Grid Style="{StaticResource SearchTypeSelection}">
-                                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding SetName}" Style="{StaticResource FlashCardTextBlockStyle}"/>
+                                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                       Text="{Binding SetName}"
+                                                       Style="{StaticResource FlashCardTextBlockStyle}" />
                                         </Grid>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
                             </ListView>
                         </StackPanel>
-                    </StackPanel >
+                    </Grid>
+
                 </DataTemplate>
             </HubSection>
 
-            <HubSection Width="520" Header="Section 2"  DataContext="{Binding StudyFlashCardSetSettingsViewModel}">
+            <HubSection Width="520" Header="Section 2" DataContext="{Binding StudyFlashCardSetSettingsViewModel}">
                 <DataTemplate>
                     <StackPanel>
-                        <TextBlock Text="Show:" FontSize="36" ></TextBlock>
-                        <StackPanel  Orientation="Horizontal" VerticalAlignment="Top" Height="100">
-                            <ToggleButton Style="{StaticResource FlashCardButton}" Content="Pinyin" IsChecked="{Binding Settings.ShowPinyin, Mode=TwoWay }"/>
-                            <ToggleButton Style="{StaticResource FlashCardButton}"  Content="Simplified"  IsChecked="{Binding Settings.ShowSimplified, Mode=TwoWay }"/>
-                            <ToggleButton Style="{StaticResource FlashCardButton}"  Content="Definition"  IsChecked="{Binding Settings.ShowDefinition, Mode=TwoWay }"/>
-                            <ToggleButton Style="{StaticResource FlashCardButton}"  Content="Traditional"  IsChecked="{Binding Settings.ShowTraditional, Mode=TwoWay }"/>
+                        <TextBlock Text="Show:" FontSize="36" />
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Height="100">
+                            <ToggleButton Style="{StaticResource FlashCardToggleButton}" Content="Pinyin"
+                                          IsChecked="{Binding Settings.ShowPinyin, Mode=TwoWay }" />
+                            <ToggleButton Style="{StaticResource FlashCardToggleButton}" Content="Simplified"
+                                          Command="{Binding UpdateShowCommand }" IsChecked="{Binding Settings.ShowSimplified, Mode=TwoWay }" />
+                            <ToggleButton Style="{StaticResource FlashCardToggleButton}" Content="Traditional"
+                                            Command="{Binding UpdateShowCommand }"    IsChecked="{Binding Settings.ShowTraditional, Mode=TwoWay }" />
+                            <ToggleButton Style="{StaticResource FlashCardToggleButton}" Content="Definition"
+                                          IsChecked="{Binding Settings.ShowDefinition, Mode=TwoWay }" />
+                           
                         </StackPanel>
-                        <TextBlock Text="Show first:" FontSize="36" ></TextBlock>
+                        <TextBlock Text="Show first:" FontSize="36" />
 
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Height="100" Width="401">
-                            <ToggleButton Style="{StaticResource FlashCardButton}"  Content="Pinyin" IsChecked="{Binding PinyinFirst, Mode=TwoWay }"/>
-                            <ToggleButton Style="{StaticResource FlashCardButton}"  Content="Characters" Command="{Binding }" IsEnabled="{Binding CanShowCharacters, Mode=OneWay}" 
-                                      IsChecked="{Binding CharactersFirst, Mode=TwoWay }"/>
-                            <ToggleButton Style="{StaticResource FlashCardButton}"  Content="Definition" Command="{Binding }"  IsChecked="{Binding EnglishFirst, Mode=TwoWay }"/>
+                            <ToggleButton Style="{StaticResource FlashCardToggleButton}" Content="Pinyin"
+                                         Command="{Binding UpdateShowCommand }" IsChecked="{Binding PinyinFirst, Mode=TwoWay }" />
+                            <ToggleButton Style="{StaticResource FlashCardToggleButton}" Content="Characters"
+                                          Command="{Binding UpdateShowCommand }" IsEnabled="{Binding CanShowCharacters, Mode=OneWay}"
+                                          IsChecked="{Binding CharactersFirst, Mode=TwoWay }" />
+                            <ToggleButton Style="{StaticResource FlashCardToggleButton}" Content="Definition"
+                                          Command="{Binding UpdateShowCommand }" IsChecked="{Binding EnglishFirst, Mode=TwoWay }" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
-                            <TextBlock Text="{Binding SelectedSet.SetName}" FontSize="36" Width="200" TextTrimming="WordEllipsis" ></TextBlock>
-                            <Button  Command="{Binding NavigateToSetListCommand}" >Change Set</Button>
+                            <TextBlock Text="{Binding SelectedSet.SetName}" FontSize="36" Width="200"
+                                       TextTrimming="WordEllipsis" />
+                            <Button Command="{Binding NavigateToSetListCommand}">Change Set</Button>
                         </StackPanel>
                         <Button Command="{Binding StudySetCommand}">Study Set</Button>
                     </StackPanel>
@@ -148,26 +175,27 @@
                     <StackPanel Orientation="Vertical">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="130"/>
-                                <ColumnDefinition Width="5"/>
-                                <ColumnDefinition Width="130"/>
-                                <ColumnDefinition Width="5"/>
-                                <ColumnDefinition Width="130"/>
+                                <ColumnDefinition Width="130" />
+                                <ColumnDefinition Width="5" />
+                                <ColumnDefinition Width="130" />
+                                <ColumnDefinition Width="5" />
+                                <ColumnDefinition Width="130" />
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="270"/>
-                                <RowDefinition Height="95"/>
+                                <RowDefinition Height="270" />
+                                <RowDefinition Height="95" />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
-                            <Image Grid.ColumnSpan="5" Stretch="Fill" Margin="0,0,0,10"/>
-                            <Image Grid.Row="1" Stretch="Fill"/>
-                            <Image Grid.Row="1" Grid.Column="2" Stretch="Fill"/>
-                            <Image Grid.Row="1" Grid.Column="4" Stretch="Fill"/>
-                            <TextBlock Style="{StaticResource TitleTextBlockStyle}" Grid.Row="2" Grid.ColumnSpan="5" Margin="0,15,0,0"
-                                       Text="Description Text:"/>
-                            <TextBlock Style="{StaticResource BodyTextBlockStyle}" Grid.Row="3" Grid.ColumnSpan="5" 
-                                       Text="Lorem ipsum dolor sit amet, consectetuer ising elit, sed diam nonummy nibh uismod tincidunt ut laoreet suscipit lobortis ni ut wisi quipexerci quis consequat minim veniam, quis nostrud exerci tation ullam corper. Lorem ipsum dolor sit amet, consectetuer ising elit, sed diam nonummy nibh uismod tincidunt ut laoreet suscipit lobortis ni ut wisi quipexerci quis consequat minim veniam, quis nostrud exerci tation ullam corper."/>
+                            <Image Grid.ColumnSpan="5" Stretch="Fill" Margin="0,0,0,10" />
+                            <Image Grid.Row="1" Stretch="Fill" />
+                            <Image Grid.Row="1" Grid.Column="2" Stretch="Fill" />
+                            <Image Grid.Row="1" Grid.Column="4" Stretch="Fill" />
+                            <TextBlock Style="{StaticResource TitleTextBlockStyle}" Grid.Row="2" Grid.ColumnSpan="5"
+                                       Margin="0,15,0,0"
+                                       Text="Description Text:" />
+                            <TextBlock Style="{StaticResource BodyTextBlockStyle}" Grid.Row="3" Grid.ColumnSpan="5"
+                                       Text="Lorem ipsum dolor sit amet, consectetuer ising elit, sed diam nonummy nibh uismod tincidunt ut laoreet suscipit lobortis ni ut wisi quipexerci quis consequat minim veniam, quis nostrud exerci tation ullam corper. Lorem ipsum dolor sit amet, consectetuer ising elit, sed diam nonummy nibh uismod tincidunt ut laoreet suscipit lobortis ni ut wisi quipexerci quis consequat minim veniam, quis nostrud exerci tation ullam corper." />
                         </Grid>
                     </StackPanel>
                 </DataTemplate>

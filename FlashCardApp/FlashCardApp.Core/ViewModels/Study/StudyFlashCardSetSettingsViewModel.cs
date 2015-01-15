@@ -44,8 +44,7 @@ namespace FlashCardApp.Core.ViewModels.Study
             //   _token = _messenger.Subscribe<SelectedSetChangedMessage>();
             /*_showDefinition = true;
             _showPinyin = true;
-            _showTraditional = true;
-            _showSimplified = true;
+          
             _canShowCharacters = true;
          */
         }
@@ -79,11 +78,13 @@ namespace FlashCardApp.Core.ViewModels.Study
         }
 
 
-         private bool _canShowCharacters;
+        
         public bool CanShowCharacters
         {
-            get { return _canShowCharacters; }
-            private set { _canShowCharacters = value; RaisePropertyChanged(()=>CanShowCharacters);}
+            get {
+                return Settings.ShowSimplified || Settings.ShowTraditional;
+            }
+            
         }
 
         private int _maxCardsInStudySet;
@@ -144,7 +145,7 @@ namespace FlashCardApp.Core.ViewModels.Study
                 _englishFirst = value;
                 if (value)
                 {
-                    UpdateShowFirstSetting("English");
+                    UpdateShowFirstSetting("Definition");
                 }
                 RaisePropertyChanged(() => EnglishFirst);
             }
@@ -217,7 +218,20 @@ namespace FlashCardApp.Core.ViewModels.Study
             ShowViewModel<StudyFlashCardSetViewModel>();
 
         }
+        private MvxCommand _updateShowCommand;
+        public ICommand UpdateShowCommand
+        {
+            get
+            {
+                _updateShowCommand = _updateShowCommand ?? new Cirrious.MvvmCross.ViewModels.MvxCommand(UpdateShow);
+                return _updateShowCommand;
+            }
+        }
 
+        private void UpdateShow()
+       {
+           RaisePropertyChanged(()=> CanShowCharacters);
+       }
 
         #endregion 
 

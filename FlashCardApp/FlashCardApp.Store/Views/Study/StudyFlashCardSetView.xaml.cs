@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
+using Cirrious.MvvmCross.WindowsStore.Views;
 using FlashCardApp.Core.ViewModels.Study;
 using FlashCardApp.Store.Common;
 
@@ -20,11 +21,16 @@ namespace FlashCardApp.Store.Views
     /// <summary>
     /// A basic page that provides characteristics common to most applications.
     /// </summary>
-    public sealed partial class StudyFlashCardSetView : FlashCardApp.Store.Common.LayoutAwarePage
+    public sealed partial class StudyFlashCardSetView : MvxStorePage
     {
         public StudyFlashCardSetView()
         {
             this.InitializeComponent();
+        }
+
+        public StudyFlashCardSetViewModel viewModel
+        {
+            get { return (StudyFlashCardSetViewModel)base.ViewModel; }
         }
 
         #region properties
@@ -35,28 +41,7 @@ namespace FlashCardApp.Store.Views
 
         #endregion
 
-        /// <summary>
-        /// Populates the page with content passed during navigation.  Any saved state is also
-        /// provided when recreating a page from a prior session.
-        /// </summary>
-        /// <param name="navigationParameter">The parameter value passed to
-        /// <see cref="Frame.Navigate(Type, Object)"/> when this page was initially requested.
-        /// </param>
-        /// <param name="pageState">A dictionary of state preserved by this page during an earlier
-        /// session.  This will be null the first time a page is visited.</param>
-        protected override void LoadState(Object navigationParameter, Dictionary<String, Object> pageState)
-        {
-        }
-
-        /// <summary>
-        /// Preserves state associated with this page in case the application is suspended or the
-        /// page is discarded from the navigation cache.  Values must conform to the serialization
-        /// requirements of <see cref="SuspensionManager.SessionState"/>.
-        /// </summary>
-        /// <param name="pageState">An empty dictionary to be populated with serializable state.</param>
-        protected override void SaveState(Dictionary<String, Object> pageState)
-        {
-        }
+       
 
         private void NextCardCorrect()
         {
@@ -83,27 +68,27 @@ namespace FlashCardApp.Store.Views
             ((StudyFlashCardSetViewModel)ViewModel).FlipCardRightCommand.Execute(new object());
         }
 
-        private void TopButton_OnTapped(object sender, TappedRoutedEventArgs e)
+        private void PreviousCardTap(object sender, TappedRoutedEventArgs e)
         {
            PreviousCard();
         }
 
-        private void LeftButton_OnTapped(object sender, TappedRoutedEventArgs e)
+        private void FlipCardLeftTap(object sender, TappedRoutedEventArgs e)
         {
             FlipCardLeft();
         }
 
-        private void RightButton_OnTapped(object sender, TappedRoutedEventArgs e)
+        private void FlipCardRightTap(object sender, TappedRoutedEventArgs e)
         {
             FlipCardRight();
         }
         
-        private void BottomLeft_OnTapped(object sender, TappedRoutedEventArgs e)
+        private void NextCardIncorrectTap(object sender, TappedRoutedEventArgs e)
         {
             NextCardIncorrect();
         }
 
-        private void BottomRight_OnTapped(object sender, TappedRoutedEventArgs e)
+        private void NextCardCorrectTap(object sender, TappedRoutedEventArgs e)
         {
             NextCardCorrect();
         }
@@ -149,6 +134,11 @@ namespace FlashCardApp.Store.Views
                 }
             }
 
+        }
+
+        private void SkipCardTap(object sender, TappedRoutedEventArgs e)
+        {
+            ((StudyFlashCardSetViewModel)ViewModel).CorrectNextCardCommand.Execute(null);//todo add skip card command
         }
     }
 }

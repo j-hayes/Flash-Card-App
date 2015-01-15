@@ -30,6 +30,7 @@ namespace FlashCardApp.Core.ViewModels.Study
             if (FlashCardSets.Count > 0)
             {
                 SelectedSet = FlashCardSets[0];
+                
             }
         }
 
@@ -101,9 +102,13 @@ namespace FlashCardApp.Core.ViewModels.Study
             }
         }
 
-       
+        public ICommand GoBackCommand {get {return new MvxCommand(GoBack);} }
 
-       
+        public void GoBack()
+        {
+            Close(this);
+        }
+
 
         private Cirrious.MvvmCross.ViewModels.MvxCommand _addSetCommand;
         public ICommand AddSetCommand

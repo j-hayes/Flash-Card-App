@@ -102,6 +102,10 @@ namespace FlashCardApp.Core.ViewModels
             }
         }
 
+      
+
+      
+
         
         private void NavigateToStudyFlashCardSetSettings()
         {

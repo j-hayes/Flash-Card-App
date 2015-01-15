@@ -15,17 +15,10 @@
     <!-- Non-brush values that vary across themes -->
 
     <ResourceDictionary.ThemeDictionaries>
-     
- 
-
         <ResourceDictionary x:Key="Default">
             <x:String x:Key="BackButtonGlyph">&#xE071;</x:String>
             <x:String x:Key="BackButtonSnappedGlyph">&#xE0BA;</x:String>
             <SolidColorBrush x:Key="TextBoxPlaceholderTextThemeBrush" Color="#CCCCCC"/>
-
-
-
-
 </ResourceDictionary>
       <ResourceDictionary x:Key="HighContrast">
             <x:String x:Key="BackButtonGlyph">&#xE071;</x:String>
@@ -33,8 +26,6 @@
    
             </ResourceDictionary>
     </ResourceDictionary.ThemeDictionaries>
-
-
     <Color x:Key="FlashCardPrimary">#1244A0</Color>
     <Color x:Key="FlashCardPrimaryDark">#013EAC</Color>
     <Color x:Key="FlashCardPrimaryDark80%">#0841A9</Color>
@@ -54,6 +45,9 @@
     <Color x:Key="FlashCardBackground">#E6E6E6</Color>
 
 
+        <SolidColorBrush x:Key="FlashCardPageBackgroundThemeBrush" Color="{StaticResource FlashCardBackground}" />
+        <SolidColorBrush x:Key="FlashCardPrimaryThemeBrush" Color="{StaticResource FlashCardPrimary}" />
+        <SolidColorBrush x:Key="FlashCardAccentThemeBrush" Color="{StaticResource FlashCardAccent}" />
         <SolidColorBrush x:Key="AppBarBackgroundThemeBrush" Color="{StaticResource FlashCardBackground}" />
         <SolidColorBrush x:Key="AppBarBorderThemeBrush" Color="{StaticResource FlashCardSecondary}" />
         <SolidColorBrush x:Key="ApplicationHeaderForegroundThemeBrush" Color="{StaticResource FlashCardPrimary}" />
@@ -156,18 +150,13 @@
     <SolidColorBrush x:Key="SearchBoxDisabledTextThemeBrush" Color="#66FFFFFF" />
 
 
-       
-      
 
 
 
 
 
-        <SolidColorBrush x:Key="BackButtonDisabledForegroundThemeBrush" Color="{StaticResource FlashCardDisabled}" />
-        <SolidColorBrush x:Key="BackButtonForegroundThemeBrush" Color="{StaticResource FlashCardBackground}" />
-        <SolidColorBrush x:Key="BackButtonPointerOverForegroundThemeBrush" Color="{StaticResource FlashCardPrimary}" />
-        <SolidColorBrush x:Key="BackButtonPointerOverBackgroundThemeBrush" Color="{StaticResource FlashCardBackground}" />
-        <SolidColorBrush x:Key="ComboBoxItemSelectedBackgroundThemeBrush" Color="{StaticResource FlashCardAccentDark}"/>
+
+    <SolidColorBrush x:Key="ComboBoxItemSelectedBackgroundThemeBrush" Color="{StaticResource FlashCardAccentDark}"/>
         <SolidColorBrush x:Key="ComboBoxItemSelectedPointerOverBackgroundThemeBrush" Color="{StaticResource FlashCardAccentDark}" />
         <SolidColorBrush x:Key="ComboBoxSelectedBackgroundThemeBrush" Color="{StaticResource FlashCardAccentDark}" />
         <SolidColorBrush x:Key="ComboBoxSelectedPointerOverBackgroundThemeBrush" Color="{StaticResource FlashCardAccent}" />
@@ -244,15 +233,57 @@
     <!-- Custom Created Styles -->
 
 
-    <Style x:Key="FlashCardButton" TargetType="ToggleButton">
+
+
+
+    <SolidColorBrush x:Key="ToggleButtonBackgroundThemeBrush" Color="White" />
+    <SolidColorBrush x:Key="ToggleButtonBorderThemeBrush" Color="{StaticResource FlashCardPrimary}" />
+    <SolidColorBrush x:Key="ToggleButtonForegroundThemeBrush" Color="{StaticResource FlashCardPrimary}" />
+    <SolidColorBrush x:Key="ToggleButtonPointerOverBackgroundThemeBrush" Color="{StaticResource FlashCardPrimaryDark80%}" />
+    <SolidColorBrush x:Key="ToggleButtonPointerOverForegroundThemeBrush" Color="white" />
+    
+    <SolidColorBrush x:Key="ToggleButtonPressedBackgroundThemeBrush" Color="{StaticResource FlashCardPrimary}" />
+    <SolidColorBrush x:Key="ToggleButtonPressedForegroundThemeBrush" Color="{StaticResource FlashCardPrimary}" />
+
+    <SolidColorBrush x:Key="ToggleButtonCheckedBackgroundThemeBrush" Color="{StaticResource FlashCardPrimary}" />
+    <SolidColorBrush x:Key="ToggleButtonCheckedBorderThemeBrush" Color="Transparent" />
+    <SolidColorBrush x:Key="ToggleButtonCheckedDisabledBackgroundThemeBrush" Color="#66000000" />
+    <SolidColorBrush x:Key="ToggleButtonCheckedDisabledForegroundThemeBrush" Color="#FFFFFFFF" />
+    <SolidColorBrush x:Key="ToggleButtonCheckedForegroundThemeBrush" Color="#FFFFFFFF" />
+  
+    <SolidColorBrush x:Key="ToggleButtonCheckedPointerOverBackgroundThemeBrush" Color="{StaticResource FlashCardPrimaryDark80%}" />
+    <SolidColorBrush x:Key="ToggleButtonCheckedPointerOverForegroundThemeBrush" Color="white" />
+    <SolidColorBrush x:Key="ToggleButtonCheckedPointerOverBorderThemeBrush" Color="{StaticResource FlashCardPrimaryDark80%}" />
+    
+    <SolidColorBrush x:Key="ToggleButtonCheckedPressedBackgroundThemeBrush" Color="Transparent" />
+    <SolidColorBrush x:Key="ToggleButtonCheckedPressedBorderThemeBrush" Color="#FF000000" />
+    <SolidColorBrush x:Key="ToggleButtonCheckedPressedForegroundThemeBrush" Color="#FF000000" />
+  
+    <SolidColorBrush x:Key="ToggleButtonDisabledBorderThemeBrush" Color="#66000000" />
+    <SolidColorBrush x:Key="ToggleButtonDisabledForegroundThemeBrush" Color="#66000000" />
+
+
+
+    <Style x:Key="FlashCardToggleButton" TargetType="ToggleButton">
+        
+        <Setter Property="Width" Value="100"></Setter>
+        <Setter Property="Height" Value="100"></Setter>
+    </Style>
+
+    <Style x:Key="FlashCardButton" TargetType="Button">
         <Setter Property="Background" Value="{StaticResource FlashCardPrimary}"></Setter>
         <Setter Property="Foreground" Value="{StaticResource FlashCardBackground}"></Setter>
         <Setter Property="Width" Value="100"></Setter>
         <Setter Property="Height" Value="100"></Setter>
-       
     </Style>
 
-    <Style x:Key="SearchResultsListView" TargetType="ListBox">
+
+    <Style x:Key="FlashCardSetListView" TargetType="ListView">
+        <Setter Property="Background" Value="{StaticResource FlashCardPrimary}"></Setter>
+        <Setter Property="Width" Value="250"></Setter>
+    </Style>
+
+    <Style x:Key="SearchResultsListBox" TargetType="ListBox">
         <Setter Property="Background" Value="{StaticResource FlashCardPrimary}"></Setter>
         <Setter Property="Width" Value="768"></Setter>
         <Setter Property="MinHeight" Value="550"></Setter>
@@ -264,10 +295,18 @@
        <Setter Property="Width" Value="250"></Setter>
        <Setter Property="Height" Value="100"></Setter>
         <Setter Property="Margin" Value="0,0,0,0"></Setter>
+  
       
     </Style>
 
-   
+
+    <Style x:Key="FlashCardSetsPageStackPanel" TargetType="StackPanel">
+        <Setter Property="Background" Value="{StaticResource FlashCardPrimary}"></Setter>
+     
+
+
+    </Style>
+
     <Style x:Key="DictionarySearchStyle" TargetType="SearchBox">
         <Setter Property="Background" Value="{StaticResource FlashCardPrimary}"></Setter>
         <Setter Property="Foreground" Value="{StaticResource FlashCardBackground}"></Setter>
@@ -284,13 +323,18 @@
         <Setter Property="FontWeight" Value="Light"/>
         <Setter Property="LineHeight" Value="40"/>
         <Setter Property="Foreground" Value="{StaticResource FlashCardBackground}"></Setter>
-        <Setter Property="RenderTransform">
-            <Setter.Value>
-                <TranslateTransform X="-2" Y="8"/>
-            </Setter.Value>
-        </Setter>
-    </Style>
     
+    </Style>
+
+    <Style x:Key="FlashCardListCardTextBlock" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="30"/>
+        <Setter Property="TextWrapping" Value="NoWrap"></Setter>
+        <Setter Property="TextTrimming" Value="WordEllipsis"></Setter>
+        <Setter Property="FontWeight" Value="Light"/>
+        <Setter Property="Foreground" Value="{StaticResource FlashCardBackground}"></Setter>
+
+    </Style>
+
     <Style x:Key="FlashCardHeaderTextStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
         <Setter Property="FontSize" Value="56"/>
         <Setter Property="FontWeight" Value="Light"/>
@@ -1697,11 +1741,21 @@
         BackButtonStyle is used to style a Button for use in the title area of a page.  Margins appropriate for
         the conventional page layout are included as part of the style.
     -->
+
+    <SolidColorBrush x:Key="BackButtonDisabledForegroundThemeBrush" Color="{StaticResource FlashCardDisabled}" />
+    <SolidColorBrush x:Key="BackButtonBackgroundThemeBrush" Color="Transparent" />
+    <SolidColorBrush x:Key="BackButtonForegroundThemeBrush" Color="{StaticResource FlashCardPrimary}" />
+    <SolidColorBrush x:Key="BackButtonPointerOverForegroundThemeBrush" Color="{StaticResource FlashCardPrimary}" />
+    <SolidColorBrush x:Key="BackButtonPointerOverBackgroundThemeBrush" Color="Gray" />
+    <SolidColorBrush x:Key="BackButtonPressedBackgroundThemeBrush" Color="{StaticResource FlashCardPrimary}" />
+    <SolidColorBrush x:Key="BackButtonPressedForegroundThemeBrush" Color="White" />
+
     <Style x:Key="BackButtonStyle" TargetType="Button">
         <Setter Property="MinWidth" Value="0"/>
         <Setter Property="Width" Value="48"/>
         <Setter Property="Height" Value="48"/>
         <Setter Property="Margin" Value="36,0,36,36"/>
+       
         <Setter Property="VerticalAlignment" Value="Bottom"/>
         <Setter Property="FontFamily" Value="Segoe UI Symbol"/>
         <Setter Property="FontWeight" Value="Normal"/>
@@ -1714,9 +1768,9 @@
                 <ControlTemplate TargetType="Button">
                     <Grid x:Name="RootGrid">
                         <Grid Margin="-1,-16,0,0">
-                            <TextBlock x:Name="BackgroundGlyph" Text="&#xE0A8;" Foreground="{StaticResource BackButtonBackgroundThemeBrush}"/>
-                            <TextBlock x:Name="NormalGlyph" Text="{StaticResource BackButtonGlyph}" Foreground="{StaticResource BackButtonForegroundThemeBrush}"/>
-                            <TextBlock x:Name="ArrowGlyph" Text="&#xE0A6;" Foreground="{StaticResource BackButtonPressedForegroundThemeBrush}" Opacity="0"/>
+                            <TextBlock x:Name="BackgroundGlyph" Text="&#xE0A8;" Foreground="Transparent"/>
+                            <TextBlock x:Name="NormalGlyph" Text="{StaticResource BackButtonGlyph}" Foreground="{StaticResource FlashCardPrimaryThemeBrush}"/>
+                            <TextBlock x:Name="ArrowGlyph" Text="&#xE0A6;" Foreground="{StaticResource FlashCardPrimaryThemeBrush}" Opacity="0"/>
                         </Grid>
                         <Rectangle
                             x:Name="FocusVisualWhite"
@@ -1752,6 +1806,13 @@
                                     <Storyboard>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BackgroundGlyph" Storyboard.TargetProperty="Foreground">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource BackButtonForegroundThemeBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="NormalGlyph" Storyboard.TargetProperty="Foreground">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource BackButtonPressedForegroundThemeBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ArrowGlyph" Storyboard.TargetProperty="Foreground">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource BackButtonPressedForegroundThemeBrush}"/>
                                         </ObjectAnimationUsingKeyFrames>
                                         <DoubleAnimation
                                             Storyboard.TargetName="ArrowGlyph"
@@ -1798,6 +1859,10 @@
         </Setter>
     </Style>
 
+    <Style x:Name="FlashCardBackButton" TargetType="Button" BasedOn="{StaticResource BackButtonStyle}">
+       <!-- <Setter Property="Foreground" Value="{StaticResource FlashCardPrimary}"></Setter>-->
+    </Style>
+    
     <!--
         PortraitBackButtonStyle is used to style a Button for use in the title area of a portrait page.  Margins appropriate
         for the conventional page layout are included as part of the style.

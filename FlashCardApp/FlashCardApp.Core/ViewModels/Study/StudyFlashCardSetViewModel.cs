@@ -247,6 +247,27 @@ namespace FlashCardApp.Core.ViewModels.Study
             }
         }
 
+        public ICommand SkipCardCommand
+        {
+            get
+            {
+                return new MvxCommand(MoveToNextCard);
+            }
+        }
+
+        private void MoveToNextCard()
+        {
+            if (CurrentCardIndex < SetCards.Count - 1)
+            {
+                CurrentCardIndex++;
+                CurrentCard = SetCards[CurrentCardIndex];
+                CurrentShowingSideIndex = DefaultSideIndex;
+            }
+            else
+            {
+                Close(this);//Todo:show set statistics
+            }
+        }
         private void MoveToNextCard(bool correct)
         {
 
@@ -259,16 +280,7 @@ namespace FlashCardApp.Core.ViewModels.Study
                 _flashCardManager.MarkIncorrect(SetCards[CurrentCardIndex]);
             }
 
-            if (CurrentCardIndex < SetCards.Count -1)
-            {
-                CurrentCardIndex++;
-                CurrentCard = SetCards[CurrentCardIndex];
-                CurrentShowingSideIndex = DefaultSideIndex;
-            }
-            else
-            {
-                Close(this);//Todo:show set statistics
-            }
+            MoveToNextCard();
         }
 
         public ICommand IncorrectNextCardCommand
