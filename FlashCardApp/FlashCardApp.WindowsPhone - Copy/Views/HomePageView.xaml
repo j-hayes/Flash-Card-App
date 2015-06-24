@@ -1,0 +1,183 @@
+﻿<views:MvxPhonePage
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="clr-namespace:Cirrious.MvvmCross.WindowsPhone.Views;assembly=Cirrious.MvvmCross.WindowsPhone"
+    xmlns:valueConverters="clr-namespace:FlashCardApp.WindowsPhone.ValueConverters"
+    xmlns:converters="clr-namespace:Cirrious.CrossCore.WindowsPhone.Converters;assembly=Cirrious.CrossCore.WindowsPhone"
+    xmlns:Primitives="clr-namespace:Microsoft.Phone.Controls.Primitives;assembly=Microsoft.Phone"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    x:Class="FlashCardApp.WindowsPhone.Views.HomePageView"
+    mc:Ignorable="d"
+    DataContext="{Binding viewModel, RelativeSource={RelativeSource Self}}"
+    SupportedOrientations="Portrait"  Orientation="Portrait"
+    shell:SystemTray.IsVisible="False">
+
+    <!--LayoutRoot contains the root grid where all other page content is placed-->
+    <views:MvxPhonePage.Resources>
+        <valueConverters:SearchEnumConverter x:Key="SearchEnumConverter" />
+        <ControlTemplate x:Key="PanoramaControlTemplate1" TargetType="phone:Panorama">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Primitives:PanningBackgroundLayer x:Name="BackgroundLayer" Grid.RowSpan="2" HorizontalAlignment="Left">
+                    <Border x:Name="background" Background="{TemplateBinding Background}" />
+                </Primitives:PanningBackgroundLayer>
+
+                <Primitives:PanningTitleLayer x:Name="TitleLayer" Grid.Row="0" HorizontalAlignment="Left"  Margin="10,-3,0,0"
+    				Content="{TemplateBinding Title}" ContentTemplate="{TemplateBinding TitleTemplate}"
+    				FontSize="50" FontFamily="{StaticResource PhoneFontFamilyLight}" CharacterSpacing="-35" />
+
+                <Primitives:PanningLayer x:Name="ItemsLayer" Grid.Row="1" HorizontalAlignment="Left">
+                    <ItemsPresenter x:Name="items"/>
+                </Primitives:PanningLayer>
+
+            </Grid>
+        </ControlTemplate>
+    </views:MvxPhonePage.Resources>
+    <views:MvxPhonePage.FontFamily>
+        <StaticResource ResourceKey="PhoneFontFamilyNormal"/>
+    </views:MvxPhonePage.FontFamily>
+    <views:MvxPhonePage.FontSize>
+        <StaticResource ResourceKey="PhoneFontSizeNormal"/>
+    </views:MvxPhonePage.FontSize>
+    <views:MvxPhonePage.Foreground>
+        <StaticResource ResourceKey="PhoneForegroundBrush"/>
+    </views:MvxPhonePage.Foreground>
+    <Grid x:Name="LayoutRoot">
+
+
+        <phone:Panorama Title="闪卡" Template="{StaticResource PanoramaControlTemplate1}">
+            <!--Panorama item one-->
+            <phone:PanoramaItem Header="Dictionary" DataContext="{Binding DictionaryViewModel}" Height="692">
+                <Grid x:Name="DictionaryGrid" Background="Transparent">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="75"/>
+                        <RowDefinition Height="75"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+                        <ToggleButton Command="{Binding SetEnglishAsTypeCommand}" IsChecked="{Binding SearchTypeIsEnglish, Mode=TwoWay}" FontSize="12" Height="60" Width="140" Content="English" />
+                        <ToggleButton  Command="{Binding SetPinyinAsTypeCommand}" IsChecked="{Binding SearchTypeIsPinyin, Mode=TwoWay}" FontSize="12"  Height="60" Width="140" Content="Pinyin" />
+                        <ToggleButton  Command="{Binding SetChineseAsTypeCommand}" IsChecked="{Binding SearchTypeIsChinese, Mode=TwoWay}" FontSize="12"  Height="60" Width="140" Content="Characters" />
+
+                    </StackPanel>
+
+                    <!--ContentPanel - place additional content here-->
+                    <StackPanel x:Name="ContentPanel" Grid.Row="1">
+                        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="9,0,0,0">
+                            <TextBox IsReadOnly="False" x:Name="FilterTextBox" Width="390" TextChanged="FilterTextBox_OnTextChanged"  VerticalAlignment="Top" Height="65" Padding="12,0,0,10"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="2">
+                        <ListBox Grid.Row="0" ItemsSource="{Binding AvailibleDictionarySearchInputTypes}"  SelectedItem="{Binding SearchInputType, Mode=TwoWay}" Padding="12,0,0,10" SelectionMode="Single"  Margin="0,10,0,0">
+                            <ListBox.Resources>
+                                <valueConverters:SearchEnumConverter x:Name="SearchEnumConverter" />
+                            </ListBox.Resources>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <StackPanel>
+                                            <TextBlock Width="120" Text="{Binding Converter={StaticResource SearchEnumConverter}}"  MaxHeight="40" Foreground="White" LineHeight="10" Padding="12,0,0,0"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
+
+                    <Grid Grid.Row="3">
+                        <ListBox x:Name="resultsView" ItemsSource="{Binding SearchResults, Mode=TwoWay}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                        <Grid Margin="5">
+                                        <StackPanel Orientation="Vertical" Width="400">
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="Tap">
+                                                    <i:InvokeCommandAction Command="{Binding Command}" CommandParameter="{Binding Item}"/>
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        <TextBlock Text="{Binding Item.Traditional}"  MaxHeight="40"/>
+                                        <TextBlock Text="{Binding Item.Simplified}" MaxHeight="40" />
+                                        <TextBlock Text="{Binding Item.AccentedPinyin}"  MaxHeight="40" />
+                                        <TextBlock Text="{Binding Item.DefintionsString}" MaxHeight="40"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Grid>
+
+                    <Popup Grid.Row="1" Grid.RowSpan="2" IsOpen="{Binding SetListPopUpIsOpen}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0*"/>
+                                <RowDefinition Height="0*"/>
+                            </Grid.RowDefinitions>
+                            <ListBox x:Name="SetListBox" ItemsSource="{Binding FlashCardSetList, Mode=TwoWay}"  SelectionMode="Single" Grid.RowSpan="2">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Vertical" Width="400">
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding SetName}"  MaxHeight="40" Foreground="White" LineHeight="10" Grid.Row="2"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </Grid>
+                    </Popup>
+                </Grid>
+            </phone:PanoramaItem>
+            <!--Panorama item two-->
+            <phone:PanoramaItem Header="Study">
+                <StackPanel Grid.Row="1">
+                    <TextBlock Text="Show:" FontSize="36" />
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                        <ToggleButton Content="Pinyin" IsChecked="{Binding StudyFlashCardSetSettingsViewModel.Settings.ShowPinyin, Mode=TwoWay}"/>
+                        <ToggleButton Content="Traditional"  IsChecked="{Binding StudyFlashCardSetSettingsViewModel.Settings.ShowTraditional, Mode=TwoWay}"/>
+                        <ToggleButton Content="Simplified"  IsChecked="{Binding StudyFlashCardSetSettingsViewModel.Settings.ShowSimplified, Mode=TwoWay}"/>
+                        <ToggleButton Content="Definition"  IsChecked="{Binding StudyFlashCardSetSettingsViewModel.Settings.ShowDefinition, Mode=TwoWay}"/>
+                    </StackPanel>
+                    <TextBlock Text="Show first:" FontSize="36" />
+
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                        <ToggleButton Content="Pinyin" IsChecked="{Binding StudyFlashCardSetSettingsViewModel.PinyinFirst, Mode=TwoWay}"/>
+                        <ToggleButton Content="Characters" Command="{Binding ''}" IsEnabled="{Binding StudyFlashCardSetSettingsViewModel.CanShowCharacters, Mode=OneWay}" 
+							IsChecked="{Binding StudyFlashCardSetSettingsViewModel.CharactersFirst, Mode=TwoWay}"/>
+                        <ToggleButton Content="Definition" Command="{Binding ''}"  IsChecked="{Binding StudyFlashCardSetSettingsViewModel.EnglishFirst, Mode=TwoWay}"/>
+                    </StackPanel>
+                    <TextBlock Text="Tap Set To Study"></TextBlock>
+                    <ListBox Height="300" ItemsSource="{Binding StudyFlashCardSetSettingsViewModel.SetList, Mode=TwoWay}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="5">
+                                    <StackPanel Orientation="Vertical" Width="400">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="Tap">
+                                                <i:InvokeCommandAction Command="{Binding Command}" CommandParameter="{Binding Item}"/>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                        <TextBlock Text="{Binding Item.SetName}" FontSize="30" MaxHeight="40"/>
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
+            </phone:PanoramaItem>
+            <!--Panorama item Three-->
+            <phone:PanoramaItem Header="Random">
+                <Grid/>
+            </phone:PanoramaItem>
+        </phone:Panorama>
+    </Grid>
+</views:MvxPhonePage>
