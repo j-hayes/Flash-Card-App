@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.ServiceModel.Security;
-using System.Text;
 using System.Windows.Input;
-using System.Xml.Linq;
 using Cirrious.MvvmCross.Plugins.Messenger;
 using Cirrious.MvvmCross.ViewModels;
 using FlashCardApp.Core.Entities;
 using FlashCardApp.Core.FlashCardService;
 using FlashCardApp.Core.Managers;
-using FlashCardApp.Core.Messages;
-using FlashCardApp.Core.ViewModels.Dictionary;
 
 namespace FlashCardApp.Core.ViewModels.Study
 {

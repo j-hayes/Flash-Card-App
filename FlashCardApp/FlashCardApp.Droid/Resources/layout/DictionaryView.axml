@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mvx="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp">
+        <Button
+            android:id="@+id/btn_english"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="English"
+            mvx:MvxBind="Click SetEnglishAsTypeCommand" />
+        <Button
+            android:id="@+id/btn_english"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Pinyin"
+            mvx:MvxBind="Click SetPinyinAsTypeCommand" />
+        <Button
+            android:id="@+id/btn_english"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Chinese"
+            mvx:MvxBind="Click SetChineseAsTypeCommand" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="500dp">
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="Search"
+            android:textSize="40dp"
+            mvx:MvxBind="Text Filter" />
+        <Mvx.MvxListView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:id="@+id/searchresults"
+            mvx:MvxBind="ItemsSource SearchResults"
+            mvx:MvxItemTemplate="@layout/search_result_line"
+            android:layout_weight="1"
+            android:dividerHeight="1dp" />
+    </LinearLayout>
+</LinearLayout>

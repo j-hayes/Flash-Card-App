@@ -1,17 +1,17 @@
-﻿using System.Collections.Generic;
-using System.Threading;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Cirrious.MvvmCross.ViewModels;
 using FlashCardApp.Core.Entities;
 using FlashCardApp.Core.Managers;
-using FlashCardApp.Core.ViewModels;
-using System.Linq;
+using FlashCardApp.Core.Services;
 using FlashCardApp.Core.ViewModels.Study;
-using System.Windows;
 
 namespace FlashCardApp.Core.ViewModels.Dictionary
 {
-    public enum DictionarySearchInputType : int
+    public enum DictionarySearchInputType
     {
         Chinese = 0,
         English = 1,
@@ -22,14 +22,28 @@ namespace FlashCardApp.Core.ViewModels.Dictionary
     {
         private readonly IDictionarySearchManager _dictionarySearchManager;
         private readonly IFlashCardManager _flashCardManager;
+        private readonly IStudySettingsService _studySettingsService;
+        private MvxCommand _applySearchCommand;
+        private string _filter = "";
+        private List<FlashCardSet> _flashCardList;
+        private DictionarySearchInputType _searchInputType;
+        private List<WithCommand<SearchResult>> _searchResults = new List<WithCommand<SearchResult>>();
+        private string _searchTerm = "";
+        private FlashCard _selectedCard;
+        private SearchResult _selectedSearchResult;
+        private FlashCardSet _selectedSet;
+        private bool _setListPopUpIsOpen;
+        private ICommand _setEnglishAsTypeCommand;
 
-        public DictionaryViewModel(IDictionarySearchManager dictionarySearchManager, IFlashCardManager flashCardManager)
+        public DictionaryViewModel(IDictionarySearchManager dictionarySearchManager, IFlashCardManager flashCardManager, IStudySettingsService studySettingsService)
         {
             _dictionarySearchManager = dictionarySearchManager;
             _flashCardManager = flashCardManager;
+            _studySettingsService = studySettingsService;
 
-            SearchInputType = DictionarySearchInputType.English;
-            AvailibleDictionarySearchInputTypes = new DictionarySearchInputType[]
+            _searchInputType = DictionarySearchInputType.English;
+            SearchTypeIsEnglish = true;
+            AvailibleDictionarySearchInputTypes = new[]
             {
                 DictionarySearchInputType.English,
                 DictionarySearchInputType.Chinese,
@@ -50,31 +64,16 @@ namespace FlashCardApp.Core.ViewModels.Dictionary
             }
         }
 
-        private List<SearchResult> _searchResults = new List<SearchResult>();
-
-        public List<SearchResult> SearchResults
+        public List<WithCommand<SearchResult>> SearchResults
         {
             get { return _searchResults; }
             set
             {
                 _searchResults = value;
                 RaisePropertyChanged(() => SearchResults);
+             
             }
         }
-
-        private string _searchTerm = "";
-
-        public string SearchTerm
-        {
-            get { return _searchTerm; }
-            set
-            {
-                _searchTerm = value;
-                RaisePropertyChanged(() => SearchTerm);
-            }
-        }
-
-        private string _filter = "";
 
         public string Filter
         {
@@ -82,14 +81,15 @@ namespace FlashCardApp.Core.ViewModels.Dictionary
             set
             {
                 _filter = value;
-                RaisePropertyChanged(() => Filter);
-                ThreadPool.QueueUserWorkItem(DoApplyFilter, Filter);
+                  RaisePropertyChanged(() => Filter);
+                DoApplyFilter(_filter);
+           
+              
                 //todo: use the expanded search functionarlity and add them to the searchresult list
             }
         }
 
         //todo: this isn't being used properly in the view because its not on a button click..
-        private Cirrious.MvvmCross.ViewModels.MvxCommand _applySearchCommand;
         /* public System.Windows.Input.ICommand ApplyFilterCommand
         {
             get
@@ -100,8 +100,6 @@ namespace FlashCardApp.Core.ViewModels.Dictionary
         }*/
 
         public DictionarySearchInputType[] AvailibleDictionarySearchInputTypes { get; private set; }
-
-        private DictionarySearchInputType _searchInputType;
 
         public DictionarySearchInputType SearchInputType
         {
@@ -114,30 +112,6 @@ namespace FlashCardApp.Core.ViewModels.Dictionary
             }
         }
 
-        private void DoApplyFilter(object obj)
-        {
-            string filterString = obj.ToString();
-            List<SearchResult> results;
-            if (SearchInputType == DictionarySearchInputType.English)
-            {
-                results = _dictionarySearchManager.SearchByEnglish(Filter);
-            }
-            else if (SearchInputType == DictionarySearchInputType.Chinese)
-            {
-                results = _dictionarySearchManager.SearchByChinese(Filter);
-            }
-            else
-            {
-                results = _dictionarySearchManager.SearchByPinYin(Filter);
-            }
-            if (results != null & filterString == Filter)
-            {
-                SearchResults = results;
-            }
-        }
-
-        private List<FlashCardSet> _flashCardList;
-
         public List<FlashCardSet> FlashCardSetList
         {
             get { return _flashCardList; }
@@ -148,8 +122,6 @@ namespace FlashCardApp.Core.ViewModels.Dictionary
             }
         }
 
-        private SearchResult _selectedSearchResult;
-
         public SearchResult SelectedSearchResult
         {
             get { return _selectedSearchResult; }
@@ -159,7 +131,7 @@ namespace FlashCardApp.Core.ViewModels.Dictionary
                 RaisePropertyChanged(() => SelectedSearchResult);
                 if (value != null)
                 {
-                    SelectedCard = new FlashCard()
+                    SelectedCard = new FlashCard
                     {
                         Definition = SelectedSearchResult.DefintionsString,
                         Pinyin = SelectedSearchResult.Pinyin,
@@ -171,8 +143,6 @@ namespace FlashCardApp.Core.ViewModels.Dictionary
             }
         }
 
-        private FlashCard _selectedCard;
-
         public FlashCard SelectedCard
         {
             get { return _selectedCard; }
@@ -182,9 +152,6 @@ namespace FlashCardApp.Core.ViewModels.Dictionary
                 RaisePropertyChanged(() => SelectedCard);
             }
         }
-
-        private FlashCardSet _selectedSet;
-        private bool _setListPopUpIsOpen;
 
         public FlashCardSet SelectedSet
         {
@@ -196,9 +163,146 @@ namespace FlashCardApp.Core.ViewModels.Dictionary
             }
         }
 
+        private bool _searchTypeIsEnglish;
+        public bool SearchTypeIsEnglish
+        {
+            get { return _searchTypeIsEnglish; }
+            set
+            {
+                _searchTypeIsEnglish = value;
+                RaisePropertyChanged(() => SearchTypeIsEnglish);
+            }
+        }
+
+        private bool _searchTypeIsPinyin;
+        public bool SearchTypeIsPinyin
+        {
+            get { return _searchTypeIsPinyin; }
+            set
+            {
+                _searchTypeIsPinyin = value;
+                RaisePropertyChanged(() => SearchTypeIsPinyin);
+            }
+        }
+
+        private bool _searchTypeIsChinese;
+        public bool SearchTypeIsChinese
+        {
+            get { return _searchTypeIsChinese; }
+            set
+            {
+                _searchTypeIsChinese = value;
+                RaisePropertyChanged(() => SearchTypeIsChinese);
+            }
+        }
+
+        public ICommand SetEnglishAsTypeCommand
+        {
+            get { return new MvxCommand(() =>
+            {
+                SearchInputType = DictionarySearchInputType.English;
+                UpdateSearchType(SearchInputType);
+
+            }); }
+        } 
+        public ICommand SetPinyinAsTypeCommand
+        {
+            get { return new MvxCommand(() =>
+            {
+                SearchInputType = DictionarySearchInputType.Pinyin;
+                UpdateSearchType(SearchInputType);
+            }); }
+        } 
+        public ICommand SetChineseAsTypeCommand
+        {
+            get
+            {
+                return new MvxCommand(() =>
+                {
+                    SearchInputType = DictionarySearchInputType.Chinese;
+                    UpdateSearchType(SearchInputType);
+                });
+                
+            }
+        }
+
+        private void UpdateSearchType(DictionarySearchInputType type)
+        {
+            _searchTypeIsEnglish = false;
+            _searchTypeIsChinese = false;
+            _searchTypeIsPinyin = false;
+
+            switch (type)
+            {
+                 case DictionarySearchInputType.Chinese:
+                    _searchTypeIsChinese = true;
+                    break;
+                case DictionarySearchInputType.English:
+                    _searchTypeIsEnglish = true;
+                    break;
+                case DictionarySearchInputType.Pinyin:
+                    _searchTypeIsPinyin = true;
+                    break;
+            }
+            RaiseAllPropertiesChanged();
+        }
+
         public ICommand GetFlashCardSetList
         {
             get { return new MvxCommand(GetFlashCardSets); }
+        }
+
+
+        public ICommand AddCardToSetCommand
+
+        {
+            get { return new MvxCommand(() => DoAddToSetCommand(SelectedSearchResult)); }
+        }
+
+        private async Task DoApplyFilter(string filterString)
+        {
+            if (SearchTypeIsChinese && filterString.Contains("'"))
+            {
+                return;
+            }
+            await Task.Run(() =>
+            {
+                try
+                {
+                    List<SearchResult> results;
+                    switch (SearchInputType)
+                    {
+                        case DictionarySearchInputType.English:
+                            results = _dictionarySearchManager.SearchByEnglish(Filter);
+                            break;
+                        case DictionarySearchInputType.Chinese:
+                            results = _dictionarySearchManager.SearchByChinese(Filter);
+                            break;
+                        default:
+                            results = _dictionarySearchManager.SearchByPinYin(Filter);
+                            break;
+                    }
+                    if (!(results != null & filterString == Filter)) return;
+                    SearchResults = new List<WithCommand<SearchResult>>();
+
+
+                    foreach (var searchResult in results)
+                    {
+                        if (searchResult == null)
+                        {
+                            continue;
+                        }
+                        SearchResult result = searchResult;
+                        SearchResults.Add(new WithCommand<SearchResult>(searchResult,
+                            new MvxCommand(() => DoAddToSetCommand(result))));
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw;
+                }
+            });
+            
         }
 
         private void GetFlashCardSets()
@@ -206,24 +310,25 @@ namespace FlashCardApp.Core.ViewModels.Dictionary
             FlashCardSetList = _flashCardManager.GetSetList();
         }
 
-
-        public ICommand AddCardToSetCommand
-
+        private void DoAddToSetCommand(SearchResult result)
         {
-            get { return new MvxCommand(DoAddToSetCommand); }
-        }
+            var selectedSetId = _studySettingsService.GetSelectedSetId();
+            var newCard = new FlashCard()
+            {
+                Definition = result.DefintionsString,
+                Pinyin = result.Pinyin,
+                Traditional = result.Traditional,
+                Simplified = result.Simplified
 
-        private void DoAddToSetCommand()
-        {
-            int flashCardId = _flashCardManager.CreateCard(SelectedCard);
-            _flashCardManager.AddCardtoSet(flashCardId, SelectedSet.ID);
+            };
+            ShowViewModel<AddSearchResultToSetViewModel>(newCard);
             SetListPopUpIsOpen = false;
         }
 
+
         public void ShowSearchResultViewModel()
         {
-            ShowViewModel<SearchResultViewModel>(new FlashCardApp.Core.ViewModels.Dictionary.SearchResultViewModel.
-                DictionarySearchResultNav()
+            ShowViewModel<SearchResultViewModel>(new SearchResultViewModel.DictionarySearchResultNav
             {
                 Id = SelectedSearchResult.ChineseId
             });

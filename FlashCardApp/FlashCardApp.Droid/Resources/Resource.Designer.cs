@@ -26,10 +26,30 @@ namespace FlashCardApp.Droid
 		
 		public static void UpdateIdValues()
 		{
+			global::SQLite.Net.Platform.XamarinAndroid.Resource.String.ApplicationName = global::FlashCardApp.Droid.Resource.String.ApplicationName;
+			global::SQLite.Net.Platform.XamarinAndroid.Resource.String.Hello = global::FlashCardApp.Droid.Resource.String.Hello;
 		}
 		
 		public partial class Attribute
 		{
+			
+			// aapt resource value: 0x7f010000
+			public const int MvxBind = 2130771968;
+			
+			// aapt resource value: 0x7f010004
+			public const int MvxDropDownItemTemplate = 2130771972;
+			
+			// aapt resource value: 0x7f010003
+			public const int MvxItemTemplate = 2130771971;
+			
+			// aapt resource value: 0x7f010001
+			public const int MvxLang = 2130771969;
+			
+			// aapt resource value: 0x7f010005
+			public const int MvxSource = 2130771973;
+			
+			// aapt resource value: 0x7f010002
+			public const int MvxTemplate = 2130771970;
 			
 			static Attribute()
 			{
@@ -47,6 +67,18 @@ namespace FlashCardApp.Droid
 			// aapt resource value: 0x7f020000
 			public const int Icon = 2130837504;
 			
+			// aapt resource value: 0x7f020001
+			public const int img1 = 2130837505;
+			
+			// aapt resource value: 0x7f020002
+			public const int img2 = 2130837506;
+			
+			// aapt resource value: 0x7f020003
+			public const int img3 = 2130837507;
+			
+			// aapt resource value: 0x7f020004
+			public const int splash = 2130837508;
+			
 			static Drawable()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -61,7 +93,43 @@ namespace FlashCardApp.Droid
 		{
 			
 			// aapt resource value: 0x7f050000
-			public const int MyButton = 2131034112;
+			public const int MvxBindingTagUnique = 2131034112;
+			
+			// aapt resource value: 0x7f050005
+			public const int MyButton = 2131034117;
+			
+			// aapt resource value: 0x7f050004
+			public const int btn_english = 2131034116;
+			
+			// aapt resource value: 0x7f050001
+			public const int category_name = 2131034113;
+			
+			// aapt resource value: 0x7f050009
+			public const int definition = 2131034121;
+			
+			// aapt resource value: 0x7f050003
+			public const int demoImageView = 2131034115;
+			
+			// aapt resource value: 0x7f050008
+			public const int editText1 = 2131034120;
+			
+			// aapt resource value: 0x7f050002
+			public const int searchresults = 2131034114;
+			
+			// aapt resource value: 0x7f05000a
+			public const int showpinyin = 2131034122;
+			
+			// aapt resource value: 0x7f05000c
+			public const int showsimplified = 2131034124;
+			
+			// aapt resource value: 0x7f05000b
+			public const int showtraditional = 2131034123;
+			
+			// aapt resource value: 0x7f050007
+			public const int simplified = 2131034119;
+			
+			// aapt resource value: 0x7f050006
+			public const int traditional = 2131034118;
 			
 			static Id()
 			{
@@ -77,10 +145,40 @@ namespace FlashCardApp.Droid
 		{
 			
 			// aapt resource value: 0x7f030000
-			public const int FirstView = 2130903040;
+			public const int ArticleView = 2130903040;
 			
 			// aapt resource value: 0x7f030001
-			public const int Main = 2130903041;
+			public const int category_list_line = 2130903041;
+			
+			// aapt resource value: 0x7f030002
+			public const int CategoryListView = 2130903042;
+			
+			// aapt resource value: 0x7f030003
+			public const int CategoryView = 2130903043;
+			
+			// aapt resource value: 0x7f030004
+			public const int DictionaryView = 2130903044;
+			
+			// aapt resource value: 0x7f030005
+			public const int FirstView = 2130903045;
+			
+			// aapt resource value: 0x7f030006
+			public const int HomePageView = 2130903046;
+			
+			// aapt resource value: 0x7f030007
+			public const int Main = 2130903047;
+			
+			// aapt resource value: 0x7f030008
+			public const int search_result_line = 2130903048;
+			
+			// aapt resource value: 0x7f030009
+			public const int SplashScreen = 2130903049;
+			
+			// aapt resource value: 0x7f03000a
+			public const int StudyFlashCardSettingsView = 2130903050;
+			
+			// aapt resource value: 0x7f03000b
+			public const int StudyFlashCardSetView = 2130903051;
 			
 			static Layout()
 			{
@@ -107,6 +205,67 @@ namespace FlashCardApp.Droid
 			}
 			
 			private String()
+			{
+			}
+		}
+		
+		public partial class Style
+		{
+			
+			// aapt resource value: 0x7f060000
+			public const int Theme_Splash = 2131099648;
+			
+			static Style()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Style()
+			{
+			}
+		}
+		
+		public partial class Styleable
+		{
+			
+			public static int[] MvxBinding = new int[] {
+					2130771968,
+					2130771969};
+			
+			// aapt resource value: 0
+			public const int MvxBinding_MvxBind = 0;
+			
+			// aapt resource value: 1
+			public const int MvxBinding_MvxLang = 1;
+			
+			public static int[] MvxControl = new int[] {
+					2130771970};
+			
+			// aapt resource value: 0
+			public const int MvxControl_MvxTemplate = 0;
+			
+			public static int[] MvxImageView = new int[] {
+					2130771973};
+			
+			// aapt resource value: 0
+			public const int MvxImageView_MvxSource = 0;
+			
+			public static int[] MvxListView = new int[] {
+					2130771971,
+					2130771972};
+			
+			// aapt resource value: 1
+			public const int MvxListView_MvxDropDownItemTemplate = 1;
+			
+			// aapt resource value: 0
+			public const int MvxListView_MvxItemTemplate = 0;
+			
+			static Styleable()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Styleable()
 			{
 			}
 		}

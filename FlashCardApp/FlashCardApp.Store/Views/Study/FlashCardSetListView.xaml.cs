@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Cirrious.MvvmCross.WindowsStore.Views;
+using Cirrious.MvvmCross.WindowsCommon.Views;
 using FlashCardApp.Core.Entities;
 using FlashCardApp.Core.ViewModels.Study;
 using FlashCardApp.Store.Common;
@@ -15,7 +15,7 @@ namespace FlashCardApp.Store.Views.Study
     /// A page that displays a group title, a list of items within the group, and details for
     /// the currently selected item.
     /// </summary>
-    public sealed partial class FlashCardSetListView : MvxStorePage
+    public sealed partial class FlashCardSetListView : MvxWindowsPage
     {
         public FlashCardSetListView()
         {

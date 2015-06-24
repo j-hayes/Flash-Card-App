@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml.Linq;
 using FlashCardApp.Core.Entities;
 using FlashCardApp.Core.Managers.FlashCardApp.Core.Services;
 using FlashCardApp.Core.ViewModels.Dictionary;

@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using Cirrious.MvvmCross.Community.Plugins.Sqlite;
+﻿using System.Collections.Generic;
+using SQLite.Net.Attributes;
 
 
 namespace FlashCardApp.Core.Entities

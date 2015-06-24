@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using FlashCardApp.Core.Entities;
-using FlashCardApp.Core.ViewModels;
-using FlashCardApp.Core.ViewModels.Dictionary;
 
 namespace FlashCardApp.Core.Managers
 {

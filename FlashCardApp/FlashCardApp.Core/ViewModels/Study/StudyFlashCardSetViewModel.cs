@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Input;
-using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Plugins.Messenger;
 using Cirrious.MvvmCross.ViewModels;
 using FlashCardApp.Core.Entities;
@@ -46,10 +46,18 @@ namespace FlashCardApp.Core.ViewModels.Study
         private IStudySettingsService _settingsService;
         public StudyFlashCardSetViewModel(IFlashCardManager flashCardManager, IMvxMessenger messenger, IStudySettingsService settingsService)
         {
-            _flashCardManager = flashCardManager;
-            _messenger = messenger;
-            _settingsService = settingsService;
-          
+            try
+            {
+                _flashCardManager = flashCardManager;
+                _messenger = messenger;
+                _settingsService = settingsService;
+
+                
+            }
+            catch (Exception e)
+            {
+                
+            }
         }
 
        
@@ -58,18 +66,21 @@ namespace FlashCardApp.Core.ViewModels.Study
 
         public void Init()
         {
+
             Settings = _settingsService.GetStudySettings();
+           
+            
             if (Settings.FirstSide == "English")
             {
                 
                 state = FlashCardStateEnum.English;
-                DefaultSideIndex = 2;
+                DefaultSideIndex = 1;
             }
             else if( Settings.FirstSide == "Characters")
             {
                
                 state = FlashCardStateEnum.Chinese;
-                DefaultSideIndex = 1;
+                DefaultSideIndex = 2;
             }
             else
             {
@@ -79,6 +90,8 @@ namespace FlashCardApp.Core.ViewModels.Study
             }
 
             Set = _flashCardManager.GetSet(_settingsService.GetSelectedSetId());
+            var sets = _flashCardManager.GetSetList();
+            Set = sets.FirstOrDefault();
 
             SetCards = _flashCardManager.GetCardsForSet(Set.ID);
             CurrentShowingSideIndex = DefaultSideIndex;
@@ -191,51 +204,51 @@ namespace FlashCardApp.Core.ViewModels.Study
 
         private void SetState()
         {
-            if (CurrentShowingSideIndex == 0)
+            switch (CurrentShowingSideIndex)
             {
-                if (Settings.ShowPinyin)
-                {
-                    state = FlashCardStateEnum.Pinyin;
-                    VisibleSideText = SetCards[CurrentCardIndex].AccentedPinyin;
-                }
-                else
-                {
-                    CurrentShowingSideIndex++;
-                }
-            }
-            else if (CurrentShowingSideIndex == 1)
-            {
-                if (Settings.ShowDefinition)
-                {
-                    state = FlashCardStateEnum.English;
-                    VisibleSideText = SetCards[CurrentCardIndex].Definition;
-                }
-                else
-                {
-                    CurrentShowingSideIndex++;
-                }
-            }
-            else
-            {
-                if (Settings.CanShowCharacters)
-                {
-                    state = FlashCardStateEnum.Chinese;
-                    if (Settings.ShowSimplified)
+                case 0:
+                    if (Settings.ShowPinyin)
                     {
-                        VisibleSideText = SetCards[CurrentCardIndex].Simplified;
+                        state = FlashCardStateEnum.Pinyin;
+                        VisibleSideText = SetCards[CurrentCardIndex].AccentedPinyin;
                     }
-                    if (Settings.ShowTraditional) //todo:better formatting of this string
+                    else
                     {
+                        CurrentShowingSideIndex++;
+                    }
+                    break;
+                case 1:
+                    if (Settings.ShowDefinition)
+                    {
+                        state = FlashCardStateEnum.English;
+                        VisibleSideText = SetCards[CurrentCardIndex].Definition;
+                    }
+                    else
+                    {
+                        CurrentShowingSideIndex++;
+                    }
+                    break;
+                default:
+                    if (Settings.CanShowCharacters)
+                    {
+                        state = FlashCardStateEnum.Chinese;
                         if (Settings.ShowSimplified)
                         {
-                            VisibleSideText = VisibleSideText + " " + SetCards[CurrentCardIndex].Traditional;
+                            VisibleSideText = SetCards[CurrentCardIndex].Simplified;
                         }
-                        else
+                        if (Settings.ShowTraditional) //todo:better formatting of this string
                         {
-                            VisibleSideText = SetCards[CurrentCardIndex].Traditional;
+                            if (Settings.ShowSimplified)
+                            {
+                                VisibleSideText = VisibleSideText + " " + SetCards[CurrentCardIndex].Traditional;
+                            }
+                            else
+                            {
+                                VisibleSideText = SetCards[CurrentCardIndex].Traditional;
+                            }
                         }
                     }
-                }
+                    break;
             }
         }
 

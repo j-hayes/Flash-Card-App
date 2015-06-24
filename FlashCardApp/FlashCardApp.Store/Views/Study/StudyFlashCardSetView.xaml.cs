@@ -12,7 +12,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
-using Cirrious.MvvmCross.WindowsStore.Views;
+using Cirrious.MvvmCross.WindowsCommon.Views;
 using FlashCardApp.Core.ViewModels.Study;
 using FlashCardApp.Store.Common;
 
@@ -21,7 +21,7 @@ namespace FlashCardApp.Store.Views
     /// <summary>
     /// A basic page that provides characteristics common to most applications.
     /// </summary>
-    public sealed partial class StudyFlashCardSetView : MvxStorePage
+    public sealed partial class StudyFlashCardSetView : MvxWindowsPage
     {
         public StudyFlashCardSetView()
         {

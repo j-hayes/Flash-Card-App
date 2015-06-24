@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Input;
 using Cirrious.MvvmCross.Plugins.Messenger;
 using Cirrious.MvvmCross.ViewModels;
@@ -23,25 +23,16 @@ namespace FlashCardApp.Core.ViewModels.Study
             _flashCardManager = flashCardManager;
             _messenger = messenger;
             _settingsService = settingsService;
-            LoadList();
+            GetFlashCardSetList();
             _flashCardSetSubscriptionToken = _messenger.Subscribe<FlashCardSetListChangedMessage>(OnListChanged);
-            
-                //todo:start with users last settings saving states
-            if (FlashCardSets.Count > 0)
-            {
-                SelectedSet = FlashCardSets[0];
-                
-            }
+        
         }
 
-        private void LoadList()
-        {
-            FlashCardSets = _flashCardManager.GetSetList();
-        }
+     
 
         private void OnListChanged(FlashCardSetListChangedMessage message)
         {
-            LoadList();
+            GetFlashCardSetList();
         }
 
         //todo: remove this it isn't necessary with the new navigation
@@ -68,15 +59,14 @@ namespace FlashCardApp.Core.ViewModels.Study
         }
         
        
-        private List<FlashCardSet> _flashCardSets = new List<FlashCardSet>();
-        public List<FlashCardSet> FlashCardSets
+        private List<WithCommand<FlashCardSet>> _flashCardSets = new List<WithCommand<FlashCardSet>>();
+        public List<WithCommand<FlashCardSet>> FlashCardSets
         {
             get { return _flashCardSets; }
             set
             {
                 _flashCardSets = value;
                 RaisePropertyChanged(() => FlashCardSets);
-              
             }
 
         }
@@ -167,8 +157,16 @@ namespace FlashCardApp.Core.ViewModels.Study
         #region privates
         private void GetFlashCardSetList()
         {
-            FlashCardSets = _flashCardManager.GetSetList();
+            var flashCardSets = _flashCardManager.GetSetList();
+            FlashCardSets = new List<WithCommand<FlashCardSet>>();
+            FlashCardSets = flashCardSets.Select(x => new WithCommand<FlashCardSet>(x, new MvxCommand(() => NavigateToSetDetailsView(x.ID)))).ToList();
         }
+
+        private void NavigateToSetDetailsView(int id)
+        {
+            ShowViewModel<FlashCardSetDetailsViewModel>(id);
+        }
+
         private List<FlashCard> GetCardsForSet()
         {
             return _flashCardManager.GetCardsForSet(SelectedSet.ID);

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using FlashCardApp.Core.Entities;
 using FlashCardApp.Core.Helpers;
 
 namespace FlashCardApp.Core.Entities

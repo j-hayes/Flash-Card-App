@@ -1,26 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Xml.Linq;
+using FlashCardApp.Core.DAL;
 using FlashCardApp.Core.Entities;
 using FlashCardApp.Core.Managers.FlashCardApp.Core.Services;
-using FlashCardApp.Core.ViewModels.Dictionary;
-using Cirrious.MvvmCross.Community.Plugins.Sqlite;
-
+using SQLite.Net;
+using SQLite.Net.Interop;
 
 
 namespace FlashCardApp.Core.Managers
 {
-    class EnglishManager : IEnglishManager
+    public class EnglishManager : IEnglishManager
     {
-        private readonly ISQLiteConnection _connection;
+        private readonly SQLiteConnection _connection;
 
-        public EnglishManager(ISQLiteConnectionFactory factory)
+        public EnglishManager(ISQLiteConnection connection)
         {
-            _connection = factory.Create("Dictionary.sqlite");
-
-
-           
+            _connection = connection.connection;
         }
 
         public List<English> EnglishesMatching(string filter)
@@ -44,8 +39,6 @@ namespace FlashCardApp.Core.Managers
         {
             _connection.Delete(English);
         }
-
-
 
         public List<English> GetEnglishesByChineseIds(List<int> chineseIds)
         {

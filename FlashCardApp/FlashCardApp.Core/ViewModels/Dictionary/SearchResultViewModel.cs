@@ -1,11 +1,8 @@
 using System.Collections.Generic;
-using System.Threading;
 using System.Windows.Input;
 using Cirrious.MvvmCross.ViewModels;
 using FlashCardApp.Core.Entities;
 using FlashCardApp.Core.Managers;
-using FlashCardApp.Core.ViewModels;
-using System.Linq;
 using Cirrious.MvvmCross.Plugins.Messenger;
 
 namespace FlashCardApp.Core.ViewModels.Dictionary

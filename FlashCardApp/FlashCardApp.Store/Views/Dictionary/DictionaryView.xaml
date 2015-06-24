@@ -1,4 +1,4 @@
-﻿<common:LayoutAwarePage
+﻿<views:MvxWindowsPage
     x:Name="PageRoot"
     x:Class="FlashCardApp.Store.Views.DictionaryView"
     DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
@@ -9,6 +9,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:valueConverters="using:FlashCardApp.Store.ValueConverters"
+    xmlns:views="using:Cirrious.MvvmCross.WindowsCommon.Views"
     mc:Ignorable="d">
 
     <Page.Resources>
@@ -34,7 +35,7 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="backButton" Click="GoBack" IsEnabled="{Binding Frame.CanGoBack, ElementName=PageRoot}" Style="{StaticResource BackButtonStyle}"/>
+            <Button x:Name="backButton" Command="{Binding GoBack}" IsEnabled="{Binding Frame.CanGoBack, ElementName=PageRoot}" Style="{StaticResource BackButtonStyle}"/>
             <TextBlock x:Name="pageTitle" Grid.Column="1" Text="{StaticResource AppName}" Style="{StaticResource PageHeaderTextStyle}"/>
         </Grid>
 
@@ -143,4 +144,4 @@
             </Grid>
         </AppBar>
     </Page.BottomAppBar>
-</common:LayoutAwarePage>
+</views:MvxWindowsPage>

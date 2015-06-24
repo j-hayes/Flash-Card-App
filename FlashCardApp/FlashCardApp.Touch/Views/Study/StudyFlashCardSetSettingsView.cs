@@ -64,7 +64,7 @@ namespace FlashCardApp.Touch
 			set.Bind (ShowTraditionalSwitch).To (ViewModel => ViewModel.Settings.ShowTraditional).TwoWay();
 			set.Bind (ShowPinyinSwitch).To (ViewModel => ViewModel.Settings.ShowPinyin).TwoWay();
 
-			set.Bind (SelectedSetNameLabel).To (ViewModel => ViewModel.SelectedSet.SetName);
+	//		set.Bind (SelectedSetNameLabel).To (ViewModel => ViewModel.SelectedSet.SetName);
 
 
 
@@ -77,7 +77,7 @@ namespace FlashCardApp.Touch
 		public override void ViewWillDisappear (bool animated)
 		{
 			base.ViewWillDisappear (animated);
-			ViewModel.SaveSettings();//id prefer to use icommand execute but it doesn't seem to be able to http://stackoverflow.com/questions/18366340/mvvmcross-get-this-error-after-upgrade-to-monotouch-version-3-2-1
+			ViewModel.SaveSettings(0);//id prefer to use icommand execute but it doesn't seem to be able to http://stackoverflow.com/questions/18366340/mvvmcross-get-this-error-after-upgrade-to-monotouch-version-3-2-1
 
 		}
 	}

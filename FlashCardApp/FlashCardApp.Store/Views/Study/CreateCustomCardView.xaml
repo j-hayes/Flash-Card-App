@@ -1,4 +1,4 @@
-﻿<common:LayoutAwarePage
+﻿<views:MvxWindowsPage
     x:Name="pageRoot"
     x:Class="FlashCardApp.Store.Views.Study.CreateCustomCardView"
     DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
@@ -8,12 +8,13 @@
     xmlns:common="using:FlashCardApp.Store.Common"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="using:Cirrious.MvvmCross.WindowsCommon.Views"
     mc:Ignorable="d">
 
     <Page.Resources>
 
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
-       
+
     </Page.Resources>
 
     <!--
@@ -33,7 +34,7 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="backButton" Click="GoBack" IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}" Style="{StaticResource BackButtonStyle}"/>
+            <Button x:Name="backButton" Command="{Binding GoBack}" IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}" Style="{StaticResource BackButtonStyle}"/>
             <TextBlock x:Name="pageTitle" Grid.Column="1" Text="{StaticResource AppName}" Style="{StaticResource PageHeaderTextStyle}"/>
         </Grid>
 
@@ -51,12 +52,12 @@
             <StackPanel Grid.Column="1">
                 <StackPanel>
                     <TextBox  Text="{Binding Card.Simplified, Mode=TwoWay}" Height="60"></TextBox>
-                    <TextBox  Text="{Binding Card.Traditional, Mode=TwoWay}" Height="60"></TextBox>
                     <TextBox  Text="{Binding Card.Pinyin, Mode=TwoWay}" Height="60"></TextBox>
                     <TextBox  Text="{Binding Card.Definition, Mode=TwoWay}" Height="60"></TextBox>
+                    <TextBox  Text="{Binding Card.Traditional, Mode=TwoWay}" Height="60"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Button Content="Submit Updates" Command="{Binding AddCardToSetCommand}" Click="Button_Click"></Button>
+                    <Button Content="Submit Updates" Command="{Binding AddCardToSetCommand}"></Button>
                     <ComboBox Width="300" ItemsSource="{Binding FlashCardSets}" DisplayMemberPath="SetName" SelectedIndex="{Binding SelectedSetIndex, Mode=TwoWay}" SelectedItem="{Binding SelectedSet, Mode=TwoWay}"/>
 
                 </StackPanel>
@@ -94,4 +95,4 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
     </Grid>
-</common:LayoutAwarePage>
+</views:MvxWindowsPage>

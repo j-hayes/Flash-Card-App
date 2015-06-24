@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mvx="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="250dp">
+        <Button
+            android:id="@+id/btn_english"
+            android:layout_width="0dp"
+            android:gravity="left"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:text="左"
+            mvx:MvxBind="Click FlipCardLeftCommand" />
+        <TextView
+            android:layout_height="100dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:textSize="50dp"
+            mvx:MvxBind="Text VisibleSideText" />
+        <Button
+            android:id="@+id/btn_english"
+            android:layout_width="0dp"
+            android:gravity="right"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:text="右"
+            mvx:MvxBind="Click FlipCardRightCommand" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp">
+        <Button
+            android:id="@+id/btn_english"
+            android:gravity="left"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:text="Previous"
+            mvx:MvxBind="Click PreviousCardCommand" />
+        <Button
+            android:id="@+id/btn_english"
+            android:gravity="right"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:text="Skip"
+            mvx:MvxBind="Click SkipCardCommand" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp">
+        <Button
+            android:id="@+id/btn_english"
+            android:gravity="left"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:text="Incorrect"
+            mvx:MvxBind="Click IncorrectNextCardCommand" />
+        <Button
+            android:id="@+id/btn_english"
+            android:gravity="right"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:text="Correct"
+            mvx:MvxBind="Click CorrectNextCardCommand" />
+    </LinearLayout>
+</LinearLayout>

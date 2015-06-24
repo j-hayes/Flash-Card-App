@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace FlashCardApp.Core.ViewModels
+﻿namespace FlashCardApp.Core.ViewModels
 {
 	public class Nav
 	{

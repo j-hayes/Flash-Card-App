@@ -8,16 +8,21 @@ namespace FlashCardApp.Core
         public override void Initialize()
         {
             CreatableTypes()
-                .EndingWith("Manager")
+                .EndingWith("Service")
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
 
             CreatableTypes()
-               .EndingWith("Service")
+               .EndingWith("Manager")
                .AsInterfaces()
                .RegisterAsLazySingleton();
+
+            CreatableTypes()
+             .EndingWith("Repository")
+             .AsInterfaces()
+             .RegisterAsLazySingleton();
 				
-			RegisterAppStart<HomePageViewModel>();
+            RegisterAppStart<HomePageViewModel>();
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.WindowsStore.Views;
+using Cirrious.MvvmCross.WindowsCommon.Views;
 using FlashCardApp.Core.Entities;
 using FlashCardApp.Core.ViewModels;
 using FlashCardApp.Core.ViewModels.Dictionary;
@@ -25,7 +25,7 @@ namespace FlashCardApp.Store.Views
     /// <summary>
     /// A page that displays a grouped collection of items.
     /// </summary>
-    public sealed partial class HomePageView : MvxStorePage
+    public sealed partial class HomePageView : MvxWindowsPage
     {
 
 

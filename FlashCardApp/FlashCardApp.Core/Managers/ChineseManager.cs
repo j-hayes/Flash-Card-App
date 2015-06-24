@@ -1,36 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
-using System.Xml.Linq;
-using Cirrious.MvvmCross.Community.Plugins.Sqlite;
+using FlashCardApp.Core.DAL;
+using SQLite.Net;
 using System.Linq;
 using FlashCardApp.Core.Entities;
+using SQLite.Net.Interop;
 
 namespace FlashCardApp.Core.Managers
 {
     public class ChineseManager : IChineseManager
     {
-        private readonly ISQLiteConnection _connection;
-        private ISQLiteConnectionFactory _factory;
+        private readonly SQLiteConnection _connection;
+      
 
-        public ChineseManager(ISQLiteConnectionFactory factory)
+        public ChineseManager(ISQLiteConnection connection)
         {
-            _factory = factory;
-            _connection = factory.Create("Dictionary.sqlite");
+            _connection = connection.connection;
         }
 
         public List<Chinese> ChinesesMatching(string searchFilter)
         {
 
-            using (ISQLiteConnection connection = _factory.Create("Dictionary.sqlite"))
-            {
-
-
-
-                List<Chinese> matchingChinese = connection.Query<Chinese>(
+                List<Chinese> matchingChinese = _connection.Query<Chinese>(
                     "Select * from Chinese WHERE Simplified match ? limit 100", searchFilter);
                 return matchingChinese;
-            }
+            
             
         }
 

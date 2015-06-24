@@ -1,4 +1,4 @@
-﻿<views:MvxStorePage
+﻿<views1:MvxWindowsPage
     RequestedTheme="Light"
     x:Name="pageRoot"
     x:Class="FlashCardApp.Store.Views.Study.FlashCardSetListView"
@@ -9,7 +9,9 @@
     xmlns:common="using:FlashCardApp.Store.Common"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:views="using:Cirrious.MvvmCross.WindowsStore.Views"
+    xmlns:views1="using:Cirrious.MvvmCross.WindowsCommon.Views"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     mc:Ignorable="d">
 
     <Page.Resources>
@@ -39,7 +41,6 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Button
-             
                 x:Name="backButton"
                 Command="{Binding GoBackCommand}"               
                 Style="{StaticResource BackButtonStyle}" />
@@ -55,62 +56,34 @@
             </Grid.RowDefinitions>
 
 
-            <!-- Vertical scrolling item list -->
-            <StackPanel Margin="50,0,50,0" Grid.Row="0" Orientation="Horizontal" Style="{StaticResource FlashCardSetsPageStackPanel}">
-                <ListView
-                    Style="{StaticResource FlashCardSetListView}"
-                    x:Name="itemListView"
-                    AutomationProperties.AutomationId="ItemsListView"
-                    AutomationProperties.Name="Items"
-                    ItemsSource="{Binding Source={StaticResource itemsViewSource}}"
-                    IsSwipeEnabled="False"
-                    SelectionChanged="ItemListView_SelectionChanged">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding SetName}" Padding="10,0" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"  Width="200" Style="{StaticResource FlashCardTextBlockStyle}" />
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-                <GridView Width="1000"
-                    ItemsSource="{Binding SelectedSetFlashCards}" ScrollViewer.HorizontalScrollBarVisibility="Visible">
-                    <GridView.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="64" />
-                                    <RowDefinition Height="64" />
-                                    <RowDefinition Height="64" />
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="120" />
-                                    <ColumnDefinition Width="120" />
-                                </Grid.ColumnDefinitions>
-                                <!--Todo: The formatting for this is all janky -->
 
-                                <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Simplified}"
-                                           FontFamily="Global User Interface"  Style="{StaticResource FlashCardListCardTextBlock}" />
-                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Traditional}"
-                                           FontFamily="Global User Interface"  Style="{StaticResource FlashCardListCardTextBlock}"/>
-                                <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                                           Text="{Binding AccentedPinyin}" FontFamily="Global User Interface"
-                                            Style="{StaticResource FlashCardListCardTextBlock}"/>
-                                <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Definition}"
-                                           FontFamily="Global User Interface"  Style="{StaticResource FlashCardListCardTextBlock}"/>
-                                </Grid>
+            <!-- Vertical scrolling item list -->
+            <Grid  Grid.Row="0" Style="{StaticResource FlashCardSetsPageStackPanel}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+              <ListBox DataContext="" ItemsSource="{Binding SetList, Mode=TwoWay}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="5">
+                            <StackPanel Orientation="Vertical" Width="400">
+                                    <interactivity:Interaction.Behaviors>
+                                        <core:EventTriggerBehavior EventName="Tapped">
+                                            <core:InvokeCommandAction Command="{Binding MyCommand}" />
+                                        </core:EventTriggerBehavior>
+                                    </interactivity:Interaction.Behaviors>
+                                    <TextBlock Text="{Binding Item.SetName}"  MaxHeight="40"/>
                             </StackPanel>
-                        </DataTemplate>
-                    </GridView.ItemTemplate>
-                </GridView>
-            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            </Grid>
 
             <StackPanel Grid.Row="1" Orientation="Horizontal">
                 <Button Command="{Binding AddSetCommand}" Content="Add Set" Height="60" Width="180" FontSize="24" />
                 <TextBox Text="{Binding NewSetName, Mode=TwoWay}" Width="474" Height="60" />
-
-
-                <Button Command="{Binding StudySetCommand}" Content="Study Set" Height="60" Width="180" FontSize="24" />
-                <Button Command="{Binding ShowDetailCommand}" Content="Edit Set" Height="60" Width="180" FontSize="24" />
                 <Button Command="{Binding CreateFlashCardCommand}" Content="Create Custom Card" Height="60" Width="276"
                         FontSize="24" />
             </StackPanel>
@@ -306,4 +279,4 @@
             </VisualState>
         </VisualStateGroup>
     </VisualStateManager.VisualStateGroups>
-</views:MvxStorePage>   
+</views1:MvxWindowsPage>   

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Windows.Input;
 using Cirrious.MvvmCross.ViewModels;
 using FlashCardApp.Core.Entities;
@@ -9,6 +6,7 @@ using FlashCardApp.Core.Managers;
 
 namespace FlashCardApp.Core.ViewModels.Study
 {
+    //todo: use this view model from within flashcard set details 
     public class CreateCustomCardViewModel : MvxViewModel
     {
        
@@ -28,6 +26,10 @@ namespace FlashCardApp.Core.ViewModels.Study
             }
         }
 
+        public void Init(FlashCard card)
+        {
+            Card = card;
+        }
 
         private FlashCard _card;
         public FlashCard Card

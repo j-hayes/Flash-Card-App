@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Cirrious.MvvmCross.Plugins.Messenger;
+﻿using Cirrious.MvvmCross.Plugins.Messenger;
 
 namespace FlashCardApp.Core.Managers
 {

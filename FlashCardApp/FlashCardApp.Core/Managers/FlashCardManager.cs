@@ -1,29 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.ServiceModel;
-using Cirrious.CrossCore.Parse;
 using Cirrious.MvvmCross.Plugins.Messenger;
-using Cirrious.MvvmCross.Community.Plugins.Sqlite;
+using FlashCardApp.Core.DAL;
 using FlashCardApp.Core.Entities;
-
-using System.Threading.Tasks;
 using FlashCardApp.Core.FlashCardService;
+using SQLite.Net;
+using SQLite.Net.Interop;
 
 namespace FlashCardApp.Core.Managers
 {
     public class FlashCardManager : IFlashCardManager
     {
-        private readonly ISQLiteConnection _connection;
+        private readonly SQLiteConnection _connection;
         private readonly IMvxMessenger _messenger;
         public FlashCardServiceClient CloudClient;
     
 
-        public FlashCardManager(ISQLiteConnectionFactory factory, IMvxMessenger messenger)
+        public FlashCardManager(ISQLiteConnection connection, IMvxMessenger messenger)
         {
+
             _messenger = messenger;
             CloudClient = new FlashCardServiceClient();
-            _connection = factory.Create("Dictionary.sqlite");
+
+            _connection = connection.connection;
             _connection.CreateTable<FlashCardSet>();
             _connection.CreateTable<FlashCard>();
 
@@ -50,7 +50,7 @@ namespace FlashCardApp.Core.Managers
 
         public FlashCard GetCard(int Id)
         {
-            return _connection.Table<FlashCard>().FirstOrDefault(x => x.ID == Id);
+            return _connection.Get<FlashCard>(Id);
         }
 
         public void AddCardtoSet(int CardID, int SetID)
@@ -100,11 +100,18 @@ namespace FlashCardApp.Core.Managers
 
         public List<FlashCard> GetCardsForSet(int p)
         {
-            List<FlashCard> cardsInSet =
-                _connection.Query<FlashCard>(
-                    "SELECT DISTINCT * FROM FlashCard WHERE ID IN (Select CardID from CardInSet Where SetID = ?)", p)
-                    .ToList();
-            return cardsInSet;
+            try
+            {
+                List<FlashCard> cardsInSet =
+                    _connection.Query<FlashCard>(
+                        "SELECT DISTINCT * FROM FlashCard WHERE ID IN (Select CardID from CardInSet Where SetID = ?)", p)
+                        .ToList();
+                return cardsInSet;
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
 
         }
 

@@ -1,7 +1,7 @@
 ﻿
 using System;
-using Cirrious.MvvmCross.Community.Plugins.Sqlite;
 using FlashCardApp.Core.Helpers;
+using SQLite.Net.Attributes;
 
 namespace FlashCardApp.Core.Entities
 {

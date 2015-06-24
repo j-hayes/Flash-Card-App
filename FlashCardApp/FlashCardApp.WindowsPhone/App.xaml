@@ -8,7 +8,7 @@
     <!--Application Resources-->
     <Application.Resources>
         <local:LocalizedStrings xmlns:local="clr-namespace:FlashCardApp.WindowsPhone" x:Key="LocalizedStrings"/>
-    </Application.Resources>
+         </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>
         <!--Required object that handles lifetime events for the application-->

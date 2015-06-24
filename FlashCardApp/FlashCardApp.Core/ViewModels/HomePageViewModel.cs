@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Windows.Input;
-using Cirrious.MvvmCross.Plugins.Messenger;
+﻿using Cirrious.MvvmCross.Plugins.Messenger;
 using Cirrious.MvvmCross.ViewModels;
-using FlashCardApp.Core.Entities;
 using FlashCardApp.Core.Managers;
-using Cirrious.MvvmCross.Community.Plugins.Sqlite;
-using FlashCardApp.Core.Managers.FlashCardApp.Core.Services;
 using FlashCardApp.Core.Services;
 using FlashCardApp.Core.ViewModels.Dictionary;
 using FlashCardApp.Core.ViewModels.Random;
@@ -21,12 +13,21 @@ namespace FlashCardApp.Core.ViewModels
 
        public HomePageViewModel(IDictionarySearchManager dictionarySearchManager, IFlashCardManager flashCardManager, IMvxMessenger messenger, IStudySettingsService settingsService)
        {
-           DictionaryViewModel = new DictionaryViewModel(dictionarySearchManager, flashCardManager);
+           DictionaryViewModel = new DictionaryViewModel(dictionarySearchManager, flashCardManager, settingsService);
            StudyFlashCardSetSettingsViewModel = new StudyFlashCardSetSettingsViewModel(messenger, flashCardManager,
                settingsService);
            StudyFlashCardSetSettingsViewModel  = new StudyFlashCardSetSettingsViewModel(messenger,flashCardManager,settingsService);
+             RandomResultViewModel = new RandomResultViewModel(dictionarySearchManager);
+         
+     
        }
 
+
+       
+
+
+       
+       private DictionaryViewModel _dictionaryViewModel;
        public DictionaryViewModel DictionaryViewModel
        {
            get { return _dictionaryViewModel; }
@@ -68,8 +69,7 @@ namespace FlashCardApp.Core.ViewModels
            }
        }
        
-       private string _searchTerm = "";
-        public string SearchTerm
+        /*public string SearchTerm
         {
             get { return _searchTerm; }
             set
@@ -101,19 +101,14 @@ namespace FlashCardApp.Core.ViewModels
                 return _flashCardCommand;
             }
         }
-
-      
-
-      
-
         
         private void NavigateToStudyFlashCardSetSettings()
         {
             ShowViewModel<StudyFlashCardSetSettingsViewModel>();
         }
 
-        private Cirrious.MvvmCross.ViewModels.MvxCommand _saveCardCloudCommand;
-       private DictionaryViewModel _dictionaryViewModel;
+       private Cirrious.MvvmCross.ViewModels.MvxCommand _saveCardCloudCommand;
+      
 
        public ICommand SaveCardCloudCommand
         {
@@ -127,6 +122,6 @@ namespace FlashCardApp.Core.ViewModels
         private void NavigateToCloudCardSave()
         {
             ShowViewModel<LoginViewModel>();
-        }
+        }*/
     }
 }

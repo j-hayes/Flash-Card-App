@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mvx="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <Mvx.MvxListView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:id="@+id/searchresults"
+        mvx:MvxBind="ItemsSource CategoryList"
+        mvx:MvxItemTemplate="@layout/category_list_line"
+        android:layout_weight="1"
+        android:dividerHeight="1dp" />
+</LinearLayout>

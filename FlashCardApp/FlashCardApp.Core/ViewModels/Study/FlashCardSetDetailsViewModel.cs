@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows.Input;
 using Cirrious.MvvmCross.ViewModels;
 using FlashCardApp.Core.Entities;
@@ -14,6 +13,7 @@ namespace FlashCardApp.Core.ViewModels.Study
         public FlashCardSetDetailsViewModel(IFlashCardManager flashCardManager)
         {
             _flashCardManager = flashCardManager;
+            
         }
 
        
@@ -30,7 +30,25 @@ namespace FlashCardApp.Core.ViewModels.Study
          
         }
 
-       
+        public bool CardSelected
+        {
+            get
+            {
+                if (SelectedCard != null)
+                {
+                    return true;
+                }
+                else
+                {
+                   return false;
+                }
+
+            }
+            
+            
+        }
+
+        
 
         private FlashCardSet _set;
         public FlashCardSet Set
@@ -51,7 +69,10 @@ namespace FlashCardApp.Core.ViewModels.Study
         public FlashCard SelectedCard
         {
             get { return _selectedCard; }
-            set { _selectedCard = value; RaisePropertyChanged(()=> SelectedCard);}
+            set { _selectedCard = value; 
+                RaisePropertyChanged(()=> SelectedCard);
+                RaisePropertyChanged(()=> CardSelected);
+            }
         }
 
         public ICommand DeleteCardCommand
@@ -86,18 +107,24 @@ namespace FlashCardApp.Core.ViewModels.Study
         {
             get
             {
-               return new MvxCommand<FlashCardSet>(
-                          item =>
-                              ShowViewModel<FlashCardDetailsViewModel>(new FlashCardDetailsViewModel.Nav()
-                              {
-                                  Id = SelectedCard.ID
-                                  
+                if (SelectedCard != null)
+                {
+                    return new MvxCommand<FlashCardSet>(
+                        item =>
+                            ShowViewModel<FlashCardDetailsViewModel>(new FlashCardDetailsViewModel.Nav()
+                            {
+                                Id = SelectedCard.ID
 
-                              }));
-            }    
+
+                            }));
+                }
+                else
+                {
+                    return new MvxCommand( ()=> { ; });
+                }
+            }
         }
 
-        
 
         private void GetSetCards(int id)
         {

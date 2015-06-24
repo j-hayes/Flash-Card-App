@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows.Input;
-using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Plugins.Messenger;
 using Cirrious.MvvmCross.ViewModels;
 using FlashCardApp.Core.Entities;
 using FlashCardApp.Core.Managers;
-using FlashCardApp.Core.Messages;
 using FlashCardApp.Core.Services;
 
 namespace FlashCardApp.Core.ViewModels.Study
@@ -21,16 +18,16 @@ namespace FlashCardApp.Core.ViewModels.Study
         Pinyin
     }
 
- 
-   
+
+
     public class StudyFlashCardSetSettingsViewModel : MvxViewModel
     {
-        private  IMvxMessenger _messenger;
+        private IMvxMessenger _messenger;
         private IFlashCardManager _manager;
         private readonly MvxSubscriptionToken _token;
         private IStudySettingsService _settingsService;
-      
-       
+
+
 
 
         public StudyFlashCardSetSettingsViewModel(IMvxMessenger messenger, IFlashCardManager manager, IStudySettingsService settingsService)
@@ -39,8 +36,9 @@ namespace FlashCardApp.Core.ViewModels.Study
             _manager = manager;
             _settingsService = settingsService;
             _settings = _settingsService.GetStudySettings();
-            _selectedSet = manager.GetSet(settingsService.GetSelectedSetId());
-            _selectedSet.FlashCards = manager.GetCardsForSet(_selectedSet.ID);
+          
+            SetList = CreateSetList(manager.GetSetList());
+           
             //   _token = _messenger.Subscribe<SelectedSetChangedMessage>();
             /*_showDefinition = true;
             _showPinyin = true;
@@ -49,6 +47,16 @@ namespace FlashCardApp.Core.ViewModels.Study
          */
         }
 
+        private List<WithCommand<FlashCardSet>> CreateSetList(List<FlashCardSet> getSetList)
+        {
+            List<WithCommand<FlashCardSet>> sets = new List<WithCommand<FlashCardSet>>();
+            foreach (var flashCardSet in getSetList)
+            {
+                FlashCardSet set = flashCardSet;
+                sets.Add(new WithCommand<FlashCardSet>(flashCardSet, new MvxCommand(()=>NavigateToStudyViewModel(set.ID))));
+            }
+            return sets;
+        }
 
 
 
@@ -59,32 +67,18 @@ namespace FlashCardApp.Core.ViewModels.Study
             set
             {
                 _settings = value;
-                RaisePropertyChanged(()=>Settings);
-              //  _settingsService.SetStudySettings(_settings);
+                RaisePropertyChanged(() => Settings);
+                //  _settingsService.SetStudySettings(_settings);
             }
         }
 
-        private FlashCardSet _selectedSet;
-        public FlashCardSet SelectedSet
-        {
-            get { return _selectedSet; }
-            set
-            {
-               
-                _selectedSet = value;
-                RaisePropertyChanged(()=>SelectedSet);
-             
-            }
-        }
-
-
-        
         public bool CanShowCharacters
         {
-            get {
+            get
+            {
                 return Settings.ShowSimplified || Settings.ShowTraditional;
             }
-            
+
         }
 
         private int _maxCardsInStudySet;
@@ -98,9 +92,11 @@ namespace FlashCardApp.Core.ViewModels.Study
         public ShowSideFirstSetting FirstSide
         {
             get { return _firstSide; }
-            set {
-				_firstSide = value; 
-				RaisePropertyChanged(()=>FirstSide); }
+            set
+            {
+                _firstSide = value;
+                RaisePropertyChanged(() => FirstSide);
+            }
 
         }
 
@@ -150,8 +146,8 @@ namespace FlashCardApp.Core.ViewModels.Study
                 RaisePropertyChanged(() => EnglishFirst);
             }
         }
-        
-       
+
+
 
 
         public void UpdateShowFirstSetting(string sideString)
@@ -159,25 +155,23 @@ namespace FlashCardApp.Core.ViewModels.Study
             _pinyinFirst = false;
             _charactersFirst = false;
             _englishFirst = false;
-            if (sideString == "Pinyin")
+            switch (sideString)
             {
-                _pinyinFirst = true;
-                Settings.FirstSide = "Pinyin";
-            }
-            else if (sideString == "Characters")
-            {
-                _charactersFirst = true;
-                Settings.FirstSide = "Characters";
-            }
-            else if (sideString == "Definition")
-            {
-                _englishFirst = true;
-                Settings.FirstSide = "Definition";
-            }
-            else
-            {
-                throw new NotSupportedException(
-                    "The side string is incorrect choices are Definition, Characters, or Pinyin");
+                case "Pinyin":
+                    _pinyinFirst = true;
+                    Settings.FirstSide = "Pinyin";
+                    break;
+                case "Characters":
+                    _charactersFirst = true;
+                    Settings.FirstSide = "Characters";
+                    break;
+                case "Definition":
+                    _englishFirst = true;
+                    Settings.FirstSide = "Definition";
+                    break;
+                default:
+                    throw new NotSupportedException(
+                        "The side string is incorrect choices are Definition, Characters, or Pinyin");
             }
             RaiseAllPropertiesChanged();
         }
@@ -190,31 +184,35 @@ namespace FlashCardApp.Core.ViewModels.Study
                 return new MvxCommand(NavigateToSetList);
             }
         }
-		public ICommand SaveSettingsCommand{
-			get{
-				return new MvxCommand (SaveSettings);
-			}
-		}
+       
 
-		public void SaveSettings ()
-		{
-			_settingsService.SetStudySettings (Settings);
-			_settingsService.SetSelectedSetId (SelectedSet.ID);
-		}
+        public void SaveSettings(int selectedSetId)
+        {
+            _settingsService.SetStudySettings(Settings);
+            _settingsService.SetSelectedSetId(selectedSetId);
+        }
 
+        private void NavigateToStudyViewModel(int id)
+        {
+            
+            Settings.SelectedSetId = id;
+            SaveSettings(id);
+            NavigateToStudyViewModel();
+
+        }
         private void NavigateToSetList()
         {
-			SaveSettings ();
+      
             ShowViewModel<FlashCardSetListViewModel>();
         }
 
-        public ICommand StudySetCommand {
-            get {return new MvxCommand(NavigateToStudyViewModel); }
+        public ICommand StudySetCommand
+        {
+            get { return new MvxCommand(NavigateToStudyViewModel); }
         }
 
         private void NavigateToStudyViewModel()
         {
-			SaveSettings ();
             ShowViewModel<StudyFlashCardSetViewModel>();
 
         }
@@ -228,12 +226,25 @@ namespace FlashCardApp.Core.ViewModels.Study
             }
         }
 
-        private void UpdateShow()
-       {
-           RaisePropertyChanged(()=> CanShowCharacters);
-       }
+        private List<WithCommand<FlashCardSet>> _setList;
+        public List<WithCommand<FlashCardSet>> SetList
+        {
+            get { return _setList; }
+            set
+            {
+                _setList = value;
+                RaisePropertyChanged(() => SetList);
+            }
+        }
 
-        #endregion 
+
+
+        private void UpdateShow()
+        {
+            RaisePropertyChanged(() => CanShowCharacters);
+        }
+
+        #endregion
 
     }
 }

@@ -1,23 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Cirrious.MvvmCross.Community.Plugins.Sqlite;
+using FlashCardApp.Core.DAL;
 using FlashCardApp.Core.Entities;
+using SQLite.Net;
+using SQLite.Net.Interop;
 
 namespace FlashCardApp.Core.Services
 {
     public class StudySettingsService : IStudySettingsService
     {
-        private ISQLiteConnection _connection;
-        private ISQLiteConnectionFactory _factory;
+      
         private int SelectedSetId; // make this a global property
+        private readonly SQLiteConnection _connection;
 
-        public StudySettingsService(ISQLiteConnectionFactory factory)
+        public StudySettingsService(ISQLiteConnection connection)
         {
-            _factory = factory;
-
-            _connection = factory.Create("Dictionary.sqlite");
+            _connection = connection.connection;
+          
             _connection.CreateTable<StudySettings>();
 
             if (!(DefaultSettingsExist()))
@@ -43,8 +42,9 @@ namespace FlashCardApp.Core.Services
         {
 
             var defaultSettings = _connection.Table<StudySettings>()
-                .Where((x => x.Id == (1)))
-                .FirstOrDefault();
+                .FirstOrDefault((x => x.Id == (1)));
+           
+                
 
             return defaultSettings;
         }
@@ -55,12 +55,26 @@ namespace FlashCardApp.Core.Services
             {
                 try
                 {
-                    return _connection.Table<FlashCardSet>().First().ID;
+                    var sets = _connection.Table<FlashCardSet>().ToList();
+                    if (sets != null && sets.Any())
+                    {
+                        return sets.FirstOrDefault().ID;
+                    }
+                    else
+                    {
+                        _connection.Insert(new FlashCard()
+                        {
+                            Pinyin = "",
+                            Definition = "",
+                            Simplified = ""
+                        });
+                        int id = _connection.Insert(new FlashCardSet() { ID = 500, SetName = "Your First Set" });
+                        return id;
+                    }
                 }
                 catch (Exception e)
                 {
-                    int id =_connection.Insert(new FlashCardSet("First Set"));
-                    return id;
+                    throw;
                 }
             }
             return SelectedSetId;

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
+using System.IO.IsolatedStorage;
 using System.Resources;
 using System.Windows;
 using System.Windows.Markup;
@@ -13,6 +15,7 @@ namespace FlashCardApp.WindowsPhone
 {
     public partial class App : Application
     {
+        public static string DB_PATH = Path.Combine(Path.Combine(ApplicationData.Current.LocalFolder.Path, "Dictionary.sqlite"));
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
         /// </summary>
@@ -67,12 +70,47 @@ namespace FlashCardApp.WindowsPhone
 
         private async void InitializeDatabase()
         {
-            string dbName = "Dictionary.sqlite";//todo: add this to some resource file
-
+           
+            StorageFile dbFile = null;
             try
             {
+                // Try to get the 
+                dbFile = await StorageFile.GetFileFromPathAsync(DB_PATH);
+            }
+            catch (FileNotFoundException)
+            {
+                
+                if (dbFile == null)
+                {
+                    // Copy file from installation folder to local folder.
+                    // Obtain the virtual store for the application.
+                    IsolatedStorageFile iso = IsolatedStorageFile.GetUserStoreForApplication();
+
+                    // Create a stream for the file in the installation folder.
+                    using (Stream input = Application.GetResourceStream(new Uri("Dictionary.sqlite", UriKind.Relative)).Stream)
+                    {
+                        // Create a stream for the new file in the local folder.
+                        using (IsolatedStorageFileStream output = iso.CreateFile(DB_PATH))
+                        {
+                            // Initialize the buffer.
+                            byte[] readBuffer = new byte[4096];
+                            int bytesRead = -1;
+
+                            // Copy the file from the installation folder to the local folder. 
+                            while ((bytesRead = input.Read(readBuffer, 0, readBuffer.Length)) > 0)
+                            {
+                                output.Write(readBuffer, 0, bytesRead);
+                            }
+                        }
+                    }
+                }
+            }
+           /* try
+            {
+                  
                 if (!(await AppHelper.ExistsInStorageFolder(AppHelper.localFolder, dbName)))
                 {
+                  
                     StorageFile defaultDb = await AppHelper.installedLocation.GetFileAsync("Assets\\" + dbName);
                     await defaultDb.CopyAsync(AppHelper.localFolder);
                 }
@@ -80,7 +118,7 @@ namespace FlashCardApp.WindowsPhone
             catch (Exception e)
             {
                 System.Diagnostics.Debug.WriteLine(e);
-            }
+            }*/
         }
 
         // Code to execute when the application is launching (eg, from Start)
