@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mvx="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="250dp">
+        <ToggleButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/showpinyin"
+            android:textOff="Show Pinyin"
+            android:textOn="Show Pinyin"
+            mvx:MvxBind="Checked Settings.ShowPinyin" />
+        <ToggleButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/showtraditional"
+            android:textOff="Show Traditional"
+            android:textOn="Show Traditional"
+            mvx:MvxBind="Checked Settings.ShowTraditional" />
+        <ToggleButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/showsimplified"
+            android:textOff="Show Simplified"
+            android:textOn="Show Simplified"
+            mvx:MvxBind="Checked Settings.ShowSimplifed" />
+        <ToggleButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/showtraditional"
+            android:textOff="Show Definition"
+            android:textOn="Show Definition"
+            mvx:MvxBind="Checked Settings.ShowDefinition" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="500dp">
+        <Button
+            android:id="@+id/btn_english"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Study Set"
+            mvx:MvxBind="Click StudySetCommand" />
+    </LinearLayout>
+</LinearLayout>
