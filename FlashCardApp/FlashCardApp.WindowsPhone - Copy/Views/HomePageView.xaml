@@ -73,7 +73,7 @@
                     <!--ContentPanel - place additional content here-->
                     <StackPanel x:Name="ContentPanel" Grid.Row="1">
                         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="9,0,0,0">
-                            <TextBox IsReadOnly="False" x:Name="FilterTextBox" Width="390" TextChanged="FilterTextBox_OnTextChanged"  VerticalAlignment="Top" Height="65" Padding="12,0,0,10"/>
+                            <TextBox FontSize="20" IsReadOnly="False" x:Name="FilterTextBox" Width="390" Text="Search" TextChanged="FilterTextBox_OnTextChanged"  VerticalAlignment="Top" Margin="12,0,0,10"/>
                         </StackPanel>
                     </StackPanel>
 
@@ -143,9 +143,11 @@
                     <TextBlock Text="Show:" FontSize="36" />
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
                         <ToggleButton Content="Pinyin" IsChecked="{Binding StudyFlashCardSetSettingsViewModel.Settings.ShowPinyin, Mode=TwoWay}"/>
+                        <ToggleButton Content="Definition"  IsChecked="{Binding StudyFlashCardSetSettingsViewModel.Settings.ShowDefinition, Mode=TwoWay}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
                         <ToggleButton Content="Traditional"  IsChecked="{Binding StudyFlashCardSetSettingsViewModel.Settings.ShowTraditional, Mode=TwoWay}"/>
                         <ToggleButton Content="Simplified"  IsChecked="{Binding StudyFlashCardSetSettingsViewModel.Settings.ShowSimplified, Mode=TwoWay}"/>
-                        <ToggleButton Content="Definition"  IsChecked="{Binding StudyFlashCardSetSettingsViewModel.Settings.ShowDefinition, Mode=TwoWay}"/>
                     </StackPanel>
                     <TextBlock Text="Show first:" FontSize="36" />
 

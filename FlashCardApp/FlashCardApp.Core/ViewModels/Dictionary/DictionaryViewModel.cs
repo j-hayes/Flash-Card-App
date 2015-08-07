@@ -256,7 +256,12 @@ namespace FlashCardApp.Core.ViewModels.Dictionary
         public ICommand AddCardToSetCommand
 
         {
-            get { return new MvxCommand(() => DoAddToSetCommand(SelectedSearchResult)); }
+            get
+            {
+                
+                return new MvxCommand(() => 
+                    DoAddToSetCommand(SelectedSearchResult));
+            }
         }
 
         private async Task DoApplyFilter(string filterString)
@@ -312,6 +317,10 @@ namespace FlashCardApp.Core.ViewModels.Dictionary
 
         private void DoAddToSetCommand(SearchResult result)
         {
+            if (result == null)
+            {
+                return;
+            }
             var selectedSetId = _studySettingsService.GetSelectedSetId();
             var newCard = new FlashCard()
             {

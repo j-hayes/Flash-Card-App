@@ -176,6 +176,16 @@
                                     <TextBlock TextWrapping="WrapWholeWords">Manage Sets</TextBlock>
                                 </Button>
                             </StackPanel>
+                            <ListView ItemsSource="{Binding SetList}">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Width="200" Text="{Binding Item}"></TextBlock>
+                                            <Button Content="Study Set" Command="{Binding Command}"></Button>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
                         </StackPanel>
 
                     </StackPanel>
