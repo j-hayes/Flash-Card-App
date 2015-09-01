@@ -16,13 +16,15 @@ namespace FlashCardApp.Core.ViewModels
            DictionaryViewModel = new DictionaryViewModel(dictionarySearchManager, flashCardManager, settingsService);
            StudyFlashCardSetSettingsViewModel = new StudyFlashCardSetSettingsViewModel(messenger, flashCardManager,
                settingsService);
-           StudyFlashCardSetSettingsViewModel  = new StudyFlashCardSetSettingsViewModel(messenger,flashCardManager,settingsService);
-             RandomResultViewModel = new RandomResultViewModel(dictionarySearchManager);
+			StudyViewModel = new StudyFlashCardSetViewModel (flashCardManager, messenger, settingsService);  
          
      
        }
 
-
+		public HomePageViewModel()
+		{
+			
+		}
        
 
 

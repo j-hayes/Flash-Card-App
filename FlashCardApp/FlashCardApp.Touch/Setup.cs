@@ -1,7 +1,9 @@
+using Cirrious.CrossCore;
 using MonoTouch.UIKit;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Touch.Platform;
+using FlashCardApp.Core.DAL;
 
 namespace FlashCardApp.Touch
 {
@@ -21,5 +23,11 @@ namespace FlashCardApp.Touch
         {
             return new DebugTrace();
         }
+
+		protected override void InitializeLastChance()
+		{
+			Mvx.RegisterSingleton<ISQLiteConnection>(new TouchSqliteConnection());
+			base.InitializeLastChance();
+		}
 	}
 }

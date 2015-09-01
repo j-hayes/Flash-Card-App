@@ -6,6 +6,7 @@ using Cirrious.MvvmCross.ViewModels;
 using System.Threading;
 using System.IO;
 using System;
+using FlashCardApp.Core.ViewModels;
 
 namespace FlashCardApp.Touch
 {
@@ -16,17 +17,6 @@ namespace FlashCardApp.Touch
 
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
-
-			_window = new UIWindow (UIScreen.MainScreen.Bounds);
-
-			var setup = new Setup(this, _window);
-			setup.Initialize();
-
-			var startup = Mvx.Resolve<IMvxAppStart>();
-			startup.Start();
-
-			_window.MakeKeyAndVisible ();
-
 			string dbname = "Dictionary.sqlite";
 			string pathToDeployed = Path.Combine( Environment.GetFolderPath (Environment.SpecialFolder.Personal), dbname);
 			string assetDatabasePath = Path.Combine (NSBundle.MainBundle.BundlePath, dbname);
@@ -39,7 +29,7 @@ namespace FlashCardApp.Touch
 			}
 
 
-		
+
 			if (!File.Exists (pathToDeployed)) {
 				Console.WriteLine ("DB file Didn't Exist on app");
 				File.Copy (assetDatabasePath, pathToDeployed);
@@ -47,6 +37,17 @@ namespace FlashCardApp.Touch
 			} else {
 				Console.WriteLine ("DB file Did Exist");
 			}
+
+			_window = new UIWindow (UIScreen.MainScreen.Bounds);
+
+			var setup = new Setup(this, _window);
+			setup.Initialize();
+
+			var startup = Mvx.Resolve<IMvxAppStart>();
+			 
+			startup.Start();
+
+			_window.MakeKeyAndVisible ();
 
 
 			return true;

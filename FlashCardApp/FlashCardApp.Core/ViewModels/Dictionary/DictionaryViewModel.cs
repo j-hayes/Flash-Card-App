@@ -52,6 +52,8 @@ namespace FlashCardApp.Core.ViewModels.Dictionary
 
             SetListPopUpIsOpen = false;
             GetFlashCardSets();
+
+			Filter = "dictionary";
         }
 
         public bool SetListPopUpIsOpen

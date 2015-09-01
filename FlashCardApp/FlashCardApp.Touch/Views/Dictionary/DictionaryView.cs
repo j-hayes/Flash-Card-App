@@ -15,7 +15,7 @@ namespace FlashCardApp.Touch
 {
 	public partial class DictionaryView : MvxViewController
 	{
-		public DictionaryViewModel ViewModel { 
+		public DictionaryViewModel viewModel { 
 			get {
 				return (DictionaryViewModel)base.ViewModel; 
 			}
@@ -51,14 +51,16 @@ namespace FlashCardApp.Touch
 
 			var set = this.CreateBindingSet<DictionaryView, DictionaryViewModel> ();
 
-			set.Bind (FilterTextField).To (v => v.Filter);
-			set.Bind (source).To (v => v.SearchResults);
+			set.Bind (FilterTextField).To (v => v.Filter).TwoWay();
+			set.Bind (source).To (v => v.SearchResults).TwoWay();
+
+
 
 			source.SelectedItemChanged += (object sender, EventArgs e) => {
 
 				var selectedItem = (SearchResult)source.SelectedItem;
-				ViewModel.SelectedSearchResult = selectedItem;
-				ViewModel.ShowSearchResultViewModel();
+				viewModel.SelectedSearchResult = selectedItem;
+				viewModel.ShowSearchResultViewModel();
 			} ;
 
 			set.Bind(source).For ("SelectedItemChanged").To ("SelectedSearchResultChangedCommand");
@@ -71,11 +73,11 @@ namespace FlashCardApp.Touch
 
 			SearchTypeSegmentedControl.ValueChanged += (object sender, EventArgs e) => {
 				if (SearchTypeSegmentedControl.SelectedSegment == 0) {
-					((DictionaryViewModel)ViewModel).SearchInputType = DictionarySearchInputType.Chinese;
+					((DictionaryViewModel)viewModel).SearchInputType = DictionarySearchInputType.Chinese;
 				}  else if (SearchTypeSegmentedControl.SelectedSegment == 1) {
-					((DictionaryViewModel)ViewModel).SearchInputType = DictionarySearchInputType.English;
+					((DictionaryViewModel)viewModel).SearchInputType = DictionarySearchInputType.English;
 				}  else if (SearchTypeSegmentedControl.SelectedSegment == 2) {
-					((DictionaryViewModel)ViewModel).SearchInputType = DictionarySearchInputType.Pinyin;
+					((DictionaryViewModel)viewModel).SearchInputType = DictionarySearchInputType.Pinyin;
 				}
 			} ;
 
@@ -88,8 +90,6 @@ namespace FlashCardApp.Touch
 			gesture.CancelsTouchesInView = false;
 
 			View.AddGestureRecognizer(gesture);
-
-
 
 			// Perform any additional setup after loading the view, typically from a nib.
 		}
