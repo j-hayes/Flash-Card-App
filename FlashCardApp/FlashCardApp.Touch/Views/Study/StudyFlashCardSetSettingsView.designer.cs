@@ -4,7 +4,7 @@
 // actions made in the UI designer. If it is removed, they will be lost.
 // Manual changes to this file may not be handled correctly.
 //
-using MonoTouch.Foundation;
+using Foundation;
 using System.CodeDom.Compiler;
 
 namespace FlashCardApp.Touch
@@ -13,40 +13,56 @@ namespace FlashCardApp.Touch
 	partial class StudyFlashCardSetSettingsView
 	{
 		[Outlet]
-		MonoTouch.UIKit.UISlider MaxNumberOfCardsScroller { get; set; }
+		UIKit.UIView contentView { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITextField MaxNumberOfCardsText { get; set; }
+		UIKit.UISlider MaxCardsSlider { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UIScrollView PageScrollView { get; set; }
+		UIKit.UISlider MaxNumberOfCardsScroller { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UILabel SelectedSetNameLabel { get; set; }
+		UIKit.UITextField MaxNumberOfCardsText { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UISwitch ShowCharactersFirstSwitch { get; set; }
+		UIKit.UIScrollView PageScrollView { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UISwitch ShowDefinitionFirstSwitch { get; set; }
+		UIKit.UITableView SetsTableView { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UISwitch ShowDefinitionSwitch { get; set; }
+		UIKit.UISwitch ShowCharactersFirstSwitch { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UISwitch ShowPinyinFirstSwitch { get; set; }
+		UIKit.UISwitch ShowDefinitionFirstSwitch { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UISwitch ShowPinyinSwitch { get; set; }
+		UIKit.UISwitch ShowDefinitionSwitch { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UISwitch ShowSimplifiedSwitch { get; set; }
+		UIKit.UISwitch ShowPinyinFirstSwitch { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UISwitch ShowTraditionalSwitch { get; set; }
+		UIKit.UISwitch ShowPinyinSwitch { get; set; }
+
+		[Outlet]
+		UIKit.UISwitch ShowSimplifiedSwitch { get; set; }
+
+		[Outlet]
+		UIKit.UISwitch ShowTraditionalSwitch { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (MaxCardsSlider != null) {
+				MaxCardsSlider.Dispose ();
+				MaxCardsSlider = null;
+			}
+
+			if (contentView != null) {
+				contentView.Dispose ();
+				contentView = null;
+			}
+
 			if (MaxNumberOfCardsScroller != null) {
 				MaxNumberOfCardsScroller.Dispose ();
 				MaxNumberOfCardsScroller = null;
@@ -60,6 +76,11 @@ namespace FlashCardApp.Touch
 			if (PageScrollView != null) {
 				PageScrollView.Dispose ();
 				PageScrollView = null;
+			}
+
+			if (SetsTableView != null) {
+				SetsTableView.Dispose ();
+				SetsTableView = null;
 			}
 
 			if (ShowCharactersFirstSwitch != null) {
@@ -95,11 +116,6 @@ namespace FlashCardApp.Touch
 			if (ShowTraditionalSwitch != null) {
 				ShowTraditionalSwitch.Dispose ();
 				ShowTraditionalSwitch = null;
-			}
-
-			if (SelectedSetNameLabel != null) {
-				SelectedSetNameLabel.Dispose ();
-				SelectedSetNameLabel = null;
 			}
 		}
 	}

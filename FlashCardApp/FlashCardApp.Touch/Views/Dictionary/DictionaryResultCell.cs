@@ -1,13 +1,14 @@
-﻿
-using System;
-using System.Drawing;
 
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using System;
+using CoreGraphics;
+
+using Foundation;
+using UIKit;
 using Cirrious.MvvmCross.Binding.Touch.Views;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using FlashCardApp.Core.ViewModels.Dictionary;
 using FlashCardApp.Core.Entities;
+using FlashCardApp.Core.ViewModels;
 
 namespace FlashCardApp.Touch
 {
@@ -27,11 +28,11 @@ namespace FlashCardApp.Touch
 				PinyinLabel.AdjustsFontSizeToFitWidth = true; 
 				DefinitionLabel.AdjustsFontSizeToFitWidth = true; 
 
-				var set = this.CreateBindingSet<DictionaryResultCell, SearchResult> ();
+				var set = this.CreateBindingSet<DictionaryResultCell, WithCommand<SearchResult>> ();
 
-				set.Bind (CharactersLabel).To (x => x.Simplified); // eventaully make this both characters and traditional in Search Result VM
-				set.Bind (PinyinLabel).To (x => x.AccentedPinyin);	
-				set.Bind (DefinitionLabel).To (x => x.DefintionsString);
+				set.Bind (CharactersLabel).To (x => x.Item.Simplified); // eventaully make this both characters and traditional in Search Result VM
+				set.Bind (PinyinLabel).To (x => x.Item.AccentedPinyin);	
+				set.Bind (DefinitionLabel).To (x => x.Item.DefintionsString);
 
 				set.Apply();
 			});

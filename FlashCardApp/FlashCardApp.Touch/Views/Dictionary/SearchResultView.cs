@@ -1,10 +1,10 @@
-﻿
-using System;
-using System.Drawing;
 
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using MonoTouch.ObjCRuntime;
+using System;
+using CoreGraphics;
+
+using Foundation;
+using UIKit;
+using ObjCRuntime;
 using Cirrious.MvvmCross.Binding.Touch.Views;
 using FlashCardApp.Core.ViewModels.Dictionary;
 using Cirrious.MvvmCross.Touch.Views;

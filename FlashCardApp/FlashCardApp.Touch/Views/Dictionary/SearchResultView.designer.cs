@@ -4,7 +4,7 @@
 // actions made in the UI designer. If it is removed, they will be lost.
 // Manual changes to this file may not be handled correctly.
 //
-using MonoTouch.Foundation;
+using Foundation;
 using System.CodeDom.Compiler;
 
 namespace FlashCardApp.Touch
@@ -13,22 +13,22 @@ namespace FlashCardApp.Touch
 	partial class SearchResultView
 	{
 		[Outlet]
-		MonoTouch.UIKit.UIButton AddToSetButton { get; set; }
+		UIKit.UIButton AddToSetButton { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UILabel DefinitionLabel { get; set; }
+		UIKit.UILabel DefinitionLabel { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITableView FlashCardSetTableView { get; set; }
+		UIKit.UITableView FlashCardSetTableView { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UILabel PinyinLabel { get; set; }
+		UIKit.UILabel PinyinLabel { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UILabel SimplifiedLabel { get; set; }
+		UIKit.UILabel SimplifiedLabel { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UILabel TraditionalLabel { get; set; }
+		UIKit.UILabel TraditionalLabel { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{

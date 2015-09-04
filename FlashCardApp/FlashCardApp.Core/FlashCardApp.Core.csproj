@@ -67,7 +67,6 @@
     <Compile Include="Entities\StudySettings.cs" />
     <Compile Include="Helpers\PinyinFormatHelper.cs" />
     <Compile Include="Managers\ChineseManager.cs" />
-    <Compile Include="Managers\CloudConverter.cs" />
     <Compile Include="Managers\DictionarySearchManager.cs" />
     <Compile Include="Managers\EnglishManager.cs" />
     <Compile Include="Managers\FlashCardManager.cs" />
@@ -80,11 +79,6 @@
     <Compile Include="Messages\SelectedSetChangedMessage.cs" />
     <Compile Include="Messages\UserLoggedInMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service References\FlashCardService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="Services\StudySettingsService.cs" />
     <Compile Include="ViewModels\Dictionary\AddSearchResultToSetViewModel.cs" />
     <Compile Include="ViewModels\Dictionary\DictionarySearchResult.cs" />
@@ -114,33 +108,10 @@
     <Content Include="DatabaseFiles\EmptyDatabase.sqlite" />
     <None Include="packages.config" />
     <None Include="Properties\ServiceReferences.Designer.ClientConfig" />
-    <None Include="Service References\FlashCardService\FlashCardApp.Core.FlashCardService.CreateUserResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\FlashCardService\FlashCardApp.Core.FlashCardService.DeleteUserResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\FlashCardService\FlashCardApp.Core.FlashCardService.GetSetsResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\FlashCardService\FlashCardApp.Core.FlashCardService.UploadSetsResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\FlashCardService\FlashCardApp.Core.FlashCardService.VerifyUserResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\FlashCardService\FlashCardService.wsdl" />
-    <None Include="Service References\FlashCardService\FlashCardService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\FlashCardService\FlashCardService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\FlashCardService\FlashCardService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="System.Runtime">
+    </Reference>
     <Reference Include="Cirrious.CrossCore">
       <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.5.0\lib\portable-win+net45+wp8+win8+wpa81\Cirrious.CrossCore.dll</HintPath>
     </Reference>
@@ -173,21 +144,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\FlashCardService\FlashCardService.disco" />
-    <None Include="Service References\FlashCardService\configuration91.svcinfo" />
-    <None Include="Service References\FlashCardService\configuration.svcinfo" />
-    <None Include="Service References\FlashCardService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Service References\FlashCardService\" />
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
@@ -201,7 +157,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\" />
-    <Folder Include="obj\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

@@ -4,7 +4,7 @@
 // actions made in the UI designer. If it is removed, they will be lost.
 // Manual changes to this file may not be handled correctly.
 //
-using MonoTouch.Foundation;
+using Foundation;
 using System.CodeDom.Compiler;
 
 namespace FlashCardApp.Touch
@@ -13,13 +13,13 @@ namespace FlashCardApp.Touch
 	partial class FlashCardSetListView
 	{
 		[Outlet]
-		MonoTouch.UIKit.UIButton AddNewSetButton { get; set; }
+		UIKit.UIButton AddNewSetButton { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITableView FlashCardSetsTableView { get; set; }
+		UIKit.UITableView FlashCardSetsTableView { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITextField NewSetNameTextField { get; set; }
+		UIKit.UITextField NewSetNameTextField { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{

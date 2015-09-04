@@ -4,7 +4,7 @@
 // actions made in the UI designer. If it is removed, they will be lost.
 // Manual changes to this file may not be handled correctly.
 //
-using MonoTouch.Foundation;
+using Foundation;
 using System.CodeDom.Compiler;
 
 namespace FlashCardApp.Touch
@@ -13,30 +13,28 @@ namespace FlashCardApp.Touch
 	partial class FlashCardSetDetailsView
 	{
 		[Outlet]
-		MonoTouch.UIKit.UIButton CardDetailsButton { get; set; }
+		UIKit.UIButton AddCustomCardButton { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UIButton DeleteCardButton { get; set; }
+		UIKit.UIButton CardDetailsButton { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UIButton DeleteSetButton { get; set; }
+		UIKit.UIButton DeleteCardButton { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITableView FlashCardTableView { get; set; }
+		UIKit.UIButton DeleteSetButton { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UILabel SetNameLabel { get; set; }
+		UIKit.UITableView FlashCardTableView { get; set; }
+
+		[Outlet]
+		UIKit.UILabel SetNameLabel { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (SetNameLabel != null) {
-				SetNameLabel.Dispose ();
-				SetNameLabel = null;
-			}
-
-			if (FlashCardTableView != null) {
-				FlashCardTableView.Dispose ();
-				FlashCardTableView = null;
+			if (CardDetailsButton != null) {
+				CardDetailsButton.Dispose ();
+				CardDetailsButton = null;
 			}
 
 			if (DeleteCardButton != null) {
@@ -44,14 +42,24 @@ namespace FlashCardApp.Touch
 				DeleteCardButton = null;
 			}
 
-			if (CardDetailsButton != null) {
-				CardDetailsButton.Dispose ();
-				CardDetailsButton = null;
-			}
-
 			if (DeleteSetButton != null) {
 				DeleteSetButton.Dispose ();
 				DeleteSetButton = null;
+			}
+
+			if (FlashCardTableView != null) {
+				FlashCardTableView.Dispose ();
+				FlashCardTableView = null;
+			}
+
+			if (SetNameLabel != null) {
+				SetNameLabel.Dispose ();
+				SetNameLabel = null;
+			}
+
+			if (AddCustomCardButton != null) {
+				AddCustomCardButton.Dispose ();
+				AddCustomCardButton = null;
 			}
 		}
 	}

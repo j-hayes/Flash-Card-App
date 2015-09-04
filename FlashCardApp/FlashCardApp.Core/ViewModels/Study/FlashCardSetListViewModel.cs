@@ -157,19 +157,23 @@ namespace FlashCardApp.Core.ViewModels.Study
         #region privates
         private void GetFlashCardSetList()
         {
-            var flashCardSets = _flashCardManager.GetSetList();
+			var flashCardSets = _flashCardManager.GetSetList ();
             FlashCardSets = new List<WithCommand<FlashCardSet>>();
-            FlashCardSets = flashCardSets.Select(x => new WithCommand<FlashCardSet>(x, new MvxCommand(() => NavigateToSetDetailsView(x.ID)))).ToList();
+			FlashCardSets = flashCardSets.Select(x => new WithCommand<FlashCardSet>(x, new MvxCommand(()=>NavigateToSetDetailsView(x)))).ToList();
         }
 
-        private void NavigateToSetDetailsView(int id)
+		private void NavigateToSetDetailsView(FlashCardSet theSet)
         {
-            ShowViewModel<FlashCardSetDetailsViewModel>(id);
-        }
+			
+				ShowViewModel<FlashCardSetDetailsViewModel> (new Nav(){
+					Id = theSet.ID
+				});
+
+		}
 
         private List<FlashCard> GetCardsForSet()
         {
-            return _flashCardManager.GetCardsForSet(SelectedSet.ID);
+			return _flashCardManager.GetCardsForSet(SelectedSet.ID);
         }
         #endregion
     }

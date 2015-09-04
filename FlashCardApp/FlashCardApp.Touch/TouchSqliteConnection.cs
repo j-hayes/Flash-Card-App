@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using FlashCardApp.Core.DAL;
-using MonoTouch.AVFoundation;
+using AVFoundation;
 using SQLite.Net;
 using SQLite.Net.Platform.XamarinIOS;
 

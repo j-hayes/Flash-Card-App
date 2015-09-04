@@ -1,4 +1,5 @@
 using Cirrious.MvvmCross.ViewModels;
+using System.Collections.Generic;
 
 namespace FlashCardApp.Core.ViewModels
 {
@@ -11,5 +12,9 @@ namespace FlashCardApp.Core.ViewModels
 			get { return _hello; }
 			set { _hello = value; RaisePropertyChanged(() => Hello); }
 		}
+
+        
     }
+
+
 }

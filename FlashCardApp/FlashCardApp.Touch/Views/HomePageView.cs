@@ -1,11 +1,11 @@
 ﻿
 using System;
-using System.Drawing;
+using CoreGraphics;
 
 using System.IO;
 
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using FlashCardApp.Core.ViewModels;
@@ -42,8 +42,8 @@ namespace FlashCardApp.Touch
 			var viewControllers = new UIViewController[]
 			{
 					CreateTabFor("Dictionary", "dictionary", viewModel.DictionaryViewModel),
-					CreateTabFor("Settings", "edit", viewModel.StudyFlashCardSetSettingsViewModel),
-					//CreateTabFor("3", "check", viewModel.StudyViewModel),
+					CreateTabFor("Settings", "gear", viewModel.StudyFlashCardSetSettingsViewModel),
+					CreateTabFor("Flash Cards", "pencil", viewModel.FlashCardListViewModel),
 			};
 				ViewControllers = viewControllers;
 				CustomizableViewControllers = new UIViewController[] { };

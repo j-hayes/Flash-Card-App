@@ -1,15 +1,17 @@
 ﻿
 using System;
-using System.Drawing;
+using CoreGraphics;
 using System.Windows;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.Binding.Touch.Views;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using FlashCardApp.Core.ViewModels.Dictionary;
-using MonoTouch.ObjCRuntime;
+using ObjCRuntime;
 using FlashCardApp.Core.Entities;
+using MonoTouch;
+using FlashCardApp.Core.ViewModels;
 
 namespace FlashCardApp.Touch
 {
@@ -20,6 +22,7 @@ namespace FlashCardApp.Touch
 				return (DictionaryViewModel)base.ViewModel; 
 			}
 			set {
+              
 				base.ViewModel = value;
 			}
 		}
@@ -56,20 +59,21 @@ namespace FlashCardApp.Touch
 
 
 
+
+
 			source.SelectedItemChanged += (object sender, EventArgs e) => {
 
-				var selectedItem = (SearchResult)source.SelectedItem;
-				viewModel.SelectedSearchResult = selectedItem;
-				viewModel.ShowSearchResultViewModel();
+				var selectedItem = (WithCommand<SearchResult>)source.SelectedItem;
+				selectedItem.Command.Execute(null);
 			} ;
 
-			set.Bind(source).For ("SelectedItemChanged").To ("SelectedSearchResultChangedCommand");
 
-			set.Bind(SearchTypeSegmentedControl).To(ViewModel=>ViewModel.SearchInputType).Mode(Cirrious.MvvmCross.Binding.MvxBindingMode.OneWayToSource);
+
+			set.Bind(SearchTypeSegmentedControl).To(ViewModel=>ViewModel.SearchInputType).Mode(Cirrious.MvvmCross.Binding.MvxBindingMode.TwoWay);
 
 			set.Apply ();
 
-			SearchTypeSegmentedControl.SelectedSegment = 0;
+			SearchTypeSegmentedControl.SelectedSegment = 1;
 
 			SearchTypeSegmentedControl.ValueChanged += (object sender, EventArgs e) => {
 				if (SearchTypeSegmentedControl.SelectedSegment == 0) {

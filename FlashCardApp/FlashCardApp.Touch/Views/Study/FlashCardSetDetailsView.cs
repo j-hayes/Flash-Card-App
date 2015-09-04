@@ -1,9 +1,9 @@
-﻿
-using System;
-using System.Drawing;
 
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using System;
+using CoreGraphics;
+
+using Foundation;
+using UIKit;
 using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.Binding.Touch.Views;
 using FlashCardApp.Core.ViewModels.Study;
