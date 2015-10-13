@@ -1,7 +1,7 @@
 ﻿
 using System;
 using System.Drawing;
-
+using FlashCardApp.Core.ViewModels;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using Cirrious.MvvmCross.Binding.Touch.Views;
@@ -27,11 +27,11 @@ namespace FlashCardApp.Touch
 				PinyinLabel.AdjustsFontSizeToFitWidth = true; 
 				DefinitionLabel.AdjustsFontSizeToFitWidth = true; 
 
-				var set = this.CreateBindingSet<DictionaryResultCell, SearchResult> ();
+				var set = this.CreateBindingSet<DictionaryResultCell, WithCommand<SearchResult>> ();
 
-				set.Bind (CharactersLabel).To (x => x.Simplified); // eventaully make this both characters and traditional in Search Result VM
-				set.Bind (PinyinLabel).To (x => x.AccentedPinyin);	
-				set.Bind (DefinitionLabel).To (x => x.DefintionsString);
+                set.Bind(CharactersLabel).To(x => x.Item.Simplified); // eventaully make this both characters and traditional in Search Result VM
+                set.Bind(PinyinLabel).To(x => x.Item.AccentedPinyin);
+                set.Bind(DefinitionLabel).To(x => x.Item.DefintionsString);
 
 				set.Apply();
 			});

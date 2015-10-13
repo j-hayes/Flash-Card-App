@@ -89,7 +89,6 @@
     <Compile Include="ViewModels\Dictionary\AddSearchResultToSetViewModel.cs" />
     <Compile Include="ViewModels\Dictionary\DictionarySearchResult.cs" />
     <Compile Include="ViewModels\Dictionary\DictionaryViewModel.cs" />
-    <Compile Include="ViewModels\FirstViewModel.cs" />
     <Compile Include="ViewModels\HomePageViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\NotUsed\CloudCardSaveViewModel.cs" />
@@ -108,7 +107,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DatabaseFiles\sqlite3.dll" />
-    <Content Include="ToDo-MvvmCross\_ Core.txt" />
     <None Include="app.config" />
     <Content Include="DatabaseFiles\Dictionary.sqlite" />
     <Content Include="DatabaseFiles\EmptyDatabase.sqlite" />
@@ -142,13 +140,13 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Cirrious.CrossCore">
-      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.5.0\lib\portable-win+net45+wp8+win8+wpa81\Cirrious.CrossCore.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.5.1\lib\portable-win+net45+wp8+win8+wpa81\Cirrious.CrossCore.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross">
-      <HintPath>..\packages\MvvmCross.HotTuna.MvvmCrossLibraries.3.5.0\lib\portable-win+net45+wp8+win8+wpa81\Cirrious.MvvmCross.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.MvvmCrossLibraries.3.5.1\lib\portable-win+net45+wp8+win8+wpa81\Cirrious.MvvmCross.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Localization">
-      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.5.0\lib\portable-win+net45+wp8+win8+wpa81\Cirrious.MvvmCross.Localization.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.5.1\lib\portable-win+net45+wp8+win8+wpa81\Cirrious.MvvmCross.Localization.dll</HintPath>
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Plugins.File">
       <HintPath>..\packages\MvvmCross.HotTuna.Plugin.File.3.5.0\lib\portable-win+net45+wp8+win8+wpa81\Cirrious.MvvmCross.Plugins.File.dll</HintPath>

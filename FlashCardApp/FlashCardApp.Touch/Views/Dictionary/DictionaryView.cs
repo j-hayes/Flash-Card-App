@@ -2,6 +2,7 @@
 using System;
 using System.Drawing;
 using System.Windows;
+using FlashCardApp.Core.ViewModels;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using Cirrious.MvvmCross.Touch.Views;
@@ -58,8 +59,8 @@ namespace FlashCardApp.Touch
 
 			source.SelectedItemChanged += (object sender, EventArgs e) => {
 
-				var selectedItem = (SearchResult)source.SelectedItem;
-				viewModel.SelectedSearchResult = selectedItem;
+				var selectedItem = (WithCommand<SearchResult>)source.SelectedItem;
+				viewModel.SelectedSearchResult = selectedItem.Item;
 				viewModel.ShowSearchResultViewModel();
 			} ;
 
