@@ -1,10 +1,10 @@
-﻿// WARNING
+// WARNING
 //
 // This file has been generated automatically by Xamarin Studio to store outlets and
 // actions made in the UI designer. If it is removed, they will be lost.
 // Manual changes to this file may not be handled correctly.
 //
-using MonoTouch.Foundation;
+using Foundation;
 using System.CodeDom.Compiler;
 
 namespace FlashCardApp.Touch
@@ -13,25 +13,25 @@ namespace FlashCardApp.Touch
 	partial class FlashCardDetailsView
 	{
 		[Outlet]
-		MonoTouch.UIKit.UITextView DefinitionTextView { get; set; }
+		UIKit.UITextView DefinitionTextView { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UISwitch EditModeSwitch { get; set; }
+		UIKit.UISwitch EditModeSwitch { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UIScrollView InputScrollView { get; set; }
+		UIKit.UIScrollView InputScrollView { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITextField PinyinTextField { get; set; }
+		UIKit.UITextField PinyinTextField { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UIButton SaveCardButton { get; set; }
+		UIKit.UIButton SaveCardButton { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITextField SimplifiedTextField { get; set; }
+		UIKit.UITextField SimplifiedTextField { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITextField TraditionalTextField { get; set; }
+		UIKit.UITextField TraditionalTextField { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{

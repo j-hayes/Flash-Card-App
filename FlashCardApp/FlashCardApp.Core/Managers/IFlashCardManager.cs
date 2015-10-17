@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using FlashCardApp.Core.Entities;
-using FlashCardApp.Core.FlashCardService;
+
 
 namespace FlashCardApp.Core.Managers
 {
@@ -33,8 +33,7 @@ namespace FlashCardApp.Core.Managers
 		       
 
 
-        ServiceFlashCardSet[] GetCloudSetsForUpload();
-
+       
 
         void MarkIncorrect(FlashCard setCard);
         void MarkCorrect(FlashCard setCard);

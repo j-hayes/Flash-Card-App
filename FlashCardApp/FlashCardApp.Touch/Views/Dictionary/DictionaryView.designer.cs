@@ -4,7 +4,7 @@
 // actions made in the UI designer. If it is removed, they will be lost.
 // Manual changes to this file may not be handled correctly.
 //
-using MonoTouch.Foundation;
+using Foundation;
 using System.CodeDom.Compiler;
 
 namespace FlashCardApp.Touch
@@ -13,13 +13,13 @@ namespace FlashCardApp.Touch
 	partial class DictionaryView
 	{
 		[Outlet]
-		MonoTouch.UIKit.UITextField FilterTextField { get; set; }
+		UIKit.UITextField FilterTextField { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITableView SearchResultsTableView { get; set; }
+		UIKit.UITableView SearchResultsTableView { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UISegmentedControl SearchTypeSegmentedControl { get; set; }
+		UIKit.UISegmentedControl SearchTypeSegmentedControl { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{

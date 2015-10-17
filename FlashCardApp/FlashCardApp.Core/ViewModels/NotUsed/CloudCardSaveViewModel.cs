@@ -5,8 +5,9 @@ using System.Windows.Input;
 using Cirrious.MvvmCross.Plugins.Messenger;
 using Cirrious.MvvmCross.ViewModels;
 using FlashCardApp.Core.Entities;
-using FlashCardApp.Core.FlashCardService;
+
 using FlashCardApp.Core.Managers;
+using System;
 
 namespace FlashCardApp.Core.ViewModels.Study
 {
@@ -14,7 +15,6 @@ namespace FlashCardApp.Core.ViewModels.Study
     {
         private IFlashCardManager _flashCardManager;
 
-        private FlashCardServiceClient serviceClient;
         private readonly MvxSubscriptionToken _flashCardSetSubscriptionToken;
 
         public CloudCardSaveViewModel(IFlashCardManager flashCardManager)
@@ -35,8 +35,7 @@ namespace FlashCardApp.Core.ViewModels.Study
             UserName = navigation.UserEmail;
             Password = navigation.Password;
             ShowSaveReplaceCardsButton = false;
-            DoGetCloudCards();//Todo: Refactor out these into new manager or the FCM
-
+       
         }
 
         
@@ -89,49 +88,11 @@ namespace FlashCardApp.Core.ViewModels.Study
         public ICommand GetCloudCards {
             get
             {
-                return new MvxCommand(DoGetCloudCards);
+				throw new NotImplementedException ();
             }
         }
 
-        private void DoGetCloudCards()
-        {
-            serviceClient = new FlashCardServiceClient();
-            serviceClient.OpenAsync();
-            serviceClient.OpenCompleted += ServiceClientOnOpenCompletedForDownload;
-           
-      
-
-            
-        }
-
-        private void ServiceClientOnOpenCompletedForDownload(object sender, AsyncCompletedEventArgs asyncCompletedEventArgs)
-        {
-            serviceClient.GetSetsCompleted += ClientOnGetSetsCompleted;
-            serviceClient.GetSetsAsync(new GetSetsRequest(UserName, Password));
-        }
-
-        private void ClientOnGetSetsCompleted(object sender, GetSetsCompletedEventArgs getSetsCompletedEventArgs)
-        {
-            if (getSetsCompletedEventArgs.Error != null)
-            {
-                ResponseText = getSetsCompletedEventArgs.Error.Message;
-            }
-            else if (getSetsCompletedEventArgs.Cancelled)
-            {
-                ResponseText = "The operation was canceled please try again";
-            }
-            else
-            {
-                List<ServiceFlashCardSet> sets = getSetsCompletedEventArgs.Result.GetSetsResult.ToList();
-                serviceClient.OpenCompleted -= ServiceClientOnOpenCompletedForDownload;
-                serviceClient.CloseAsync();
-                ServiceCardConverter serviceCardConverter = new ServiceCardConverter();
-                FlashCardSets =  serviceCardConverter.ConvertCloudSetToSet(sets);
-                ShowSaveReplaceCardsButton = true;
-            }
-            
-        }
-
+     
        
 
         public ICommand ReplaceCardsWithCloudCards
@@ -151,41 +112,7 @@ namespace FlashCardApp.Core.ViewModels.Study
 
         public ICommand UploadCardsToCloud
         {
-            get{return new MvxCommand(DoUploadCardsToCloud);}
+			get{throw new NotImplementedException ();}
         }
-
-        private void DoUploadCardsToCloud()
-        {
-            serviceClient = new FlashCardServiceClient();
-            serviceClient.OpenAsync();
-            serviceClient.UploadSetsCompleted += ClientOnUploadSetsCompleted;
-
-            serviceClient.UploadSetsAsync(new UploadSetsRequest(_flashCardManager.GetCloudSetsForUpload(),
-                UserName, Password));
-            serviceClient.CloseAsync();
-        }
-
-        private void ClientOnUploadSetsCompleted(object sender, UploadSetsCompletedEventArgs uploadSetsCompletedEventArgs)
-        {
-            if (uploadSetsCompletedEventArgs.Error != null)
-            {
-                ResponseText = uploadSetsCompletedEventArgs.Error.Message;
-            }
-            else if (uploadSetsCompletedEventArgs.Cancelled)
-            {
-                ResponseText = "The operation was canceled please try again";
-            }
-            else
-            {
-                if (uploadSetsCompletedEventArgs.Result.UploadSetsResult)
-                {
-                    ResponseText = "Your Cards Have been uploaded successfully";
-                }
-                else
-                {
-                    ResponseText = "There was an error";
-                }
-            }
-        }
-    }
+	}
 }

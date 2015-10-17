@@ -1,12 +1,13 @@
 ﻿using System;
-using System.Drawing;
+using CoreGraphics;
 
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 using Cirrious.MvvmCross.Binding.Touch.Views;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using FlashCardApp.Core.ViewModels.Dictionary;
 using FlashCardApp.Core.Entities;
+using FlashCardApp.Core.ViewModels;
 
 namespace FlashCardApp.Touch
 {
@@ -22,10 +23,10 @@ namespace FlashCardApp.Touch
 				SetNameLabel.AdjustsFontSizeToFitWidth = true; 
 			
 
-				var set = this.CreateBindingSet<FlashCardSetTableViewCell, FlashCardSet> ();
+				var set = this.CreateBindingSet<FlashCardSetTableViewCell, WithCommand<FlashCardSet>> ();
 
-				set.Bind (SetNameLabel).To (x => x.SetName); // eventaully make this both characters and traditional in Search Result VM
-				set.Bind (NumberOfCardsLabel).To(x=>x.FlashCards.Count);
+				set.Bind (SetNameLabel).To (x => x.Item.SetName); // eventaully make this both characters and traditional in Search Result VM
+				set.Bind (NumberOfCardsLabel).To(x=>x.Item.FlashCards.Count);
 				//set.Bind (EnglishLabel).To (x => x.DefintionsString);
 				set.Apply();
 		});

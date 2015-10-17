@@ -1,15 +1,16 @@
-﻿
-using System;
-using System.Drawing;
 
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using System;
+using CoreGraphics;
+
+using Foundation;
+using UIKit;
 using Cirrious.MvvmCross.Touch.Views;
-using MonoTouch.ObjCRuntime;
+using ObjCRuntime;
 using Cirrious.MvvmCross.Binding.Touch.Views;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using FlashCardApp.Core.ViewModels.Study;
 using FlashCardApp.Core.Entities;
+using FlashCardApp.Core.ViewModels;
 
 namespace FlashCardApp.Touch
 {
@@ -55,19 +56,19 @@ namespace FlashCardApp.Touch
 			var set = this.CreateBindingSet<FlashCardSetListView, FlashCardSetListViewModel> ();
 			set.Bind (NewSetNameTextField).To (ViewModel => ViewModel.NewSetName).TwoWay();
 			set.Bind (AddNewSetButton).To ("AddSetCommand");
-
+			
 
 			set.Bind (source).To (v => v.FlashCardSets);
 
 			source.SelectedItemChanged += (object sender, EventArgs e) => {
 
-				var selectedItem = (FlashCardSet)source.SelectedItem;
-				ViewModel.SelectedSet = selectedItem;
-
+				var selectedItem = (WithCommand<FlashCardSet>)source.SelectedItem;
+				ViewModel.SelectedSet = selectedItem.Item;
+				selectedItem.Command.Execute(null);
 
 			};
 		
-			set.Bind (source).For ("SelectedItemChanged").To ("ShowDetailCommand");
+	
 
 			set.Apply ();
 

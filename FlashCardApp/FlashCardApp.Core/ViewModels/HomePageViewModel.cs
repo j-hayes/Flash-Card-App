@@ -16,8 +16,8 @@ namespace FlashCardApp.Core.ViewModels
            DictionaryViewModel = new DictionaryViewModel(dictionarySearchManager, flashCardManager, settingsService);
            StudyFlashCardSetSettingsViewModel = new StudyFlashCardSetSettingsViewModel(messenger, flashCardManager,
                settingsService);
-			StudyViewModel = new StudyFlashCardSetViewModel (flashCardManager, messenger, settingsService);  
-         
+			StudyViewModel = new StudyFlashCardSetViewModel (flashCardManager, messenger, settingsService);
+            FlashCardListViewModel = new FlashCardSetListViewModel(flashCardManager, messenger, settingsService);
      
        }
 
@@ -25,18 +25,22 @@ namespace FlashCardApp.Core.ViewModels
 		{
 			
 		}
-       
 
 
-       
-       private DictionaryViewModel _dictionaryViewModel;
+        private FlashCardSetListViewModel _flashCardListViewModel;
+        public FlashCardSetListViewModel FlashCardListViewModel
+        {
+            get { return _flashCardListViewModel; }
+            set { _flashCardListViewModel = value; RaisePropertyChanged(() => FlashCardListViewModel); }
+        }
+
+        private DictionaryViewModel _dictionaryViewModel;
        public DictionaryViewModel DictionaryViewModel
        {
            get { return _dictionaryViewModel; }
            set { _dictionaryViewModel = value;RaisePropertyChanged(()=>DictionaryViewModel); }
        }
-
-
+        
        private StudyFlashCardSetSettingsViewModel _studyFlashCardSetSettingsViewModel;
        public StudyFlashCardSetSettingsViewModel StudyFlashCardSetSettingsViewModel
        {

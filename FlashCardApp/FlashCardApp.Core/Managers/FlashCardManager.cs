@@ -4,7 +4,7 @@ using System.Linq;
 using Cirrious.MvvmCross.Plugins.Messenger;
 using FlashCardApp.Core.DAL;
 using FlashCardApp.Core.Entities;
-using FlashCardApp.Core.FlashCardService;
+
 using SQLite.Net;
 using SQLite.Net.Interop;
 
@@ -14,15 +14,13 @@ namespace FlashCardApp.Core.Managers
     {
         private readonly SQLiteConnection _connection;
         private readonly IMvxMessenger _messenger;
-        public FlashCardServiceClient CloudClient;
-    
+      
 
         public FlashCardManager(ISQLiteConnection connection, IMvxMessenger messenger)
         {
 
             _messenger = messenger;
-            CloudClient = new FlashCardServiceClient();
-
+      
             _connection = connection.connection;
             _connection.CreateTable<FlashCardSet>();
             _connection.CreateTable<FlashCard>();
@@ -95,7 +93,14 @@ namespace FlashCardApp.Core.Managers
 
         public List<FlashCardSet> GetSetList()
         {
-            return _connection.Table<FlashCardSet>().ToList();
+			var list = _connection.Table<FlashCardSet>().ToList();
+
+			foreach (var set in list) 
+			{
+				var cards = GetCardsForSet (set.ID);
+				set.FlashCards = cards;
+			}
+			return list;
         }
 
         public List<FlashCard> GetCardsForSet(int p)
@@ -149,20 +154,7 @@ namespace FlashCardApp.Core.Managers
         }
 
 
-        public ServiceFlashCardSet[] GetCloudSetsForUpload()
-        {
-            List<FlashCardSet> flashCardSets = GetSetList();
-            foreach (var flashCardSet in flashCardSets)
-            {
-                flashCardSet.FlashCards = GetCardsForSet(flashCardSet.ID);
-            }
-
-            var cloudConverter = new ServiceCardConverter();
-            List<ServiceFlashCardSet> cloudset = cloudConverter.ConvertSetToCloudSet(flashCardSets);
-
-            return cloudset.ToArray();
-        }
-
+     
         public void MarkIncorrect(FlashCard setCard)
         {
             setCard.TotalTries++;

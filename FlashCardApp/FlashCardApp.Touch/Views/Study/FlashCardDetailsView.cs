@@ -1,9 +1,9 @@
-﻿
-using System;
-using System.Drawing;
 
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using System;
+using CoreGraphics;
+
+using Foundation;
+using UIKit;
 using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.Binding.Touch.Views;
 using FlashCardApp.Core.ViewModels.Study;
@@ -83,33 +83,36 @@ namespace FlashCardApp.Touch
 
 		private void OnKeyboardWillShow (NSNotification notification)
 		{
-			var keyboardObject = notification.UserInfo.ValueForKey(new NSString("UIKeyboardFrameEndUserInfoKey"));
-			var keyboardRect = new NSValue(keyboardObject.Handle).RectangleFValue;
-			var keyboardY = keyboardRect.Y;
-			var textBoxViewBottom = InputScrollView.Frame.Height;
-			if (keyboardY < textBoxViewBottom)
-			{
-				_moveTextBoxY = textBoxViewBottom - keyboardY + 10;
-				UIView.Animate(0.3, () => {
-					var frame = new RectangleF(InputScrollView.Frame.X, InputScrollView.Frame.Y - _moveTextBoxY, InputScrollView.Frame.Width, 
-						InputScrollView.Frame.Height);
-					InputScrollView.Frame = frame;
-				});
+			throw new NotImplementedException ();
 
-			}
+//			var keyboardObject = notification.UserInfo.ValueForKey(new NSString("UIKeyboardFrameEndUserInfoKey"));
+//			var keyboardRect = new NSValue(keyboardObject.Handle).RectangleFValue;
+//			var keyboardY = keyboardRect.Y;
+//			var textBoxViewBottom = InputScrollView.Frame.Height;
+//			if (keyboardY < textBoxViewBottom)
+//			{
+//				_moveTextBoxY = textBoxViewBottom - keyboardY + 10;
+//				UIView.Animate(0.3, () => {
+//					var frame = new CGRect(InputScrollView.Frame.X, InputScrollView.Frame.Y - _moveTextBoxY, InputScrollView.Frame.Width, 
+//						InputScrollView.Frame.Height);
+//					InputScrollView.Frame = frame;
+//				});
+//
+//			}
 		}
 
 		private void OnKeyboardWillHide(NSNotification notification)
 		{
-			// View has moved
-			if (_moveTextBoxY != 0)
-			{
-				UIView.Animate(0.3, () => {
-					var frame = new RectangleF(InputScrollView.Frame.X, InputScrollView.Frame.Y + _moveTextBoxY, 
-						InputScrollView.Frame.Width, InputScrollView.Frame.Height);
-					InputScrollView.Frame = frame;
-				});
-			}
+			throw new NotImplementedException ();
+//			// View has moved
+//			if (_moveTextBoxY != 0)
+//			{
+//				UIView.Animate(0.3, () => {
+//					var frame = new CGRect(InputScrollView.Frame.X, InputScrollView.Frame.Y + _moveTextBoxY, 
+//						InputScrollView.Frame.Width, InputScrollView.Frame.Height);
+//					InputScrollView.Frame = frame;
+//				});
+//			}
 		}
 	}
 }
